@@ -1,0 +1,20 @@
+{
+  "name": "anticore",
+  "version": "0.9.9",
+  "description": "Another way to handle HTML AJAX contents ",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lcfvs/anticore.git"
+  },
+  "keywords": [
+    "Simple",
+    "AJAX",
+    "library"
+  ],
+  "author": "Lcf.vs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lcfvs/anticore/issues"
+  },
+  "homepage": "https://github.com/Lcfvs/anticore#readme"
+}
