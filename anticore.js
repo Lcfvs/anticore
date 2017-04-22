@@ -26,7 +26,7 @@ void function (global) {
     demethodize = Function.bind.bind(Function.call);
     forEach = demethodize([].forEach);
     html = demethodize(range.createContextualFragment, range);
-    log = demethodize(console.log, console);
+    log = demethodize(console.error, console);
 
     create = function (prototype) {
         return Object.create(prototype || null);
@@ -38,14 +38,30 @@ void function (global) {
     requestPrototype = create();
     queue = [];
 
+    /**
+     * Builds a request based on a form
+     * @param {HTMLFormElement} form
+     * @returns {Object} request
+     */
     anticore.fetchers.form = function (form) {
         return anticore.request(form.action, form.method, new FormData(form));
     };
 
+    /**
+     * Builds a request based on an anchor
+     * @param {HTMLAnchorElement} a
+     * @returns {object} request
+     */
     anticore.fetchers.a = function (a) {
         return anticore.request(a.href, 'get');
     };
 
+    /**
+     * Builds a request based on an element
+     * (form or anchor, for more, extend anticore fetchers)
+     * @param {HTMLElement} element
+     * @returns {Object} request
+     */
     anticore.fetcher = function (element) {
         var name;
 
@@ -54,11 +70,24 @@ void function (global) {
         return anticore.fetchers[name](element);
     };
 
+    /**
+     * Populates the request response
+     * @param {Object} request
+     * @returns {Object} anticore
+     */
     anticore.trigger = function (request) {
         anticore.onTimeout(request);
         setTimeout(anticore.populate, 0, request.response.fragment, true);
+
+        return anticore;
     };
 
+    /**
+     * Adds a listener, based on a querySelectorAll
+     * @param {String} selector
+     * @param {Function} listener
+     * @returns {Object} anticore
+     */
     anticore.on = function (selector, listener) {
         registry[selector] = registry[selector] || [];
 
@@ -69,14 +98,27 @@ void function (global) {
         return anticore;
     };
 
+    /**
+     * Handles any requests timeout & retry if any
+     * @param {Object} request
+     * @returns {Object} anticore
+     */
     anticore.onTimeout = function (request) {
         if (request.response.status === 408) {
             request.retry();
 
-            throw new Error();
+            throw new Error('Request timeout');
         }
+
+        return anticore;
     };
 
+    /**
+     * Launches the selectors tests to find the related listeners
+     * @param {HTMLElement|DocumentFragment} container
+     * @param {Boolean} [loaded] (internal use)
+     * @returns {Object} anticore
+     */
     anticore.populate = function (container, loaded) {
         var queue;
 
@@ -86,8 +128,17 @@ void function (global) {
         forEach(Object.keys(registry), onSelector, queue);
         queue.next = nextRecord.bind(queue);
         queue.next();
+
+        return anticore;
     };
 
+    /**
+     * Builds a request
+     * @param {String} url
+     * @param {String} method (get or post)
+     * @param {Object} [body] (the post request body)
+     * @return {requestPrototype}
+     */
     anticore.request = function (url, method, body) {
         var request,
             options;
@@ -106,12 +157,24 @@ void function (global) {
         return request;
     };
 
+    /**
+     * Adds a field value on an existing body
+     * @param {String} name
+     * @param {*} value
+     * @return {requestPrototype}
+     */
     requestPrototype.body = function (name, value) {
         this.options.body.append(name, value);
 
         return this;
     };
 
+    /**
+     * Adds credentials to the request
+     * (let by default, if you fetch a resource on the same domain, if not, use 'include')
+     * @param {String} [value = 'same-origin']
+     * @return {requestPrototype}
+     */
     requestPrototype.credentials = function (value) {
         if (value === undefined) {
             value = 'same-origin';
@@ -122,6 +185,11 @@ void function (global) {
         return this;
     };
 
+    /**
+     * Fetches the request & adds a trigger callback for the response
+     * @param {Function} trigger
+     * @returns {requestPrototype}
+     */
     requestPrototype.fetch = function (trigger) {
         var item;
 
@@ -131,8 +199,14 @@ void function (global) {
 
         queue.push(item);
         fetchRequest();
+
+        return this;
     };
 
+    /**
+     * Retries to fetch a request
+     * @returns {requestPrototype}
+     */
     requestPrototype.retry = function () {
         if (!queue[0] || queue[0].request !== this) {
             return;
@@ -140,14 +214,28 @@ void function (global) {
 
         queue.unshift(1);
         queue.next();
+
+        return this;
     };
 
+    /**
+     * Add a header to the request
+     * @param {String} name
+     * @param {String} value
+     * @returns {requestPrototype}
+     */
     requestPrototype.header = function (name, value) {
         this.options.headers[name] = value;
 
         return this;
     };
 
+    /**
+     * Adds an option to the request
+     * @param {String} name
+     * @param {String} value
+     * @returns {requestPrototype}
+     */
     requestPrototype.option = function (name, value) {
         this.options[name] = value;
 
