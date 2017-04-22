@@ -1,6 +1,6 @@
 /*
- Copyright MIT 2016 Lcf.vs
- https://github.com/Lcfvs/form.cheats
+ Copyright MIT 2017 Lcf.vs
+ https://github.com/Lcfvs/anticore
  */
 void function (global) {
     'use strict';
