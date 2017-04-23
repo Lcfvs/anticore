@@ -115,7 +115,7 @@ void function (global) {
 
     /**
      * Launches the selectors tests to find the related listeners
-     * @param {HTMLElement|DocumentFragment} container
+     * @param {Document|HTMLElement|DocumentFragment} container
      * @param {Boolean} [loaded] (internal use)
      * @returns {Object} anticore
      */
