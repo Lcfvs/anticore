@@ -22,6 +22,8 @@ It's fairly simple : **why not just wait something to treat ?**
 
 It really can help your code to be simple as possible.
 
+[Demo](https://jsfiddle.net/s0jbzbmt/)
+
 
 ## How ?
 
@@ -107,7 +109,7 @@ And the `/form` returns :
 ```HTML
 <form class="mainForm" action="/form" method="post">
   <fieldset>
-    <p><label><input /></label></p>
+    <p><label>Enter something <input /></label></p>
   </fieldset>
 </form>
 ```
