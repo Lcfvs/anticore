@@ -1,6 +1,6 @@
 # anticore
 
-The easiest middleware manager for AJAX requests, for less than 2Ko !
+The easiest middleware manager for AJAX requests, for a few more than 2Ko !
 
 
 ## Why?
@@ -300,6 +300,19 @@ anticore.on('a, button', function(element, next) {
   next();
 });
 ```
+
+
+### Fetching mode
+
+The fetching mode is based on the request `content-type`, these rules are followed
+
+* `blob`: by default
+* `html`: if the `content-type` contains `html` or `svg`
+* `json`: if the `content-type` contains `json`
+* `text`: if the `content-type` contains `text`
+
+But if you want to treat blob, json or text, you need to create your own logic for these types (the .trigger)
+
 
 ### The anticore's real power!
 

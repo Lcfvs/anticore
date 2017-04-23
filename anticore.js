@@ -17,7 +17,8 @@ void function (global) {
         anticore,
         registry,
         requestPrototype,
-        queue;
+        queue,
+        types;
 
     document = global.document;
     range = document.createRange();
@@ -27,6 +28,7 @@ void function (global) {
     forEach = demethodize([].forEach);
     html = demethodize(range.createContextualFragment, range);
     log = demethodize(console.error, console);
+    types = ['html', 'svg'];
 
     create = function (prototype) {
         return Object.create(prototype || null);
@@ -261,7 +263,6 @@ void function (global) {
 
         return fetch(item.request.url, item.request.options)
             .then(onResponse)
-            .then(html)
             .then(onFragment)
             .then(item.trigger)
             .then(nextRequest)
@@ -269,19 +270,27 @@ void function (global) {
     }
 
     function onResponse(response) {
-        var item;
+        var type,
+            item;
+
+        type = response.headers.get('content-type')
+            .match(/json|html|svg|text/)[0] || 'blob';
 
         item = queue[0];
+        item.type = type;
         item.request.response = response;
 
-        return response.text();
+        return response[types.indexOf(type) > -1 ? 'text' : type]();
     }
 
-    function onFragment(fragment) {
+    function onFragment(data) {
         var item;
 
         item = queue[0];
-        item.request.response.fragment = fragment;
+
+        if (types.indexOf(item.type) > -1) {
+            item.request.response.fragment = html(data);
+        }
 
         return item.request;
     }
