@@ -58,7 +58,7 @@ You need to support older browsers too? No problem, just look to that [polyfill]
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/master/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.0.5/anticore.min.js"></script>
 ```
 
 
