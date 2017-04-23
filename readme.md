@@ -3,7 +3,7 @@
 The easiest middleware manager for AJAX requests, for less than 2Ko !
 
 
-## Why ?
+## Why?
 
 In a classical website using AJAX to make the user navigation, we have a lot of functions linked together by callbacks to make something on the server response.
  
@@ -16,7 +16,7 @@ Moreover, when our script calls the server, the requested view can be removed re
 Lemme show you how to cut it.  ;)
 
 
-## The solution ? 
+## The solution? 
 
 It's fairly simple : **why not just wait something to treat ?**
 
@@ -25,7 +25,7 @@ It really can help your code to be simple as possible.
 [Demo](https://jsfiddle.net/s0jbzbmt/)
 
 
-## How ?
+## How?
 
 The idea consists only to create some listeners at the page load :
  
@@ -52,7 +52,7 @@ All you need is the support of the natives
 * **ES2015** [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 * [`window.fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API.
 
-You need to support older browsers too ? No problem, just look to that [polyfill](https://github.com/github/fetch).
+You need to support older browsers too? No problem, just look to that [polyfill](https://github.com/github/fetch).
 
 
 ## Install
@@ -301,15 +301,15 @@ anticore.on('a, button', function(element, next) {
 });
 ```
 
-### The anticore's real power !
+### The anticore's real power!
 
-The server can respond what it wants, it can respond 0, 1, 2, ... view components, we don't care !
+The server can respond what it wants, it can respond 0, 1, 2, ... view components, we don't care!
 
-Each middleware makes only it's own tasks if an element matches... or nothing if not and isn't affected by the others.
+Each middleware makes only its own tasks if an element matches... or nothing if not and isn't affected by the others.
 
 Imagine your page as a view components list, like a grid, for example.
 
-Imagine too that when we call `/what-s-new-to-fetch` the server checks what components needs to refresh and bundles all the elements in one unique response... all the elements are treated, even if they aren't in a specific order.
+Imagine too that when we call `/what-s-new-to-fetch` the server checks what components need to refresh and bundles all the elements in one unique response... all the elements are treated, even if they aren't in a specific order.
 
 Enjoy :)
 
