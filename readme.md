@@ -309,9 +309,9 @@ The fetching mode is based on the request `content-type`, these rules are follow
 * `blob`: by default
 * `html`: if the `content-type` contains `html` or `svg`
 * `json`: if the `content-type` contains `json`
-* `text`: if the `content-type` contains `text`
+* `text`: if the `content-type` contains `text/plain`
 
-But if you want to treat blob, json or text, you need to create your own logic for these types (the .trigger)
+But if you want to treat `blob`, `json` or `text`, you need to create your own logic for these types (the .trigger)
 
 
 ### The anticore's real power!

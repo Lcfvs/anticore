@@ -273,8 +273,8 @@ void function (global) {
         var type,
             item;
 
-        type = response.headers.get('content-type')
-            .match(/json|html|svg|text/)[0] || 'blob';
+        type = ((response.headers.get('content-type') || 'html')
+            .match(/json|html|svg|text(?=\/plain)/) || ['blob'])[0];
 
         item = queue[0];
         item.type = type;
