@@ -79,7 +79,7 @@ void function (global) {
      */
     anticore.trigger = function (request) {
         anticore.onTimeout(request);
-        setTimeout(anticore.populate, 0, request.response.fragment, true);
+        setTimeout(anticore.populate, 0, request.response.result, true);
 
         return anticore;
     };
@@ -289,7 +289,9 @@ void function (global) {
         item = queue[0];
 
         if (types.indexOf(item.type) > -1) {
-            item.request.response.fragment = html(data);
+            item.request.response.result = html(data);
+        } else {
+            item.request.response.result = data;
         }
 
         return item.request;
