@@ -98,7 +98,7 @@ For the following examples, suppose we have a simple web page like :
       </section>
     </main>
     <footer></footer>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/master/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.0.6/anticore.min.js"></script>
   </body>
 </html>
 ```
