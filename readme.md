@@ -1,5 +1,8 @@
 # anticore
 
+[![npm](https://img.shields.io/npm/v/anticore.svg?style=plastic)]()
+[![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
+
 The easiest middleware manager for AJAX requests, for a few more than 2Ko !
 
 
@@ -58,8 +61,12 @@ You need to support older browsers too? No problem, just look to that [polyfill]
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.0.5/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.0.6/anticore.min.js"></script>
 ```
+
+You can also install it from npm
+
+`npm install anticore`
 
 
 ## Usage
