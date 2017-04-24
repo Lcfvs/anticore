@@ -28,7 +28,7 @@ void function (global) {
     forEach = demethodize([].forEach);
     html = demethodize(range.createContextualFragment, range);
     log = demethodize(console.error, console);
-    types = ['html', 'svg'];
+    types = ['html', 'svg', 'xml'];
 
     create = function (prototype) {
         return Object.create(prototype || null);
@@ -274,7 +274,7 @@ void function (global) {
             item;
 
         type = ((response.headers.get('content-type') || 'application/octet-stream')
-            .match(/json|html|svg|text(?=\/plain)/) || ['blob'])[0];
+            .match(/json|html|svg|xml|text(?=\/plain)/) || ['blob'])[0];
 
         item = queue[0];
         item.type = type;
