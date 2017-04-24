@@ -25,7 +25,7 @@ It's fairly simple : **why not just wait something to treat ?**
 
 It really can help your code to be simple as possible.
 
-[Demo](https://jsfiddle.net/s0jbzbmt/)
+[Demo](https://jsfiddle.net/k6gm2pss/)
 
 
 ## How?
@@ -61,7 +61,7 @@ You need to support older browsers too? No problem, just look to that [polyfill]
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.0.9/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.0.10/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -98,7 +98,7 @@ For the following examples, suppose we have a simple web page like :
       </section>
     </main>
     <footer></footer>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.0.9/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.0.10/anticore.min.js"></script>
   </body>
 </html>
 ```
