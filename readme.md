@@ -314,7 +314,7 @@ anticore.on('a, button', function(element, next) {
 The fetching mode is based on the request `content-type`, these rules are followed
 
 * `blob`: by default
-* `html`: if the `content-type` contains `html` or `svg`
+* `html`: if the `content-type` contains `html` or `svg` or `xml`
 * `json`: if the `content-type` contains `json`
 * `text`: if the `content-type` contains `text/plain`
 
