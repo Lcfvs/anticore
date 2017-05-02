@@ -80,7 +80,8 @@ void function (global) {
             return anticore;
         }
         
-        setTimeout(populate, 0, request.response.result, request.resolve);
+        populate(request.response.result, true)
+            .then(request.resolve);
 
         return anticore;
     };
@@ -326,16 +327,16 @@ void function (global) {
         this.push([listener, this.element, this.loaded]);
     }
 
-    function populate(container, resolve) {
-        var queue;
+    function populate(container, loaded) {
+        return new Promise(function(resolve) {
+            var queue;
 
-        queue = [];
-        queue.container = container;
-        queue.loaded = !!resolve;
-        forEach(Object.keys(registry), onSelector, queue);
-        queue.next = nextRecord.bind(queue, resolve);
-        queue.next();
-
-        return anticore;
+            queue = [];
+            queue.container = container;
+            queue.loaded = loaded;
+            forEach(Object.keys(registry), onSelector, queue);
+            queue.next = nextRecord.bind(queue, resolve);
+            queue.next();
+        });
     };
 }(this);
