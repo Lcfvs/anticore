@@ -80,8 +80,7 @@ void function (global) {
             return anticore;
         }
         
-        setTimeout(populate, 0, request.response.result, true);
-        request.resolve();
+        setTimeout(populate, 0, request.response.result, request.resolve);
 
         return anticore;
     };
@@ -292,13 +291,13 @@ void function (global) {
         return item.request;
     }
 
-    function nextRecord() {
+    function nextRecord(resolve) {
         var record;
 
         record = this.shift();
 
         if (!record) {
-            return;
+            return resolve();
         }
 
         record[0](record[1], this.next, this.loaded);
@@ -327,14 +326,14 @@ void function (global) {
         this.push([listener, this.element, this.loaded]);
     }
 
-    function populate(container, loaded) {
+    function populate(container, resolve) {
         var queue;
 
         queue = [];
         queue.container = container;
-        queue.loaded = loaded === true;
+        queue.loaded = !!resolve;
         forEach(Object.keys(registry), onSelector, queue);
-        queue.next = nextRecord.bind(queue);
+        queue.next = nextRecord.bind(queue, resolve);
         queue.next();
 
         return anticore;
