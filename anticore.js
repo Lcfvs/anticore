@@ -297,7 +297,7 @@ void function (global) {
         record = this.shift();
 
         if (!record) {
-            return resolve();
+            return resolve && resolve();
         }
 
         record[0](record[1], this.next, this.loaded);
