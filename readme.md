@@ -61,7 +61,7 @@ You need to support older browsers too? No problem, just look to that [polyfill]
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.0.10/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.1.0/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -98,7 +98,7 @@ For the following examples, suppose we have a simple web page like :
       </section>
     </main>
     <footer></footer>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.0.10/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.1.0/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -319,6 +319,22 @@ The fetching mode is based on the request `content-type`, these rules are follow
 * `text`: if the `content-type` contains `text/plain`
 
 But if you want to treat `blob`, `json` or `text`, you need to create your own logic for these types (the .trigger)
+
+
+Example:
+
+```JS
+anticore
+  .fetcher(element)
+  .fetch(yourHandler);
+
+// or
+
+anticore
+  .fetcher(element)
+  .fetch()
+  .then(yourHandler);
+```
 
 
 ### The anticore's real power!

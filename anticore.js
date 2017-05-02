@@ -12,7 +12,6 @@ void function (global) {
         demethodize,
         forEach,
         html,
-        log,
         create,
         anticore,
         registry,
@@ -27,7 +26,6 @@ void function (global) {
     demethodize = Function.bind.bind(Function.call);
     forEach = demethodize([].forEach);
     html = demethodize(range.createContextualFragment, range);
-    log = demethodize(console.error, console);
     types = ['html', 'svg', 'xml'];
 
     create = function (prototype) {
@@ -78,8 +76,12 @@ void function (global) {
      * @returns {Object} anticore
      */
     anticore.trigger = function (request) {
-        anticore.onTimeout(request);
-        setTimeout(anticore.populate, 0, request.response.result, true);
+        if (anticore.onTimeout(request)) {
+            return anticore;
+        }
+        
+        setTimeout(populate, 0, request.response.result, true);
+        request.resolve();
 
         return anticore;
     };
@@ -103,35 +105,25 @@ void function (global) {
     /**
      * Handles any requests timeout & retry if any
      * @param {Object} request
-     * @returns {Object} anticore
+     * @returns {Boolean}
      */
     anticore.onTimeout = function (request) {
         if (request.response.status === 408) {
             request.retry();
-
-            throw new Error('Request timeout');
+            
+            return true;
         }
 
-        return anticore;
+        return false;
     };
 
     /**
      * Launches the selectors tests to find the related listeners
      * @param {Document|HTMLElement|DocumentFragment} container
-     * @param {Boolean} [loaded] (internal use)
      * @returns {Object} anticore
      */
-    anticore.populate = function (container, loaded) {
-        var queue;
-
-        queue = [];
-        queue.container = container;
-        queue.loaded = loaded === true;
-        forEach(Object.keys(registry), onSelector, queue);
-        queue.next = nextRecord.bind(queue);
-        queue.next();
-
-        return anticore;
+    anticore.populate = function (container) {
+        return populate(container);
     };
 
     /**
@@ -190,19 +182,22 @@ void function (global) {
     /**
      * Fetches the request & adds a trigger callback for the response
      * @param {Function} trigger
-     * @returns {requestPrototype}
+     * @returns {Promise}
      */
     requestPrototype.fetch = function (trigger) {
         var item;
 
         item = create();
         item.request = this;
-        item.trigger = trigger;
 
         queue.push(item);
-        fetchRequest();
 
-        return this;
+        return new Promise(function(resolve, reject) {
+            item.request.resolve = resolve;
+            item.reject = reject;
+            item.trigger = trigger;
+            fetchRequest();
+        });
     };
 
     /**
@@ -264,9 +259,9 @@ void function (global) {
         return fetch(item.request.url, item.request.options)
             .then(onResponse)
             .then(onFragment)
-            .then(item.trigger)
+            .then(item.trigger || item.request.resolve)
             .then(nextRequest)
-            .catch(log);
+            .catch(item.reject);
     }
 
     function onResponse(response) {
@@ -331,4 +326,17 @@ void function (global) {
     function onListener(listener) {
         this.push([listener, this.element, this.loaded]);
     }
+
+    function populate(container, loaded) {
+        var queue;
+
+        queue = [];
+        queue.container = container;
+        queue.loaded = loaded === true;
+        forEach(Object.keys(registry), onSelector, queue);
+        queue.next = nextRecord.bind(queue);
+        queue.next();
+
+        return anticore;
+    };
 }(this);
