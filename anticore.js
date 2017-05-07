@@ -5,7 +5,10 @@
 void function (global) {
     'use strict';
 
-    var document,
+    var selector,
+        document,
+        encodeURIComponent,
+        URL,
         range,
         fetch,
         FormData,
@@ -19,7 +22,18 @@ void function (global) {
         queue,
         types;
 
+    selector = 'input[name]:not([type=file]):not([type=reset]):not([type=submit]):not([type=checkbox]):not([type=radio]):not(:disabled),'
+        + 'input[name][type=submit]:focus,'
+        + 'button[name][type=submit]:focus,'
+        + 'button[name]:not([type]):focus,'
+        + 'input[name][type=checkbox]:checked,'
+        + 'input[name][type=radio]:checked,'
+        + 'textarea[name]:not(:disabled),'
+        + 'select[name]:not(:disabled) [selected=selected]';
+
     document = global.document;
+    encodeURIComponent = global.encodeURIComponent;
+    URL = global.URL;
     range = document.createRange();
     fetch = global.fetch;
     FormData = global.FormData;
@@ -44,8 +58,25 @@ void function (global) {
      * @returns {Object} request
      */
     anticore.fetchers.form = function (form) {
-        return anticore.request(form.action, form.method, new FormData(form));
+        var action = new URL(form.action || form.ownerDocument.location.href),
+            method = form.method,
+            data;
+
+        if (method === 'post') {
+            data = new FormData(form);
+        } else {
+            action.search += action.search.indexOf('?') > -1 ? '' : '?';
+            forEach(form.querySelectorAll(selector), stringify, action);
+        }
+
+        return anticore.request(action, method, data);
     };
+
+    function stringify(item) {
+        this.search += '&' + encodeURIComponent((item.nodeName.toLowerCase() === 'option'
+            ? item.parentNode
+            : item).name) + '=' + encodeURIComponent(item.value).replace(/%20/g, '+');
+    }
 
     /**
      * Builds a request based on an anchor
@@ -79,7 +110,7 @@ void function (global) {
         if (anticore.onTimeout(request)) {
             return anticore;
         }
-        
+
         populate(request.response.result, true)
             .then(request.resolve);
 
@@ -110,7 +141,7 @@ void function (global) {
     anticore.onTimeout = function (request) {
         if (request.response.status === 408) {
             request.retry();
-            
+
             return true;
         }
 
