@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/anticore.svg?style=plastic)]()
 [![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
 
-The easiest middleware manager for AJAX requests, for only 3Ko !
+The easiest middleware manager for AJAX requests, for only 3Ko!
 
 
 ## Why?
@@ -16,12 +16,12 @@ In that case, we have a lot of nested functions, on the road of the callback hel
 
 Moreover, when our script calls the server, the requested view can be removed resulting by a 404, an internal error resulting by a 500, the user's session can be expired, etc. then we need to control the server response, adding a useless & repetitive treatment.
 
-Lemme show you how to cut it.  ;)
+Lemme show you how to cut it. ;)
 
 
 ## The solution? 
 
-It's fairly simple : **why not just wait something to treat ?**
+It's fairly simple: **why not just wait something to treat?**
 
 It really can help your code to be simple as possible.
 
@@ -33,14 +33,14 @@ It really can help your code to be simple as possible.
 
 ## How?
 
-The idea consists only to create some listeners at the page load :
+The idea consists only to create some listeners at the page load:
  
 ```JS
 anticore
   .on(querySelector, listener);
 ```
 
-When needed, make a AJAX call :
+When needed, make a AJAX call:
  
 ```JS
 anticore
@@ -48,7 +48,7 @@ anticore
   .fetch(anticore.trigger);
 ```
 
-And... why and? that's all !
+And... why and? that's all!
 
 
 ## Requirements
@@ -64,7 +64,7 @@ You need to support older browsers too? No problem, just look to that [polyfill]
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.2.1/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.2.2/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -76,7 +76,7 @@ You can also install it from npm
 
 ### Prepare the HTML
 
-For the following examples, suppose we have a simple web page like :
+For the following examples, suppose we have a simple web page like:
  
 ```HTML
 <!DOCTYPE html>
@@ -100,12 +100,12 @@ For the following examples, suppose we have a simple web page like :
         <h1>This is the main section</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.2.1/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.2.2/anticore.min.js"></script>
   </body>
 </html>
 ```
 
-Where the `/section` returns :
+Where the `/section` returns:
 
 ```HTML
 <section class="mainSection">
@@ -113,7 +113,7 @@ Where the `/section` returns :
 </section>
 ```
 
-And the `/form` returns :
+And the `/form` returns:
 
 ```HTML
 <form class="mainForm" action="/form" method="post">
@@ -257,7 +257,7 @@ anticore
 ```JS
 // post request
 anticore
-  .request('/what-s-new-to-fetch', 'post', formData)
+  .request('/what-s-new-to-fetch', 'post', new FormData(form))
   .fetch(anticore.trigger);
 ```
 
