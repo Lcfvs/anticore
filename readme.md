@@ -64,7 +64,7 @@ You need to support older browsers too? No problem, just look to that [polyfill]
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.2.3/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.2./anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -100,7 +100,7 @@ For the following examples, suppose we have a simple web page like:
         <h1>This is the main section</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.2.3/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.2.4/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -264,7 +264,6 @@ anticore
 ### Extend the fetcher to handle your elements as you want, based on the tag name
 
 ```JS
-// post request
 anticore
   .fetchers.button = function(button) {
     return anticore.request(button.dataset.href, 'get');
