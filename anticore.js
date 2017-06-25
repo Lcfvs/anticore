@@ -112,7 +112,10 @@ void function (global) {
         }
 
         populate(request.response.result, true)
-            .then(request.resolve);
+            .then(request.resolve)
+            .then(function () {
+              return request;
+            });
 
         return anticore;
     };
