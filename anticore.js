@@ -373,4 +373,4 @@ void function (global) {
             queue.next();
         });
     };
-}(this);
+}(Function('return this')());
