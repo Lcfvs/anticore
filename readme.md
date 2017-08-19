@@ -66,7 +66,7 @@ You need to support older browsers too? No problem, just look to that [polyfill]
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.4.5/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.4.6/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -102,7 +102,7 @@ For the following examples, suppose we have a simple web page like:
         <h1>This is the main section</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.4.5/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.4.6/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -337,6 +337,28 @@ Imagine too that when we call `/what-s-new-to-fetch` the server checks what comp
 
 Enjoy :)
 
+
+## Utils
+
+### `anticore.utils.create(prototype = null, descriptors = undefined)`
+
+Standalone `Object.create` which can have no args
+
+### `anticore.utils.demethodize(method, ...bindParams)`
+
+Returns a standalone function from an object method
+
+### `anticore.utils.forEach(iterable, callback, thisArg = undefined)`
+
+Standalone `Array.prototype.forEach` shortcut
+
+### `anticore.utils.$(selector, refNode = document)`
+
+Standalone `document.querySelector` shortcut
+
+### `anticore.utils.$$(selector, refNode = document)`
+
+Standalone `document.querySelectorAll` shortcut 
 
 ## License
 

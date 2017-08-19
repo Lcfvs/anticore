@@ -5,7 +5,8 @@
 void function (global) {
   'use strict';
 
-  var selector,
+  var
+  selector,
   document,
   encodeURIComponent,
   URL,
@@ -15,7 +16,6 @@ void function (global) {
   demethodize,
   forEach,
   html,
-  create,
   anticore,
   registry,
   requestPrototype,
@@ -42,9 +42,17 @@ void function (global) {
   html = demethodize(range.createContextualFragment, range);
   types = ['html', 'svg', 'xml'];
 
-  create = function (prototype) {
-    return Object.create(prototype || null);
-  };
+  function create(prototype, descriptors) {
+    return Object.create(prototype || null, descriptors);
+  }
+
+  function $(selector, node) {
+    return (node || document).querySelector(selector);
+  }
+
+  function $$(selector, node) {
+    return (node || document).querySelectorAll(selector);
+  }
 
   anticore = global.anticore = create();
   anticore.fetchers = create();
@@ -58,7 +66,8 @@ void function (global) {
    * @returns {Object} request
    */
   anticore.fetchers.form = function (form) {
-    var action = new URL(form.action || form.ownerDocument.location.href),
+    var
+    action = new URL(form.action || form.ownerDocument.location.href),
     method = form.method,
     data;
 
@@ -66,7 +75,7 @@ void function (global) {
       data = new FormData(form);
     } else {
       action.search += action.search.indexOf('?') > -1 ? '' : '?';
-      forEach(form.querySelectorAll(selector), stringify, action);
+      forEach($$(selector, form), stringify, action);
     }
 
     return anticore.request(action, method, data);
@@ -98,8 +107,7 @@ void function (global) {
    * @returns {Object} request
    */
   anticore.fetcher = function (element) {
-    var name;
-
+    var
     name = element.nodeName.toLowerCase();
 
     return anticore.fetchers[name](element);
@@ -173,7 +181,8 @@ void function (global) {
    * @return {requestPrototype}
    */
   anticore.request = function (url, method, body) {
-    var request,
+    var
+    request,
     options;
 
     request = create(requestPrototype);
@@ -220,6 +229,13 @@ void function (global) {
     return anticore;
   };
 
+  anticore.utils = create();
+  anticore.utils.create = create;
+  anticore.utils.demethodize = demethodize;
+  anticore.utils.forEach = forEach;
+  anticore.utils.$ = $;
+  anticore.utils.$$ = $$;
+
   /**
    * Adds a field value on an existing body
    * @param {String} name
@@ -254,7 +270,8 @@ void function (global) {
    * @returns {Promise}
    */
   requestPrototype.fetch = function (trigger) {
-    var item;
+    var
+    item;
 
     item = create();
     item.request = this;
@@ -317,7 +334,8 @@ void function (global) {
   }
 
   function fetchRequest() {
-    var item;
+    var
+    item;
 
     if (queue[1]) {
       return;
@@ -334,7 +352,8 @@ void function (global) {
   }
 
   function onResponse(response) {
-    var type,
+    var
+    type,
     item;
 
     type = ((response.headers.get('content-type') || 'application/octet-stream')
@@ -348,7 +367,8 @@ void function (global) {
   }
 
   function onFragment(data) {
-    var item;
+    var
+    item;
 
     item = queue[0];
 
@@ -362,7 +382,8 @@ void function (global) {
   }
 
   function nextRecord(resolve) {
-    var record;
+    var
+    record;
 
     record = this.shift();
 
@@ -374,17 +395,19 @@ void function (global) {
   }
 
   function onSelector(selector) {
-    var queue,
+    var
+    queue,
     nodes;
 
     queue = this;
     queue.selector = selector;
-    nodes = queue.container.querySelectorAll(selector);
+    nodes = $$(selector, queue.container);
     forEach(nodes, onElement, queue);
   }
 
   function onElement(element) {
-    var queue;
+    var
+    queue;
 
     queue = this;
     queue.element = element;
@@ -398,7 +421,8 @@ void function (global) {
 
   function populate(container, loaded) {
     return new Promise(function (resolve) {
-      var queue;
+      var
+      queue;
 
       queue = [];
       queue.container = container;
@@ -410,7 +434,7 @@ void function (global) {
   }
 
   function reFetchFromEvent(event) {
-    forEach(event.target.querySelectorAll('.error'), clean);
+    forEach($$('.error', event.target), clean);
     anticore.fetchFromEvent(event);
   }
 
