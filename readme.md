@@ -27,7 +27,9 @@ It really can help your code to be simple as possible.
 
 [Basic demo, based on the following examples](https://jsfiddle.net/k6gm2pss/)
 
-[Form validation demo](http://jsfiddle.net/05orbLfa/)
+[Form validation demo (short version)](http://jsfiddle.net/h6qaobp2/)
+
+[Form validation demo (long version)](http://jsfiddle.net/05orbLfa/)
 
 
 
@@ -64,7 +66,7 @@ You need to support older browsers too? No problem, just look to that [polyfill]
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.4.0/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.4.1/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -100,7 +102,7 @@ For the following examples, suppose we have a simple web page like:
         <h1>This is the main section</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.4.0/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.4.1/anticore.min.js"></script>
   </body>
 </html>
 ```
