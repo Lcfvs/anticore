@@ -191,9 +191,9 @@ void function (global) {
 
   /**
    * Default fetcher listener
-   * @param event
+   * @param {Event} event
    */
-  anticore.defaultFetcher = function (event) {
+  anticore.fetchFromEvent = function (event) {
     anticore
     .fetcher(event.target)
     .fetch(anticore.trigger);
@@ -207,12 +207,12 @@ void function (global) {
    */
   anticore.defaults = function () {
     anticore.on('a', function(element, next) {
-      element.addEventListener('click', anticore.defaultFetcher);
+      element.addEventListener('click', anticore.fetchFromEvent);
       next();
     });
 
     anticore.on('form', function(element, next) {
-      element.addEventListener('submit', anticore.defaultFetcher);
+      element.addEventListener('submit', reFetchFromEvent);
       next();
     });
 
@@ -274,7 +274,7 @@ void function (global) {
    */
   requestPrototype.retry = function () {
     if (!queue[0] || queue[0].request !== this) {
-      return;
+      return this;
     }
 
     queue.unshift(1);
@@ -406,5 +406,14 @@ void function (global) {
       queue.next = nextRecord.bind(queue, resolve);
       queue.next();
     });
+  }
+
+  function reFetchFromEvent(event) {
+    forEach(event.target.querySelectorAll('.error'), clean);
+    anticore.fetchFromEvent(event);
+  }
+
+  function clean(element) {
+    element.parentNode.removeChild(element);
   }
 }(Function('return this')());
