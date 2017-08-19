@@ -64,7 +64,7 @@ You need to support older browsers too? No problem, just look to that [polyfill]
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.2.8/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.3.0/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -100,7 +100,7 @@ For the following examples, suppose we have a simple web page like:
         <h1>This is the main section</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.2.8/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.3.0/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -187,14 +187,7 @@ anticore.on('.mainForm', function(element, next) {
 // a middleware to turn anchors in AJAX requests
 anticore.on('a', function(element, next) {
   // listen the click
-  element.addEventListener('click', function(event) {
-    anticore
-      .fetcher(element)
-      .fetch(anticore.trigger);
-
-    // prevent the default behavior
-    event.preventDefault();
-  });
+  element.addEventListener('click', anticore.defaultFetcher);
 
   // then let the next middleware to resolve, if any
   next();
@@ -205,20 +198,17 @@ anticore.on('a', function(element, next) {
 // a middleware to turn forms in AJAX requests
 anticore.on('form', function(element, next) {
   // listen the submit
-  element.addEventListener('submit', function(event) {
-    anticore
-      // specify what element is used for the request
-      .fetcher(element)
-      // enqueue the request & tell to anticore what to do when resolved
-      .fetch(anticore.trigger);
-
-    // prevent the default behavior
-    event.preventDefault();
-  });
+  element.addEventListener('submit', anticore.defaultFetcher);
 
   // then let the next middleware to resolve, if any
   next();
 });
+```
+
+In place of those 2 middlewares, you can also call the `defaults()` method :
+
+```JS
+anticore.defaults();
 ```
 
 
@@ -227,6 +217,7 @@ anticore.on('form', function(element, next) {
 ```JS
 anticore.populate(document);
 ```
+
 
 ## Advanced usage
 
@@ -272,14 +263,7 @@ anticore
 // Then you can add a generic middleware like for the anchors
 anticore.on('button', function(element, next) {
   // listen the click
-  element.addEventListener('click', function(event) {
-    anticore
-      .fetcher(element)
-      .fetch(anticore.trigger);
-
-    // prevent the default behavior
-    event.preventDefault();
-  });
+  element.addEventListener('click', anticore.defaultFetcher);
 
   // then let the next middleware to resolve, if any
   next();
@@ -295,14 +279,7 @@ anticore
 // Then you can add a generic middleware like for the anchors & buttons
 anticore.on('a, button', function(element, next) {
   // listen the click
-  element.addEventListener('click', function(event) {
-    anticore
-      .fetcher(element)
-      .fetch(anticore.trigger);
-
-    // prevent the default behavior
-    event.preventDefault();
-  });
+  element.addEventListener('click', anticore.defaultFetcher);
 
   // then let the next middleware to resolve, if any
   next();

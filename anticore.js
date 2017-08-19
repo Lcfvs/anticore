@@ -190,6 +190,36 @@ void function (global) {
   };
 
   /**
+   * Default fetcher listener
+   * @param event
+   */
+  anticore.defaultFetcher = function (event) {
+    anticore
+    .fetcher(event.target)
+    .fetch(anticore.trigger);
+
+    event.preventDefault();
+  };
+
+  /**
+   * Adds default <a> & <form> middlewares
+   * @returns {Object} anticore
+   */
+  anticore.defaults = function () {
+    anticore.on('a', function(element, next) {
+      element.addEventListener('click', anticore.defaultFetcher);
+      next();
+    });
+
+    anticore.on('form', function(element, next) {
+      element.addEventListener('submit', anticore.defaultFetcher);
+      next();
+    });
+
+    return anticore;
+  };
+
+  /**
    * Adds a field value on an existing body
    * @param {String} name
    * @param {*} value
@@ -376,5 +406,5 @@ void function (global) {
       queue.next = nextRecord.bind(queue, resolve);
       queue.next();
     });
-  };
+  }
 }(Function('return this')());
