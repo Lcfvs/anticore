@@ -156,12 +156,13 @@ void function (global) {
   };
 
   /**
-   * Launches the selectors tests to find the related listeners
-   * @param {Document|HTMLElement|DocumentFragment} container
+   * Launches the selectors tests to find the related listeners,
+   * takes the scoped document if not passed as argument
+   * @param {Document|HTMLElement|DocumentFragment|undefined} container
    * @returns {Object} anticore
    */
   anticore.populate = function (container) {
-    return populate(container);
+    return populate(container || document);
   };
 
   /**
