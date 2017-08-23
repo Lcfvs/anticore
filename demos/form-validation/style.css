@@ -1,0 +1,7 @@
+span.error {
+    color: red;
+}
+
+input, select {
+    display: block;
+}

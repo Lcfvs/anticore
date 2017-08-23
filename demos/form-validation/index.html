@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Form validation demo :: anticore</title>
+        <link href="style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header>
+            <h1>Form validation demo :: anticore</h1>
+        </header>
+        <main>
+            <form name="user" action="response.html" method="post">
+                <fieldset>
+                    <p>
+                        <label for="username">Username</label>
+                        <input id="username" placeholder="Lcf.vs" />
+                    </p>
+                    <p>
+                        <label for="country">Country</label>
+                        <select id="country">
+                            <option value="Belgium" selected="selected">Belgium</option>
+                            <option value="France">France</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </p>
+                </fieldset>
+                <button type="submit" class="save">Save</button>
+            </form>
+        </main>
+        <script src="../../anticore.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
