@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/anticore.svg?style=plastic)]()
 [![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
 
-The easiest middleware manager for AJAX requests, for only 3Ko!
+The easiest middleware manager for AJAX requests, for around 3Ko!
 
 
 ## Why?
@@ -66,7 +66,7 @@ You need to support older browsers too? No problem, just look to that [polyfill]
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.4.6/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.4.7/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -102,7 +102,7 @@ For the following examples, suppose we have a simple web page like:
         <h1>This is the main section</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.4.6/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.4.7/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -163,7 +163,7 @@ anticore.on('.mainSection', function(element, next, loaded) {
 ```JS
 // a middleware to handle the main form
 anticore.on('.mainForm', function(element, next) {
-  // gets the current main section (already in the document
+  // gets the current main section (already in the document)
   let mainSection = document.querySelector('.mainSection');
   // gets the current main form (already in the document)
   let mainForm = mainSection.querySelector('.mainForm');
@@ -272,22 +272,6 @@ anticore
 
 // Then you can add a generic middleware like for the anchors
 anticore.on('button', function(element, next) {
-  // listen the click
-  element.addEventListener('click', anticore.fetchFromEvent);
-
-  // then let the next middleware to resolve, if any
-  next();
-});
-
-// or join the 2 in 1 by replacing the anchors middleware by
-
-anticore
-  .fetchers.button = function(button) {
-    return anticore.request(button.dataset.href, 'get');
-  };
-
-// Then you can add a generic middleware like for the anchors & buttons
-anticore.on('a, button', function(element, next) {
   // listen the click
   element.addEventListener('click', anticore.fetchFromEvent);
 
