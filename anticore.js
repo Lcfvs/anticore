@@ -54,7 +54,7 @@ void function (global) {
     return (node || document).querySelectorAll(selector);
   }
 
-  anticore = global.anticore = create();
+  anticore = create();
   anticore.fetchers = create();
   registry = create();
   requestPrototype = create();
