@@ -441,4 +441,16 @@ void function (global) {
   function clean(element) {
     element.parentNode.removeChild(element);
   }
+
+  if (typeof module === 'object' && typeof module.exports === 'object') {
+    module.exports = anticore;
+  } else {
+    if (typeof define === 'function' && define.amd) {
+      define([], function() {
+        return anticore;
+      });
+    } else {
+      global.anticore = anticore;
+    }
+  }
 }(Function('return this')());
