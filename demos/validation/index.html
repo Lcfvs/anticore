@@ -3,14 +3,14 @@
     <head>
         <meta charset="utf-8">
         <title>validation::demos::anticore</title>
-        <link href="style.css" rel="stylesheet" />
+        <link href="assets/css/style.css" rel="stylesheet" />
     </head>
     <body>
         <header>
             <h1>validation::demos::anticore</h1>
         </header>
         <main>
-            <form name="user" action="response.html" method="post">
+            <form name="user" action="fragments/response.html" method="post">
                 <fieldset>
                     <p>
                         <label for="username">Username</label>
@@ -28,7 +28,8 @@
                 <button type="submit" class="save">Save</button>
             </form>
         </main>
-        <script src="../../anticore.min.js"></script>
-        <script src="middlewares.js"></script>
+        <script defer src="https://cdn.rawgit.com/Lcfvs/anticore/1.5.4/anticore.min.js"></script>
+        <script defer src="assets/js/on-validation-error.md.js"></script>
+        <script defer src="https://cdn.rawgit.com/Lcfvs/anticore/1.5.4/middlewares/defaults-and-populate.md.min.js"></script>
     </body>
 </html>

@@ -14,7 +14,5 @@ void function (global) {
     field.parentNode.insertBefore(element, field);
 
     next();
-  })
-  .defaults()
-  .populate();
+  });
 }(this);

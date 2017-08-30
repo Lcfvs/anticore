@@ -3,14 +3,14 @@
     <head>
         <meta charset="utf-8">
         <title>messages::demos::anticore</title>
-        <link href="style.css" rel="stylesheet" />
+        <link href="assets/css/style.css" rel="stylesheet" />
     </head>
     <body>
         <header>
             <h1>messages::demos::anticore</h1>
         </header>
         <main id="messages">
-            <h1>Messages <span class="notifications"><strong id="notificationCount">3 <a href="response.html">↺</a></strong></span></h1>
+            <h1>Messages <span class="notifications"><strong id="notificationCount">3 <a href="fragments/response.html">↺</a></strong></span></h1>
             <section class="message">
                 <h1>Message 1 title</h1>
                 <h1>This is the message 1 content</h1>
@@ -24,7 +24,9 @@
                 <h1>This is the message 3 content</h1>
             </section>
         </main>
-        <script src="../../anticore.min.js"></script>
-        <script src="middlewares.js"></script>
+        <script defer src="https://cdn.rawgit.com/Lcfvs/anticore/1.5.4/anticore.min.js"></script>
+        <script defer src="assets/js/notification-count-updater.md.js"></script>
+        <script defer src="assets/js/message-reader.md.js"></script>
+        <script defer src="https://cdn.rawgit.com/Lcfvs/anticore/1.5.4/middlewares/defaults-and-populate.md.min.js"></script>
     </body>
 </html>

@@ -3,21 +3,7 @@ void function (global) {
 
   let
   anticore = global.anticore,
-  // refer to readme #utils
   $ = anticore.utils.$;
-
-  anticore.on('main', function(element, next, loaded) {
-    if (!loaded) {
-      return next();
-    }
-
-    let
-    main = $('main');
-
-    main.parentNode.replaceChild(element, main);
-
-    next();
-  });
 
   anticore.on('nav a', function () {
     function changeCurrent(event) {
@@ -34,7 +20,4 @@ void function (global) {
       next();
     };
   }());
-
-  anticore.defaults();
-  anticore.populate();
 }(this);
