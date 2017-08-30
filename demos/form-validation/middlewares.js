@@ -7,8 +7,10 @@ void function (global) {
 
   anticore
   .on('.error[data-for]', function(element, next) {
-    let target = element.dataset.for;
-    let field = $(target);
+    let
+    target = element.dataset.for,
+    field = $(target);
+
     field.parentNode.insertBefore(element, field);
 
     next();

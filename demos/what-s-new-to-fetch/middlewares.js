@@ -6,11 +6,15 @@ void function (global) {
   $ = anticore.utils.$;
 
   anticore
-  .on('section[id]', function(element, next) {
+  .on('section[id]', function(element, next, loaded) {
+    if (!loaded) {
+      return next();
+    }
+
     let section = $('#' + element.id);
     section.parentNode.replaceChild(element, section);
 
-    next();
+    setTimeout(next, 300);
   })
   .defaults()
   .populate();

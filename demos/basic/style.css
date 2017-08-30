@@ -1,3 +1,21 @@
+nav ol {
+    list-style: none;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+}
+
+nav a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+nav a.current {
+    background: deepskyblue;
+}
+
 input {
     display: block;
 }
