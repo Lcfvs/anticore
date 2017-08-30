@@ -51,7 +51,7 @@ git clone https://github.com/Lcfvs/anticore.git dossier-de-votre-choix
 ## Via une balise &lt;script>&lt;/script>
 
 ```html
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.5.4/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.5.5/anticore.min.js"></script>
 ```
 
 # Étapes du processus
@@ -178,7 +178,7 @@ void function(global) {
 
 ```js
 // module d'initialisation (à charger en dernier)
-// peut être remplacé par j'ajout d'une balise script chargeant https://cdn.rawgit.com/Lcfvs/anticore/1.5.4/middlewares/defaults-and-populate.md.min.js
+// peut être remplacé par l'ajout d'une balise script chargeant https://cdn.rawgit.com/Lcfvs/anticore/1.5.5/middlewares/defaults-and-populate.md.min.js
 void function(global) {
   'use strict';
   
@@ -195,7 +195,7 @@ Dans `dossier-de-votre-choix/demos`, vous trouverez les sources des exemples sui
 
 ## Exemple basique (basic)
 
-### `demos/basic/index.html`
+### [`demos/basic/index.html`](demos/basic/index.html)
 
 Dans le body, nous avons un menu de navigation et une section principale
 
@@ -215,7 +215,7 @@ Dans le body, nous avons un menu de navigation et une section principale
 </main>
 ```
 
-### `demos/basic/fragments/section.html`
+### [`demos/basic/fragments/section.html`](demos/basic/fragments/section.html)
 
 Un fragment de document pouvant être appelé en AJAX
 
@@ -226,7 +226,7 @@ Un fragment de document pouvant être appelé en AJAX
 </main>
 ```
 
-### `demos/basic/fragments/form.html`
+### [`demos/basic/fragments/form.html`](demos/basic/fragments/form.html)
 
 Un autre fragment de document pouvant être appelé en AJAX
 
@@ -241,7 +241,7 @@ Un autre fragment de document pouvant être appelé en AJAX
 </main>
 ```
 
-### `demos/basic/assets/js/change-current-nav-anchor.md.js`
+### [`demos/basic/assets/js/change-current-nav-anchor.md.js`](demos/basic/assets/js/change-current-nav-anchor.md.js)
 
 Middleware servant à remplacer le main de la page, par celui obtenu en AJAX
 
@@ -261,7 +261,7 @@ anticore.on('main', function(element, next, loaded) {
 });
 ```
 
-### `demos/basic/assets/js/main-replacer.md.js`
+### [`demos/basic/assets/js/main-replacer.md.js`](demos/basic/assets/js/main-replacer.md.js)
 
 Middleware servant à définir le lien courant, lorsqu'on clique dessus (ajout de `.current`)
 
@@ -288,7 +288,7 @@ Notez, ici, l'encapsulation de la fonction `changeCurrent()`, afin de pouvoir re
 
 ## Exemple de validation de formulaire, par le serveur (validation)
 
-### `demos/validation/index.html`
+### [`demos/validation/index.html`](demos/validation/index.html)
 
 Dans le body, nous avons une section contenant un formulaire
 
@@ -317,7 +317,7 @@ Dans le body, nous avons une section contenant un formulaire
 </main>
 ```
 
-### `demos/validation/fragments/response.html`
+### [`demos/validation/fragments/response.html`](demos/validation/fragments/response.html)
 
 Un fragment HTML contenant des messages d'erreurs de validation, pouvant être appelé en AJAX
 
@@ -329,7 +329,7 @@ Un fragment HTML contenant des messages d'erreurs de validation, pouvant être a
 Notez l'attribut `data-for`, à titre d'exemple, contenant un sélecteur permettant de cibler l'élément auquel le
 message d'erreur correspond.
 
-### `demos/validation/assets/js/on-validation-error.md.js`
+### [`demos/validation/assets/js/on-validation-error.md.js`](demos/validation/assets/js/on-validation-error.md.js)
 
 Le middleware interceptant les messages d'erreurs, en récupérant le sélecteur dans l'attribut `data-for`, afin de savoir
 où l'injecter
@@ -346,9 +346,9 @@ anticore.on('.error[data-for]', function(element, next) {
 });
 ```
 
-## Exemple de grille composants à mettre à jour (demos/messages)
+## Exemple de grille composants à mettre à jour (messages)
 
-### `demos/messages/index.html`
+### [`demos/messages/index.html`](demos/messages/index.html)
 
 Dans le body, nous avons une section contenant un compteur de nouveaux messages et une liste de messages déjà lus
 
@@ -373,7 +373,7 @@ Dans le body, nous avons une section contenant un compteur de nouveaux messages 
 </main>
 ```
 
-### `demos/messages/fragments/response.html`
+### [`demos/messages/fragments/response.html`](demos/messages/fragments/response.html)
 
 Un fragment HTML contenant une liste de composants à mettre à jour, pouvant être appelé en AJAX
 
@@ -393,7 +393,7 @@ Un fragment HTML contenant une liste de composants à mettre à jour, pouvant ê
 </section>
 ```
 
-### `demos/messages/assets/js/notification-count-updater.md.js`
+### [`demos/messages/assets/js/notification-count-updater.md.js`](demos/messages/assets/js/notification-count-updater.md.js)
 
 Un middleware permettant de mettre à jour le compteur de notifications
 
@@ -408,7 +408,7 @@ anticore.on('#notificationCount', function(element, next) {
 })
 ```
 
-### `demos/messages/assets/js/message-reader.md.js`
+### [`demos/messages/assets/js/message-reader.md.js`](demos/messages/assets/js/message-reader.md.js)
 
 Un middleware interceptant les nouveaux messages, les ajoutant à la liste, avec un délai de 0.3 ms entre chaque ajout
 
