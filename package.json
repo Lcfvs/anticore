@@ -1,6 +1,6 @@
 {
   "name": "anticore",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Another way to handle HTML AJAX contents",
   "main": "anticore.js",
   "repository": {
@@ -17,5 +17,6 @@
   "bugs": {
     "url": "https://github.com/Lcfvs/anticore/issues"
   },
-  "homepage": "https://github.com/Lcfvs/anticore#readme"
+  "homepage": "https://github.com/Lcfvs/anticore#readme",
+  "dependencies": {}
 }

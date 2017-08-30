@@ -166,7 +166,7 @@ void function (global) {
   /**
    * Launches the selectors tests to find the related listeners,
    * takes the scoped document if not passed as argument
-   * @param {Document|HTMLElement|DocumentFragment|undefined} container
+   * @param {Document|HTMLElement|DocumentFragment} [container=global.document)
    * @returns {Object} anticore
    */
   anticore.populate = function (container) {
@@ -251,15 +251,11 @@ void function (global) {
   /**
    * Adds credentials to the request
    * (let by default, if you fetch a resource on the same domain, if not, use 'include')
-   * @param {String} [value = 'same-origin']
+   * @param {String} [value='same-origin']
    * @return {requestPrototype}
    */
   requestPrototype.credentials = function (value) {
-    if (value === undefined) {
-      value = 'same-origin';
-    }
-
-    this.options.credentials = value;
+    this.options.credentials = value || 'same-origin';
 
     return this;
   };
