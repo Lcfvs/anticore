@@ -57,7 +57,7 @@ git clone https://github.com/Lcfvs/anticore.git dossier-de-votre-choix
 # Étapes du processus
 
 * Chargement du document et des scripts
-* Déclaration des middlewares `ancitore.on(selector, middleware)`
+* Déclaration des middlewares `anticore.on(selector, middleware)`
 * Optionnellement, déclaration des middlewares par défaut `anticore.defaults()`
   * écoute du clic sur un lien, pour en faire un appel AJAX
   * écoute de la soumission d'un formulaire, pour en faire un appel AJAX
@@ -178,7 +178,8 @@ void function(global) {
 
 ```js
 // module d'initialisation (à charger en dernier)
-// peut être remplacé par l'ajout d'une balise script chargeant https://cdn.rawgit.com/Lcfvs/anticore/1.5.7/middlewares/defaults-and-populate.md.min.js
+// peut être remplacé par l'ajout d'une balise script chargeant le scipt suivant :
+// https://cdn.rawgit.com/Lcfvs/anticore/1.5.7/middlewares/defaults-and-populate.md.min.js
 void function(global) {
   'use strict';
   
