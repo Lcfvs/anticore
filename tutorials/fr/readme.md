@@ -51,7 +51,7 @@ git clone https://github.com/Lcfvs/anticore.git dossier-de-votre-choix
 ## Via une balise &lt;script>&lt;/script>
 
 ```html
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.5.5/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.5.6/anticore.min.js"></script>
 ```
 
 # Étapes du processus
@@ -178,7 +178,7 @@ void function(global) {
 
 ```js
 // module d'initialisation (à charger en dernier)
-// peut être remplacé par l'ajout d'une balise script chargeant https://cdn.rawgit.com/Lcfvs/anticore/1.5.5/middlewares/defaults-and-populate.md.min.js
+// peut être remplacé par l'ajout d'une balise script chargeant https://cdn.rawgit.com/Lcfvs/anticore/1.5.6/middlewares/defaults-and-populate.md.min.js
 void function(global) {
   'use strict';
   
@@ -194,6 +194,10 @@ Dans `dossier-de-votre-choix/demos`, vous trouverez les sources des exemples sui
 `dossier-de-votre-choix/demos/index.html` dans votre navigateur.
 
 ## Exemple basique (basic)
+
+### Démo
+
+[https://cdn.rawgit.com/Lcfvs/anticore/1.5.6/demos/basic/index.html](https://cdn.rawgit.com/Lcfvs/anticore/1.5.6/demos/basic/index.html)
 
 ### [`demos/basic/index.html`](demos/basic/index.html)
 
@@ -288,6 +292,10 @@ Notez, ici, l'encapsulation de la fonction `changeCurrent()`, afin de pouvoir re
 
 ## Exemple de validation de formulaire, par le serveur (validation)
 
+### Démo
+
+[https://cdn.rawgit.com/Lcfvs/anticore/1.5.6/demos/validation/index.html](https://cdn.rawgit.com/Lcfvs/anticore/1.5.6/demos/validation/index.html)
+
 ### [`demos/validation/index.html`](demos/validation/index.html)
 
 Dans le body, nous avons une section contenant un formulaire
@@ -347,6 +355,10 @@ anticore.on('.error[data-for]', function(element, next) {
 ```
 
 ## Exemple de grille composants à mettre à jour (messages)
+
+### Démo
+
+[https://cdn.rawgit.com/Lcfvs/anticore/1.5.6/demos/messages/index.html](https://cdn.rawgit.com/Lcfvs/anticore/1.5.6/demos/messages/index.html)
 
 ### [`demos/messages/index.html`](demos/messages/index.html)
 
