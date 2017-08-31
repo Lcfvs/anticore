@@ -288,7 +288,8 @@ anticore.on('nav a', function () {
 }());
 ```
 
-Notez, ici, l'encapsulation de la fonction `changeCurrent()`, afin de pouvoir rendre ce middleware indépendant.
+Notez, ici, l'encapsulation de la fonction `changeCurrent()`, afin de pouvoir rendre ce middleware indépendant, sans
+recréer une nouvelle fonction, pour chaque élément pris en charge par ce middleware.
 
 
 ## Exemple de validation de formulaire, par le serveur (validation)
