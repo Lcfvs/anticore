@@ -46,12 +46,14 @@ void function (global) {
     return Object.create(prototype || null, descriptors);
   }
 
-  function $(selector, node) {
-    return (node || document).querySelector(selector);
+  function $(selector, refNode) {
+    refNode = (refNode || document);
+
+    return selector === undefined ? refNode : refNode.querySelector(selector);
   }
 
-  function $$(selector, node) {
-    return (node || document).querySelectorAll(selector);
+  function $$(selector, refNode) {
+    return (refNode || document).querySelectorAll(selector);
   }
 
   anticore = create();

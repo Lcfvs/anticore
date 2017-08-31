@@ -63,7 +63,7 @@ Vous devez assurer un support pour les anciens navigateurs ? Pas de problème, i
 ## Installation
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.5.7/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.5.8/anticore.min.js"></script>
 ```
 
 Vous pouvez aussi l'installer depuis NPM :
@@ -99,7 +99,7 @@ Pour les exemples suivants, considérez que votre page HTML resemble à ceci :
         <h1>Ceci est la section principale</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.5.7/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.5.8/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -339,13 +339,13 @@ Dérivée de `Object.create`, utilisable sans arguments
 
 Dérivée de `Array.prototype.forEach`
 
-### `anticore.utils.$(selector, refNode = document)`
+### `anticore.utils.$(selector = undefined, refNode = document)`
 
-Dérivée de `document.querySelector`
+Dérivée de `node.querySelector`, retourne `refNode` si pas de sélecteur spécifié
 
 ### `anticore.utils.$$(selector, refNode = document)`
 
-Dérivée de `document.querySelectorAll` 
+Dérivée de `node.querySelectorAll`
 
 ## License
 
