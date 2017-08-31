@@ -178,7 +178,7 @@ void function(global) {
 
 ```js
 // module d'initialisation (à charger en dernier)
-// peut être remplacé par l'ajout d'une balise script chargeant le scipt suivant :
+// peut être remplacé par l'ajout d'une balise script chargeant le script suivant :
 // https://cdn.rawgit.com/Lcfvs/anticore/1.5.7/middlewares/defaults-and-populate.md.min.js
 void function(global) {
   'use strict';
