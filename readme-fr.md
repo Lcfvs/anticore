@@ -63,7 +63,7 @@ Vous devez assurer un support pour les anciens navigateurs ? Pas de problème, i
 ## Installation
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.5.8/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.6.0/anticore.min.js"></script>
 ```
 
 Vous pouvez aussi l'installer depuis NPM :
@@ -99,7 +99,7 @@ Pour les exemples suivants, considérez que votre page HTML resemble à ceci :
         <h1>Ceci est la section principale</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.5.8/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.6.0/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -185,7 +185,7 @@ anticore.on('.mainForm', function(element, next) {
 
 ```JS
 // un middleware interceptant le clic sur une ancre, pour en déduire l'appel AJAX
-anticore.on('a', function(element, next) {
+anticore.on('a:not([download]):not([target])', function(element, next) {
   // on écoute le click
   element.addEventListener('click', anticore.fetchFromEvent);
 

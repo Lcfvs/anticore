@@ -214,11 +214,11 @@ void function (global) {
   };
 
   /**
-   * Adds default <a> & <form> middlewares
+   * Adds default a:not([download]):not([target]) & form middlewares
    * @returns {Object} anticore
    */
   anticore.defaults = function () {
-    anticore.on('a', function(element, next) {
+    anticore.on('a:not([download]):not([target])', function(element, next) {
       element.addEventListener('click', anticore.fetchFromEvent);
       next();
     });
