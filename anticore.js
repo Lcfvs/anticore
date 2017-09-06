@@ -218,12 +218,12 @@ void function (global) {
    * @returns {Object} anticore
    */
   anticore.defaults = function () {
-    anticore.on('a:not([download]):not([target])', function(element, next) {
+    anticore.on('a:not([download]):not([target]),a[target=_self]:not([download])', function(element, next) {
       element.addEventListener('click', anticore.fetchFromEvent);
       next();
     });
 
-    anticore.on('form', function(element, next) {
+    anticore.on('form:not([target]),form[target=_self]', function(element, next) {
       element.addEventListener('submit', reFetchFromEvent);
       next();
     });
