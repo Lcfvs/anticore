@@ -10,12 +10,10 @@ void function (global) {
   document,
   encodeURIComponent,
   URL,
-  range,
   fetch,
   FormData,
   demethodize,
   forEach,
-  html,
   anticore,
   registry,
   requestPrototype,
@@ -34,12 +32,10 @@ void function (global) {
   document = global.document;
   encodeURIComponent = global.encodeURIComponent;
   URL = global.URL;
-  range = document.createRange();
   fetch = global.fetch;
   FormData = global.FormData;
   demethodize = Function.bind.bind(Function.call);
   forEach = demethodize([].forEach);
-  html = demethodize(range.createContextualFragment, range);
   types = ['html', 'svg', 'xml'];
 
   function create(prototype, descriptors) {
@@ -54,6 +50,16 @@ void function (global) {
 
   function $$(selector, refNode) {
     return (refNode || document).querySelectorAll(selector);
+  }
+
+  function html(data) {
+    var
+    body;
+
+    body = document.createElement('body');
+    body.innerHTML = data;
+
+    return body;
   }
 
   anticore = create();
@@ -208,10 +214,15 @@ void function (global) {
   anticore.fetchFromEvent = function (event) {
     anticore
     .fetcher(event.target)
-    .fetch(anticore.trigger);
+    .fetch(anticore.trigger)
+    ['catch'](anticore.onError);
 
     event.preventDefault();
+
+    return false;
   };
+
+  anticore.onError = console.error.bind(console);
 
   /**
    * Adds default a:not([download]):not([target]) & form middlewares
@@ -219,7 +230,12 @@ void function (global) {
    */
   anticore.defaults = function () {
     anticore.on('a:not([download]):not([target]),a[target=_self]:not([download])', function(element, next) {
-      element.addEventListener('click', anticore.fetchFromEvent);
+      if ('ontouchstart' in global) {
+        element.addEventListener('touchend', anticore.fetchFromEvent);
+      }
+
+      element.addEventListener('mouseup', anticore.fetchFromEvent);
+
       next();
     });
 
