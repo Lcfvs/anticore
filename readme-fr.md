@@ -52,18 +52,17 @@ Ensuite... Pourquoi ensuite? c'est tout !
 
 ## Dépendances
 
-Tout ce dont vous avez besoin, c'est le support navigateur de ces 2 éléments :
+Tout ce dont vous avez besoin, c'est le support navigateur de ces 3 polyfills :
 
 * **ES2015** [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-* [`window.fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API.
-
-Vous devez assurer un support pour les anciens navigateurs ? Pas de problème, il existe un [polyfill](https://github.com/github/fetch).
+* [`window.fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API
+* [URL](https://github.com/inexorabletash/polyfill/blob/master/url.js)
 
 
 ## Installation
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.7.2/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.7.4/anticore.min.js"></script>
 ```
 
 Vous pouvez aussi l'installer depuis NPM :
@@ -99,7 +98,7 @@ Pour les exemples suivants, considérez que votre page HTML resemble à ceci :
         <h1>Ceci est la section principale</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.7.2/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.7.4/anticore.min.js"></script>
   </body>
 </html>
 ```

@@ -58,15 +58,14 @@ And... why and? that's all!
 All you need is the support of the natives
 
 * **ES2015** [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-* [`window.fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API.
-
-You need to support older browsers too? No problem, just look to that [polyfill](https://github.com/github/fetch).
+* [`window.fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API
+* [URL](https://github.com/inexorabletash/polyfill/blob/master/url.js)
 
 
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.7.2/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.7.4/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -102,7 +101,7 @@ For the following examples, suppose we have a simple web page like:
         <h1>This is the main section</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.7.2/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.7.4/anticore.min.js"></script>
   </body>
 </html>
 ```

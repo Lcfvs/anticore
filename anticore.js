@@ -229,11 +229,12 @@ void function (global) {
   anticore.onError = console.error.bind(console);
 
   /**
-   * Adds default a:not([download]):not([target]) & form middlewares
+   * Adds default a:not([download][href^="data:"]):not([target]), a[target=_self]:not([download][href^="data:"]) & form middlewares
    * @returns {Object} anticore
    */
   anticore.defaults = function () {
-    anticore.on('a:not([download]):not([target]),a[target=_self]:not([download])', function(element, next) {
+    anticore.on('a:not([download][href^="data:"]):not([target]),a[target=_self]:not([download][href^="data:"])',
+    function(element, next) {
       var
       handle;
 
