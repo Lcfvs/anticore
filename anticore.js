@@ -2,7 +2,19 @@
  Copyright MIT 2017 Lcf.vs
  https://github.com/Lcfvs/anticore
  */
-void function (global) {
+/*
+ Copyright MIT 2017 Lcf.vs
+ https://github.com/Lcfvs/anticore
+ */
+void function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(factory.bind(null, global));
+  } else if (typeof module === "object" && module.exports) {
+    module.exports = factory(global);
+  } else {
+    global.anticore = factory(global);
+  }
+}(Function('return this;')(), function (global) {
   'use strict';
 
   var
@@ -86,7 +98,7 @@ void function (global) {
       forEach($$(selector, form), stringify, action);
     }
 
-    return anticore.request(action, method, data);
+    return anticore.request(action, method, data, form);
   };
 
   function stringify(item) {
@@ -105,7 +117,7 @@ void function (global) {
    * @returns {object} request
    */
   anticore.fetchers.a = function (a) {
-    return anticore.request(a.href, 'get');
+    return anticore.request(a.href, 'get', null, a);
   };
 
   /**
@@ -186,9 +198,10 @@ void function (global) {
    * @param {String} url
    * @param {String} method (get or post)
    * @param {Object} [body] (the post request body)
+   * @param {Element} [target] (the event target)
    * @return {requestPrototype}
    */
-  anticore.request = function (url, method, body) {
+  anticore.request = function (url, method, body, target) {
     var
     request,
     options;
@@ -197,6 +210,7 @@ void function (global) {
     options = create();
 
     request.options = options;
+    request.target = target;
     request.url = url;
 
     options.headers = create();
@@ -257,6 +271,7 @@ void function (global) {
     return anticore;
   };
 
+  anticore.plugins = create();
   anticore.utils = create();
   anticore.utils.create = create;
   anticore.utils.demethodize = demethodize;
@@ -466,15 +481,5 @@ void function (global) {
     element.parentNode.removeChild(element);
   }
 
-  if (typeof module === 'object' && typeof module.exports === 'object') {
-    module.exports = anticore;
-  } else {
-    if (typeof define === 'function' && define.amd) {
-      define([], function() {
-        return anticore;
-      });
-    } else {
-      global.anticore = anticore;
-    }
-  }
-}(Function('return this')());
+  return anticore;
+});

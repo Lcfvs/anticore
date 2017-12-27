@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/anticore.svg?style=plastic)]()
 [![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
 
-The easiest middleware manager for AJAX requests, for around 3Ko!
+The easiest middleware manager for AJAX requests, for around 4Ko!
 
 
 ## Why?
@@ -65,7 +65,7 @@ All you need is the support of the natives
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.7.6/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.0/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -101,7 +101,7 @@ For the following examples, suppose we have a simple web page like:
         <h1>This is the main section</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.7.6/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.0/anticore.min.js"></script>
   </body>
 </html>
 ```
