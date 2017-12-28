@@ -257,16 +257,17 @@ void function (global, factory) {
    * @returns {Object} anticore
    */
   anticore.defaults = function () {
+    function handle(event) {
+      return anticore.fetchFromEvent.call(create(), event);
+    }
+
     anticore.on('a:not([download]):not([target]):not([href^="data:"]),a[target=_self]:not([download]):not([href^="data:"])',
     function(element, next) {
-      var
-      handle = {};
-
       if ('ontouchstart' in global) {
-        element.addEventListener('touchend', anticore.fetchFromEvent.bind(handle));
+        element.addEventListener('touchend', handle);
       }
 
-      element.addEventListener('click', anticore.fetchFromEvent.bind(handle));
+      element.addEventListener('click', handle);
 
       next();
     });

@@ -51,7 +51,7 @@ git clone https://github.com/Lcfvs/anticore.git dossier-de-votre-choix
 ## Via une balise &lt;script>&lt;/script>
 
 ```html
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.3/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.4/anticore.min.js"></script>
 ```
 
 # Étapes du processus
@@ -179,7 +179,7 @@ void function(global) {
 ```js
 // module d'initialisation (à charger en dernier)
 // peut être remplacé par l'ajout d'une balise script chargeant le script suivant :
-// https://cdn.rawgit.com/Lcfvs/anticore/1.8.3/middlewares/defaults-and-populate.md.min.js
+// https://cdn.rawgit.com/Lcfvs/anticore/1.8.4/middlewares/defaults-and-populate.md.min.js
 void function(global) {
   'use strict';
   
@@ -198,7 +198,7 @@ Dans `dossier-de-votre-choix/demos`, vous trouverez les sources des exemples sui
 
 ### Démo
 
-[https://cdn.rawgit.com/Lcfvs/anticore/1.8.3/demos/basic/index.html](https://cdn.rawgit.com/Lcfvs/anticore/1.8.3/demos/basic/index.html)
+[https://cdn.rawgit.com/Lcfvs/anticore/1.8.4/demos/basic/index.html](https://cdn.rawgit.com/Lcfvs/anticore/1.8.4/demos/basic/index.html)
 
 ### [`demos/basic/index.html`](../../demos/basic/index.html)
 
@@ -296,7 +296,7 @@ recréer une nouvelle fonction, pour chaque élément pris en charge par ce midd
 
 ### Démo
 
-[https://cdn.rawgit.com/Lcfvs/anticore/1.8.3/demos/validation/index.html](https://cdn.rawgit.com/Lcfvs/anticore/1.8.3/demos/validation/index.html)
+[https://cdn.rawgit.com/Lcfvs/anticore/1.8.4/demos/validation/index.html](https://cdn.rawgit.com/Lcfvs/anticore/1.8.4/demos/validation/index.html)
 
 ### [`demos/validation/index.html`](../../demos/validation/index.html)
 
@@ -360,7 +360,7 @@ anticore.on('.error[data-for]', function(element, next) {
 
 ### Démo
 
-[https://cdn.rawgit.com/Lcfvs/anticore/1.8.3/demos/messages/index.html](https://cdn.rawgit.com/Lcfvs/anticore/1.8.3/demos/messages/index.html)
+[https://cdn.rawgit.com/Lcfvs/anticore/1.8.4/demos/messages/index.html](https://cdn.rawgit.com/Lcfvs/anticore/1.8.4/demos/messages/index.html)
 
 ### [`demos/messages/index.html`](../../demos/messages/index.html)
 
