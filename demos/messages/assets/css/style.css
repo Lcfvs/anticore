@@ -8,7 +8,7 @@ a {
 }
 
 a:before {
-    content: '';
+    content: '↺';
 }
 
 button[type="submit"]:before,
@@ -36,6 +36,7 @@ button.fetching[type="submit"],
 form button.fetching:not([type]) {
     cursor: not-allowed;
     pointer-events: none;
+    background: khaki;
 }
 
 a.fetching:before,
@@ -51,7 +52,6 @@ form button.fetching:not([type]):before {
     margin-top: .2em;
     margin-left: .1em;
     font-size: .7em;
-    background: khaki;
 }
 
 @keyframes fetching {
