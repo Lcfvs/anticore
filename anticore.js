@@ -18,7 +18,9 @@ void function (global, factory) {
   'use strict';
 
   var
+  focusSelector,
   selector,
+  targetSelector,
   document,
   encodeURIComponent,
   URL,
@@ -32,14 +34,22 @@ void function (global, factory) {
   queue,
   types;
 
+  focusSelector = 'input[type=submit]:focus,'
+  + 'button[type=submit]:focus,'
+  + 'button:not([type]):focus';
+
   selector = 'input[name]:not([type=file]):not([type=reset]):not([type=submit]):not([type=checkbox]):not([type=radio]):not(:disabled),'
-  + 'input[name][type=submit]:focus,'
-  + 'button[name][type=submit]:focus,'
-  + 'button[name]:not([type]):focus,'
   + 'input[name][type=checkbox]:checked:not(:disabled),'
   + 'input[name][type=radio]:checked:not(:disabled),'
   + 'textarea[name]:not(:disabled),'
-  + 'select[name]:not(:disabled) [selected=selected]';
+  + 'select[name]:not(:disabled) [selected=selected],'
+  + focusSelector;
+
+  targetSelector = focusSelector
+  + ',:not(input):focus,'
+  + 'input[type=submit],'
+  + 'button[type=submit],'
+  + 'button:not([type])';
 
   document = global.document;
   encodeURIComponent = global.encodeURIComponent;
@@ -66,9 +76,8 @@ void function (global, factory) {
 
   function html(data) {
     var
-    body;
-
     body = document.createElement('body');
+
     body.innerHTML = data;
 
     return body;
@@ -211,6 +220,7 @@ void function (global, factory) {
 
     request.options = options;
     request.target = target;
+    request.originalTarget = target.parentNode.querySelector(targetSelector);
     request.url = url;
 
     options.headers = create();
@@ -250,8 +260,6 @@ void function (global, factory) {
     anticore.on('a:not([download]):not([target]):not([href^="data:"]),a[target=_self]:not([download]):not([href^="data:"])',
     function(element, next) {
       var
-      handle;
-
       handle = {};
 
       if ('ontouchstart' in global) {
@@ -264,7 +272,7 @@ void function (global, factory) {
     });
 
     anticore.on('form:not([target]),form[target=_self]', function(element, next) {
-      element.addEventListener('submit', reFetchFromEvent);
+      element.addEventListener('submit', cleanAndFetch);
       next();
     });
 
@@ -278,6 +286,12 @@ void function (global, factory) {
   anticore.utils.forEach = forEach;
   anticore.utils.$ = $;
   anticore.utils.$$ = $$;
+
+  function notify(response) {
+    queue[0].request.originalTarget.classList.toggle('fetching');
+
+    return response;
+  }
 
   /**
    * Adds a field value on an existing body
@@ -310,11 +324,9 @@ void function (global, factory) {
    */
   requestPrototype.fetch = function (trigger) {
     var
-    item;
-
     item = create();
-    item.request = this;
 
+    item.request = this;
     queue.push(item);
 
     return new Promise(function (resolve, reject) {
@@ -374,16 +386,17 @@ void function (global, factory) {
 
   function fetchRequest() {
     var
-    item;
+    item = queue[0];
 
     if (queue[1]) {
       return;
     }
 
-    item = queue[0];
+    notify();
 
     return fetch(item.request.url, item.request.options)
     .then(onResponse)
+    .then(notify)
     .then(onFragment)
     .then(item.trigger || item.request.resolve)
     .then(nextRequest)
@@ -392,13 +405,10 @@ void function (global, factory) {
 
   function onResponse(response) {
     var
-    type,
-    item;
-
-    type = ((response.headers.get('content-type') || 'application/octet-stream')
-    .match(/json|html|svg|xml|text(?=\/plain)/) || ['blob'])[0];
-
+    type= ((response.headers.get('content-type') || 'application/octet-stream')
+    .match(/json|html|svg|xml|text(?=\/plain)/) || ['blob'])[0],
     item = queue[0];
+
     item.type = type;
     item.request.response = response;
 
@@ -407,8 +417,6 @@ void function (global, factory) {
 
   function onFragment(data) {
     var
-    item;
-
     item = queue[0];
 
     if (types.indexOf(item.type) > -1) {
@@ -422,8 +430,6 @@ void function (global, factory) {
 
   function nextRecord(resolve) {
     var
-    record;
-
     record = this.shift();
 
     if (!record) {
@@ -435,20 +441,17 @@ void function (global, factory) {
 
   function onSelector(selector) {
     var
-    queue,
-    nodes;
-
-    queue = this;
-    queue.selector = selector;
+    queue = this,
     nodes = $$(selector, queue.container);
+
+    queue.selector = selector;
     forEach(nodes, onElement, queue);
   }
 
   function onElement(element) {
     var
-    queue;
-
     queue = this;
+
     queue.element = element;
 
     forEach(registry[queue.selector], onListener, queue);
@@ -461,9 +464,8 @@ void function (global, factory) {
   function populate(container, loaded) {
     return new Promise(function (resolve) {
       var
-      queue;
-
       queue = [];
+
       queue.container = container;
       queue.loaded = loaded;
       forEach(Object.keys(registry), onSelector, queue);
@@ -472,7 +474,7 @@ void function (global, factory) {
     });
   }
 
-  function reFetchFromEvent(event) {
+  function cleanAndFetch(event) {
     forEach($$('.error', event.target), clean);
     anticore.fetchFromEvent.call({}, event);
   }
