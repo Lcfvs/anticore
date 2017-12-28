@@ -236,14 +236,10 @@ void function (global, factory) {
    * @param {Event} event
    */
   anticore.fetchFromEvent = function (event) {
-    if (!this.fetching) {
-      this.fetching = true;
-
-      anticore
-      .fetcher(event.target)
-      .fetch(anticore.trigger)
-      ['catch'](anticore.onError);
-    }
+    anticore
+    .fetcher(event.target)
+    .fetch(anticore.trigger)
+    ['catch'](anticore.onError);
 
     event.preventDefault();
 
@@ -258,7 +254,9 @@ void function (global, factory) {
    */
   anticore.defaults = function () {
     function handle(event) {
-      return anticore.fetchFromEvent.call(create(), event);
+      if (event.type === 'click' || (event.type === "touchend" && event.changedTouches.length === 1)) {
+        anticore.fetchFromEvent(event);
+      }
     }
 
     anticore.on('a:not([download]):not([target]):not([href^="data:"]),a[target=_self]:not([download]):not([href^="data:"])',
@@ -477,7 +475,7 @@ void function (global, factory) {
 
   function cleanAndFetch(event) {
     forEach($$('.error', event.target), clean);
-    anticore.fetchFromEvent.call({}, event);
+    anticore.fetchFromEvent(event);
   }
 
   function clean(element) {
