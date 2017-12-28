@@ -62,7 +62,7 @@ Tout ce dont vous avez besoin, c'est le support navigateur de ces 3 polyfills :
 ## Installation
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.6/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.7/anticore.min.js"></script>
 ```
 
 Vous pouvez aussi l'installer depuis NPM :
@@ -98,7 +98,7 @@ Pour les exemples suivants, considérez que votre page HTML resemble à ceci :
         <h1>Ceci est la section principale</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.6/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.7/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -346,7 +346,7 @@ Dérivée de `node.querySelector`, retourne `refNode` si pas de sélecteur spéc
 
 Dérivée de `node.querySelectorAll`
 
-### `anticore.utils.listenClickOrTap(element, listener)`
+### `anticore.utils.listenClickOrTap(element, listener, useCapture)`
 
 Écoute un évènement `click` ou `touchend` sur un élément
 

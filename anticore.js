@@ -288,16 +288,17 @@ void function (global, factory) {
      * Listens a click or touchend event on an element
      * @param {Element} element
      * @param {Function} listener
+     * @param {Boolean} useCapture
      */
-    return function (element, listener) {
+    return function (element, listener, useCapture) {
       var
       trueListener = handle.bind(element, listener);
 
       if ('ontouchend' in global) {
-        element.addEventListener('touchend', trueListener);
+        element.addEventListener('touchend', trueListener, useCapture);
       }
 
-      element.addEventListener('click', trueListener);
+      element.addEventListener('click', trueListener, useCapture);
     };
   }();
 
