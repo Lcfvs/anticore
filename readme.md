@@ -65,7 +65,7 @@ All you need is the support of the natives
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.5/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.6/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -101,7 +101,7 @@ For the following examples, suppose we have a simple web page like:
         <h1>This is the main section</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.5/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.6/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -342,6 +342,10 @@ Standalone `node.querySelector` shortcut
 ### `anticore.utils.$$(selector, refNode = document)`
 
 Standalone `node.querySelectorAll` shortcut 
+
+### `anticore.utils.listenClickOrTap(element, listener)`
+
+Listens a `click` or `touchend` event on an element
 
 ## License
 

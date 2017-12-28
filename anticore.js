@@ -2,10 +2,6 @@
  Copyright MIT 2017 Lcf.vs
  https://github.com/Lcfvs/anticore
  */
-/*
- Copyright MIT 2017 Lcf.vs
- https://github.com/Lcfvs/anticore
- */
 void function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(factory.bind(null, global));
@@ -34,19 +30,19 @@ void function (global, factory) {
   queue,
   types;
 
-  focusSelector = 'input[type=submit]:focus,'
-  + 'button[type=submit]:focus,'
-  + 'button:not([type]):focus';
+  focusSelector = 'input[type=submit]:hover,'
+  + 'button[type=submit]:hover,'
+  + 'button:not([type]):hover,';
 
-  selector = 'input[name]:not([type=file]):not([type=reset]):not([type=submit]):not([type=checkbox]):not([type=radio]):not(:disabled),'
+  selector = focusSelector
+  + 'input[name]:not([type=file]):not([type=reset]):not([type=submit]):not([type=checkbox]):not([type=radio]):not(:disabled),'
   + 'input[name][type=checkbox]:checked:not(:disabled),'
   + 'input[name][type=radio]:checked:not(:disabled),'
   + 'textarea[name]:not(:disabled),'
-  + 'select[name]:not(:disabled) [selected=selected],'
-  + focusSelector;
+  + 'select[name]:not(:disabled) [selected=selected]';
 
   targetSelector = focusSelector
-  + ',:not(input):focus,'
+  + ':not(input):hover,'
   + 'input[type=submit],'
   + 'button[type=submit],'
   + 'button:not([type])';
@@ -220,7 +216,7 @@ void function (global, factory) {
 
     request.options = options;
     request.target = target;
-    request.originalTarget = target.parentNode.querySelector(targetSelector);
+    request.originalTarget = target.ownerDocument.querySelector(targetSelector);
     request.url = url;
 
     options.headers = create();
@@ -248,24 +244,22 @@ void function (global, factory) {
 
   anticore.onError = console.error.bind(console);
 
+  anticore.plugins = create();
+  anticore.utils = create();
+  anticore.utils.create = create;
+  anticore.utils.demethodize = demethodize;
+  anticore.utils.forEach = forEach;
+  anticore.utils.$ = $;
+  anticore.utils.$$ = $$;
+
   /**
    * Adds default a:not([download]):not([target]):not([href^="data:"]),a[target=_self]:not([download]):not([href^="data:"]) & form middlewares
    * @returns {Object} anticore
    */
   anticore.defaults = function () {
-    function handle(event) {
-      if (event.type === 'click' || (event.type === "touchend" && event.changedTouches.length === 1)) {
-        anticore.fetchFromEvent(event);
-      }
-    }
-
     anticore.on('a:not([download]):not([target]):not([href^="data:"]),a[target=_self]:not([download]):not([href^="data:"])',
     function(element, next) {
-      if ('ontouchstart' in global) {
-        element.addEventListener('touchend', handle);
-      }
-
-      element.addEventListener('click', handle);
+      anticore.utils.listenClickOrTap(element, anticore.fetchFromEvent);
 
       next();
     });
@@ -278,13 +272,34 @@ void function (global, factory) {
     return anticore;
   };
 
-  anticore.plugins = create();
-  anticore.utils = create();
-  anticore.utils.create = create;
-  anticore.utils.demethodize = demethodize;
-  anticore.utils.forEach = forEach;
-  anticore.utils.$ = $;
-  anticore.utils.$$ = $$;
+  anticore.utils.listenClickOrTap = function () {
+    function handle(listener, event) {
+      if (event.type === 'click' || (event.type === 'touchend' && event.changedTouches.length === 1)) {
+        event.preventDefault();
+        listener.call(this, event);
+
+        return false;
+      }
+
+      return listener.call(this, event);
+    }
+
+    /**
+     * Listens a click or touchend event on an element
+     * @param {Element} element
+     * @param {Function} listener
+     */
+    return function (element, listener) {
+      var
+      trueListener = handle.bind(element, listener);
+
+      if ('ontouchend' in global) {
+        element.addEventListener('touchend', trueListener);
+      }
+
+      element.addEventListener('click', trueListener);
+    };
+  }();
 
   function notify(response) {
     queue[0].request.originalTarget.classList.toggle('fetching');
