@@ -280,8 +280,6 @@ void function (global, factory) {
 
         return false;
       }
-
-      return listener.call(this, event);
     }
 
     /**
