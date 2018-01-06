@@ -276,6 +276,7 @@ void function (global, factory) {
     var
     events = create();
 
+    events.blur = ['blur', 'touchcancel', 'touchleave'];
     events.blur.listener = function (listener, event) {
       return listener.call(this, event);
     };
