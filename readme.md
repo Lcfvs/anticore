@@ -65,7 +65,7 @@ All you need is the support of the natives
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.9/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.10/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -101,7 +101,7 @@ For the following examples, suppose we have a simple web page like:
         <h1>This is the main section</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.9/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.10/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -343,7 +343,7 @@ Standalone `node.querySelector` shortcut
 
 Standalone `node.querySelectorAll` shortcut
 
-### `anticore.utils.listen(element, event, listener, useCapture)`
+### `anticore.utils.listen(event, element, listener, useCapture)`
 
 Listens an event (touch or not) on an element:
 * `blur`: listens `blur`, `touchcancel` & `touchleave`

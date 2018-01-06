@@ -259,7 +259,7 @@ void function (global, factory) {
   anticore.defaults = function () {
     anticore.on('a:not([download]):not([target]):not([href^="data:"]),a[target=_self]:not([download]):not([href^="data:"])',
     function(element, next) {
-      anticore.utils.listen(element, 'click', anticore.fetchFromEvent);
+      anticore.utils.listen('click', element, anticore.fetchFromEvent);
 
       next();
     });
@@ -291,7 +291,7 @@ void function (global, factory) {
     events.focus = ['focus', 'touchstart'];
     events.focus.listener = events.blur.listener;
 
-    function listen(element, event, listener, useCapture) {
+    function listen(event, element, listener, useCapture) {
       if ('on'.concat(event) in element) {
         element.addEventListener(event, listener, useCapture);
       }
@@ -299,13 +299,13 @@ void function (global, factory) {
 
     /**
      * Listens an event on an element (touch or not)
-     * @param {Element} element
      * @param {String} event
+     * @param {Element} element
      * @param {Function} listener
      * @param {Boolean} useCapture
      * @returns {Function} listener
      */
-    return function (element, event, listener, useCapture) {
+    return function (event, element, listener, useCapture) {
       var
       bound,
       names,
@@ -318,7 +318,7 @@ void function (global, factory) {
         length = names.length;
 
         for (key; key < length; key += 1) {
-          listen(element, names[key], bound, useCapture);
+          listen(names[key], element, bound, useCapture);
         }
 
         return bound;
