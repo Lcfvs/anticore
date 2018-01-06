@@ -232,12 +232,12 @@ void function (global, factory) {
    * @param {Event} event
    */
   anticore.fetchFromEvent = function (event) {
+    event.preventDefault();
+
     anticore
     .fetcher(event.target)
     .fetch(anticore.trigger)
     ['catch'](anticore.onError);
-
-    event.preventDefault();
 
     return false;
   };
@@ -259,7 +259,7 @@ void function (global, factory) {
   anticore.defaults = function () {
     anticore.on('a:not([download]):not([target]):not([href^="data:"]),a[target=_self]:not([download]):not([href^="data:"])',
     function(element, next) {
-      anticore.utils.listenClickOrTap(element, anticore.fetchFromEvent);
+      anticore.utils.listen(element, 'click', anticore.fetchFromEvent);
 
       next();
     });
@@ -272,33 +272,76 @@ void function (global, factory) {
     return anticore;
   };
 
-  anticore.utils.listenClickOrTap = function () {
-    function handle(listener, event) {
-      if (event.type === 'click' || (event.type === 'touchend' && event.changedTouches.length === 1)) {
-        event.preventDefault();
-        listener.call(this, event);
+  anticore.utils.listen = function () {
+    var
+    events = create();
 
-        return false;
+    events.blur.listener = function (listener, event) {
+      return listener.call(this, event);
+    };
+
+    events.click = ['click', 'touchend'];
+    events.click.listener = function (listener, event) {
+      if (event.touches.length === 1) {
+        return listener.call(this, event);
+      }
+    };
+
+    events.focus = ['focus', 'touchstart'];
+    events.focus.listener = events.blur.listener;
+
+    function listen(element, event, listener, useCapture) {
+      if ('on'.concat(event) in element) {
+        element.addEventListener(event, listener, useCapture);
       }
     }
 
     /**
-     * Listens a click or touchend event on an element
+     * Listens an event on an element (touch or not)
      * @param {Element} element
+     * @param {String} event
      * @param {Function} listener
      * @param {Boolean} useCapture
+     * @returns {Function} listener
      */
-    return function (element, listener, useCapture) {
+    return function (element, event, listener, useCapture) {
       var
-      trueListener = handle.bind(element, listener);
+      bound,
+      names,
+      key = 0,
+      length;
 
-      if ('ontouchend' in global) {
-        element.addEventListener('touchend', trueListener, useCapture);
+      if (event in events) {
+        names = events[event];
+        bound = names.listener.bind(element, listener);
+        length = names.length;
+
+        for (key; key < length; key += 1) {
+          listen(element, names[key], bound, useCapture);
+        }
+
+        return bound;
       }
 
-      element.addEventListener('click', trueListener, useCapture);
+      element.addEventListener(event, listener, useCapture);
+
+      return listener;
     };
   }();
+
+  /**
+   * Listens an click or unique touch event on an element
+   * @deprecated use anticore.utils.listen instead
+   * @param {Element} element
+   * @param {Function} listener
+   * @param {Boolean} useCapture
+   * @returns {Function} listener
+   */
+  anticore.utils.listenClickOrTap = function (element, listener, useCapture) {
+    console.warn('Deprecated: use anticore.utils.listen instead');
+
+    return anticore.utils.listen(element, 'click', listener, useCapture);
+  };
 
   function notify(response) {
     queue[0].request.originalTarget.classList.toggle('fetching');

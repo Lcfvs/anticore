@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/anticore.svg?style=plastic)]()
 [![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
 
-The easiest middleware manager for AJAX requests, for around 4Ko!
+The easiest middleware manager for AJAX requests, for around 5Ko!
 
 
 ## Why?
@@ -65,7 +65,7 @@ All you need is the support of the natives
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.8/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.9/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -101,7 +101,7 @@ For the following examples, suppose we have a simple web page like:
         <h1>This is the main section</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.8/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.9/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -341,10 +341,18 @@ Standalone `node.querySelector` shortcut
 
 ### `anticore.utils.$$(selector, refNode = document)`
 
-Standalone `node.querySelectorAll` shortcut 
+Standalone `node.querySelectorAll` shortcut
+
+### `anticore.utils.listen(element, event, listener, useCapture)`
+
+Listens an event (touch or not) on an element:
+* `blur`: listens `blur`, `touchcancel` & `touchleave`
+* `click`: listens `click` & `touchend`
+* `focus`: listens `focus` & `touchstart`
 
 ### `anticore.utils.listenClickOrTap(element, listener, useCapture)`
 
+***[DEPRECATED] use anticore.utils.listen instead***
 Listens a `click` or `touchend` event on an element
 
 ## License

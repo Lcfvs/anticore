@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/anticore.svg?style=plastic)]()
 [![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
 
-Le plus simple gestionnaire de requêtes AJAX, pour environ 3Ko !
+Le plus simple gestionnaire de requêtes AJAX, pour environ 5Ko !
 
 
 ## Pourquoi ?
@@ -62,7 +62,7 @@ Tout ce dont vous avez besoin, c'est le support navigateur de ces 3 polyfills :
 ## Installation
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.8/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.9/anticore.min.js"></script>
 ```
 
 Vous pouvez aussi l'installer depuis NPM :
@@ -98,7 +98,7 @@ Pour les exemples suivants, considérez que votre page HTML resemble à ceci :
         <h1>Ceci est la section principale</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.8/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.9/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -346,7 +346,17 @@ Dérivée de `node.querySelector`, retourne `refNode` si pas de sélecteur spéc
 
 Dérivée de `node.querySelectorAll`
 
+### `anticore.utils.listen(element, event, listener, useCapture)`
+
+Écoute un évènement (tactile ou pas), sur un élément :
+
+* `blur`: écoute `blur`, `touchcancel` & `touchleave`
+* `click`: écoute `click` & `touchend`
+* `focus`: écoute `focus` & `touchstart`
+
 ### `anticore.utils.listenClickOrTap(element, listener, useCapture)`
+
+***[DÉPRÉCIÉ] utilisez plutôt anticore.utils.listen***
 
 Écoute un évènement `click` ou `touchend` sur un élément
 
