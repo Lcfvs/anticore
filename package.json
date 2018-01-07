@@ -1,6 +1,6 @@
 {
   "name": "anticore",
-  "version": "1.8.11",
+  "version": "1.8.12",
   "description": "Another way to handle HTML AJAX contents",
   "main": "anticore.js",
   "repository": {

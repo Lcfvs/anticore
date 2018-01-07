@@ -283,7 +283,7 @@ void function (global, factory) {
 
     events.click = ['click', 'touchend'];
     events.click.listener = function (listener, event) {
-      if (event.touches.length === 1) {
+      if (!event.touches || event.touches.length === 1) {
         return listener.call(this, event);
       }
     };
