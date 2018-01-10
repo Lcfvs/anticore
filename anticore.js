@@ -216,7 +216,11 @@ void function (global, factory) {
 
     request.options = options;
     request.target = target;
-    request.originalTarget = target.ownerDocument.querySelector(targetSelector);
+
+    if (target) {
+      request.originalTarget = target.ownerDocument.querySelector(targetSelector);
+    }
+
     request.url = url;
 
     options.headers = create();
@@ -345,7 +349,12 @@ void function (global, factory) {
   };
 
   function notify(response) {
-    queue[0].request.originalTarget.classList.toggle('fetching');
+    var
+    target = queue[0].request.originalTarget;
+
+    if (target) {
+      target.classList.toggle('fetching');
+    }
 
     return response;
   }

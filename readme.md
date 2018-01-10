@@ -65,7 +65,7 @@ All you need is the support of the natives
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.12/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.13/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -101,7 +101,7 @@ For the following examples, suppose we have a simple web page like:
         <h1>This is the main section</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.12/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.13/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -257,7 +257,7 @@ anticore
 ```JS
 // post request
 anticore
-  .request('/what-s-new-to-fetch', 'post', new FormData(form))
+  .request('/what-s-new-to-fetch', 'post', new FormData(form), form)
   .fetch(anticore.trigger);
 ```
 
@@ -266,7 +266,7 @@ anticore
 ```JS
 anticore
   .fetchers.button = function(button) {
-    return anticore.request(button.dataset.href, 'get');
+    return anticore.request(button.dataset.href, 'get', null, button);
   };
 
 // Then you can add a generic middleware like for the anchors

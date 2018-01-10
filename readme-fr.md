@@ -62,7 +62,7 @@ Tout ce dont vous avez besoin, c'est le support navigateur de ces 3 polyfills :
 ## Installation
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.12/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.13/anticore.min.js"></script>
 ```
 
 Vous pouvez aussi l'installer depuis NPM :
@@ -98,7 +98,7 @@ Pour les exemples suivants, considérez que votre page HTML resemble à ceci :
         <h1>Ceci est la section principale</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.12/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.13/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -256,7 +256,7 @@ anticore
 ```JS
 // post request
 anticore
-  .request('/what-s-new-to-fetch', 'post', new FormData(form))
+  .request('/what-s-new-to-fetch', 'post', new FormData(form), form)
   .fetch(anticore.trigger);
 ```
 
@@ -265,7 +265,7 @@ anticore
 ```JS
 anticore
   .fetchers.button = function(button) {
-    return anticore.request(button.dataset.href, 'get');
+    return anticore.request(button.dataset.href, 'get', null button);
   };
 
 // Ensuite, vous pouvez intercepter
