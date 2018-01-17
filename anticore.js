@@ -276,9 +276,12 @@ void function (global, factory) {
     return anticore;
   };
 
-  anticore.utils.listen = function () {
+  void function () {
     var
-    events = create();
+    events = create(),
+    prototype = Element.prototype,
+    listen = prototype.addEventListener,
+    forget = prototype.removeEventListener;
 
     events.blur = ['blur', 'touchcancel', 'touchleave'];
     events.blur.listener = function (listener, event) {
@@ -295,10 +298,37 @@ void function (global, factory) {
     events.focus = ['focus', 'touchstart'];
     events.focus.listener = events.blur.listener;
 
-    function listen(event, element, listener, useCapture) {
+    function call(method, event, element, listener, useCapture) {
       if ('on'.concat(event) in element) {
-        element.addEventListener(event, listener, useCapture);
+        method.call(element, event, listener, useCapture);
       }
+    }
+
+    function callEach(method, event, element, listener, useCapture) {
+      var
+      realListener = listener,
+      names,
+      key = 0,
+      length;
+
+      if (event in events) {
+        names = events[event];
+        length = names.length;
+
+        if (method === listen) {
+          realListener = names.listener.bind(element, realListener);
+        }
+
+        for (key; key < length; key += 1) {
+          call(method, names[key], element, realListener, useCapture);
+        }
+
+        return realListener;
+      }
+
+      call(method, event, element, realListener, useCapture);
+
+      return realListener;
     }
 
     /**
@@ -307,30 +337,36 @@ void function (global, factory) {
      * @param {Element} element
      * @param {Function} listener
      * @param {Boolean} useCapture
+     * @returns {Function} realListener
+     */
+    anticore.utils.listen = callEach.bind(null, listen);
+
+    /**
+     * Forgets a listener of an event on an element (touch or not)
+     * @param {String} event
+     * @param {Element} element
+     * @param {Function} listener
+     * @param {Boolean} useCapture
      * @returns {Function} listener
      */
-    return function (event, element, listener, useCapture) {
-      var
-      bound,
-      names,
-      key = 0,
-      length;
+    anticore.utils.forget = callEach.bind(null, forget);
 
-      if (event in events) {
-        names = events[event];
-        bound = names.listener.bind(element, listener);
-        length = names.length;
+    /**
+     * Listens once an event on an element (touch or not)
+     * @param {String} event
+     * @param {Element} element
+     * @param {Function} listener
+     * @param {Boolean} useCapture
+     * @returns {Function} listener
+     */
+    anticore.utils.once = function (event, element, listener, useCapture) {
+      var realListener = anticore.utils.listen(event, element, function (event) {
+        anticore.utils.forget(event.type, element, realListener, useCapture);
 
-        for (key; key < length; key += 1) {
-          listen(names[key], element, bound, useCapture);
-        }
+        return listener.call(this, event);
+      }, useCapture);
 
-        return bound;
-      }
-
-      element.addEventListener(event, listener, useCapture);
-
-      return listener;
+      return realListener;
     };
   }();
 

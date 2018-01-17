@@ -65,7 +65,7 @@ All you need is the support of the natives
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.14/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.9.0/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -101,7 +101,7 @@ For the following examples, suppose we have a simple web page like:
         <h1>This is the main section</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.14/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.9.0/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -349,6 +349,20 @@ Listens an event (touch or not) on an element:
 * `blur`: listens `blur`, `touchcancel` & `touchleave`
 * `click`: listens `click` & `touchend`
 * `focus`: listens `focus` & `touchstart`
+
+### `anticore.utils.once(event, element, listener, useCapture)`
+
+Listens once an event (touch or not) on an element:
+* `blur`: listens `blur`, `touchcancel` & `touchleave`
+* `click`: listens `click` & `touchend`
+* `focus`: listens `focus` & `touchstart`
+
+### `anticore.utils.forget(event, element, listener, useCapture)`
+
+Forgets a listener of an event on an element (touch or not)
+* `blur`: forgets `blur`, `touchcancel` & `touchleave`
+* `click`: forgets `click` & `touchend`
+* `focus`: forgets `focus` & `touchstart`
 
 ### `anticore.utils.listenClickOrTap(element, listener, useCapture)`
 
