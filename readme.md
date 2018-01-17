@@ -65,7 +65,7 @@ All you need is the support of the natives
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.13/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.14/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -101,7 +101,7 @@ For the following examples, suppose we have a simple web page like:
         <h1>This is the main section</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.13/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.8.14/anticore.min.js"></script>
   </body>
 </html>
 ```

@@ -1,7 +1,7 @@
 {
   "name": "anticore",
-  "version": "1.8.13",
-  "description": "Another way to handle HTML AJAX contents",
+  "version": "1.8.14",
+  "description": "Another way to handle AJAX DOM contents",
   "main": "anticore.js",
   "repository": {
     "type": "git",
