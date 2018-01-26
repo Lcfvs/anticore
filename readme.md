@@ -65,7 +65,7 @@ All you need is the support of the natives
 ## Install
 
 ```HTML
-<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.9.0/anticore.min.js"></script>
+<script src="https://cdn.rawgit.com/Lcfvs/anticore/1.9.1/anticore.min.js"></script>
 ```
 
 You can also install it from npm
@@ -101,7 +101,7 @@ For the following examples, suppose we have a simple web page like:
         <h1>This is the main section</h1>
       </section>
     </main>
-    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.9.0/anticore.min.js"></script>
+    <script src="https://cdn.rawgit.com/Lcfvs/anticore/1.9.1/anticore.min.js"></script>
   </body>
 </html>
 ```
@@ -334,6 +334,10 @@ Returns a standalone function from an object method
 ### `anticore.utils.forEach(iterable, callback, thisArg = undefined)`
 
 Standalone `Array.prototype.forEach` shortcut
+
+### `anticore.utils.slice(iterable, callback, thisArg = undefined)`
+
+Standalone `Array.prototype.slice` shortcut
 
 ### `anticore.utils.$(selector, refNode = document)`
 

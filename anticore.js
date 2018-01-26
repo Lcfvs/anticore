@@ -226,7 +226,10 @@ void function (global, factory) {
     options.headers = create();
     options.headers['X-Requested-With'] = 'XMLHttpRequest';
     options.method = method;
-    options.body = body;
+
+    if (method === 'post') {
+      options.body = body;
+    }
 
     return request;
   };
