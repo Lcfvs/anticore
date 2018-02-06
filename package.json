@@ -1,14 +1,16 @@
 {
   "name": "anticore",
-  "version": "1.9.1",
-  "description": "Another way to handle AJAX DOM contents",
-  "main": "anticore.js",
+  "version": "2.0.0",
+  "description": "A generic living DOM library to simplify your client code, like with its easiest middleware manager for AJAX requests.",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lcfvs/anticore.git"
   },
   "keywords": [
-    "Simple",
+    "simple",
+    "generic",
+    "DOM",
     "AJAX",
     "library"
   ],
