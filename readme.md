@@ -1,5 +1,4 @@
-# anticore2-alpha
-[DRAFT] [anticore](https://github.com/Lcfvs/anticore) V2
+# anticore
 
 A generic living DOM library to simplify your client code, like with its easiest middleware manager for
 AJAX requests.
