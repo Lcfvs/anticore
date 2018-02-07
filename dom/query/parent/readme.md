@@ -1,4 +1,4 @@
-# [anticore](../../../#reference)/[dom](../../#reference)/[query](../#reference)/<a name="reference">parent</a>
+# [anticore](../../../../../#reference)/[dom](../../#reference)/[query](../#reference)/<a name="reference">parent</a>
 
 ```js
 parent(node)

@@ -1,4 +1,4 @@
-# [anticore](../#reference)/<a name="reference">primitive</a>
+# [anticore](../../../#reference)/<a name="reference">primitive</a>
 
 * [array](./array/#reference)
 * [function](./function/#reference)

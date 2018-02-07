@@ -1,4 +1,4 @@
-# [anticore](../../#reference)/[primitive](../#reference)/<a name="reference">array</a>
+# [anticore](../../../../#reference)/[primitive](../#reference)/<a name="reference">array</a>
 
 * [every](./every/#reference)
 * [filter](./filter/#reference)

@@ -1,4 +1,4 @@
-# [anticore](../../#reference)/[dom](../#reference)/<a name="reference">selection</a>
+# [anticore](../../../../#reference)/[dom](../#reference)/<a name="reference">selection</a>
 
 * [current](./current/#reference)
 * [end](./end/#reference)

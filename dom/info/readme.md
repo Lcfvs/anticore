@@ -1,4 +1,4 @@
-# [anticore](../../#reference)/[dom](../#reference)/<a name="reference">info</a>
+# [anticore](../../../../#reference)/[dom](../#reference)/<a name="reference">info</a>
 
 * [boundingRect](./boundingRect/#reference)
 * [isCollection](./isCollection/#reference)

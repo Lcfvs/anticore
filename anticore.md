@@ -1,4 +1,4 @@
-# [anticore](./#reference)/<a name="reference">anticore methods</a>
+# [anticore](../../#reference)/<a name="reference">anticore methods</a>
 
 
 ## anticore.on

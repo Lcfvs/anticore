@@ -1,4 +1,4 @@
-# anticore
+# <a name="reference">anticore</a>
 
 A generic living DOM library to simplify your client code, like with its easiest middleware manager for
 AJAX requests.

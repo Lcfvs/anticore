@@ -1,4 +1,4 @@
-# [anticore](../../../#reference)/[dom](../../#reference)/[emitter](../#reference)/<a name="reference">off</a>
+# [anticore](../../../../../#reference)/[dom](../../#reference)/[emitter](../#reference)/<a name="reference">off</a>
 
 ```js
 off(event, node, listener, useCapture)

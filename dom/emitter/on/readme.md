@@ -1,4 +1,4 @@
-# [anticore](../../../#reference)/[dom](../../#reference)/[emitter](../#reference)/<a name="reference">on</a>
+# [anticore](../../../../../#reference)/[dom](../../#reference)/[emitter](../#reference)/<a name="reference">on</a>
 
 ```js
 on(event, node, listener, useCapture)

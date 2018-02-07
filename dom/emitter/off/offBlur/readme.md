@@ -1,4 +1,4 @@
-# [anticore](../../../../#reference)/[dom](../../../#reference)/[emitter](../../#reference)/[off](../#reference)/<a name="reference">onBlur</a>
+# [anticore](../../../../../../#reference)/[dom](../../../#reference)/[emitter](../../#reference)/[off](../#reference)/<a name="reference">onBlur</a>
 
 ```js
 offBlur(node, listener, useCapture)
