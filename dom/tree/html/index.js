@@ -1,4 +1,4 @@
-import {isElement} from '../../info/isElement/index';
+import {isElement} from '../../info/isElement';
 import {isUndefined} from '../../../primitive/undefined/isUndefined';
 
 export function html(element, data) {

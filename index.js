@@ -16,7 +16,7 @@ import {onClick} from './dom/emitter/on/onClick';
 import {onSubmit} from './dom/emitter/on/onSubmit';
 import {nodeName} from './dom/info/nodeName';
 import {parent} from './dom/query/parent';
-import {rects} from './dom/info/rects/rects';
+import {rects} from './dom/info/rects';
 import {request} from './request';
 import {queue} from './request/.queue';
 import {one} from './dom/query/one';
