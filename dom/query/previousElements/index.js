@@ -1,5 +1,5 @@
 import {filter} from '../../../primitive/array/filter';
-import {isElement} from '../../info/isElement/isElement';
+import {isElement} from '../../info/isElement/index';
 import {previousNodes} from '../previousNodes';
 
 export function previousElements(node) {

@@ -1,5 +1,5 @@
 import {text} from '../../tree/text';
-import {isElement} from '../isElement/isElement';
+import {isElement} from '../isElement/index';
 import {one} from '../../query/one';
 
 export function isEmpty(node) {

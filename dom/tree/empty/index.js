@@ -1,4 +1,4 @@
-import {isElement} from '../../info/isElement/isElement';
+import {isElement} from '../../info/isElement/index';
 import {html} from '../html';
 import {text} from '../text';
 
