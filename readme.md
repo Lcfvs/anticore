@@ -1,4 +1,4 @@
-# <a name="reference">anticore</a>
+# <a name="reference">anticore</a> [![npm](https://img.shields.io/npm/v/anticore.svg?style=plastic)]() [![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
 
 A generic living DOM library to simplify your client code, like with its easiest middleware manager for
 AJAX requests.
