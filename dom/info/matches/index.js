@@ -1,19 +1,18 @@
 import {indexOf} from '../../../primitive/array/indexOf';
+import {isText} from '../../info/isText';
 import {all} from '../../query/all';
 import {parent} from '../../query/parent';
 
 export function matches(selector, node) {
   let
-  last = node,
-  current;
+  results = all(selector, node.document || node.ownerDocument),
+  i = results.length;
 
-  while (current = parent(last)) {
-    if (indexOf(all(selector, current), last) > -1) {
-      return true;
-    }
-
-    last = current;
+  if (isText(node)) {
+    node = parent(node);
   }
 
-  return false;
+  while (--i >= 0 && results.item(i) !== node);
+
+  return i > -1;
 }
