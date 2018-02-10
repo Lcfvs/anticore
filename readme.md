@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/anticore.svg?style=plastic)]()
 [![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
 
-anticore is a generic living DOM library to simplify your client code, like with its easiest middleware manager for
+**anticore** is a generic living DOM library to simplify your client code, like with its easiest middleware manager for
 AJAX requests.
 
 ## <a name="install">Install</a>
