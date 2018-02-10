@@ -1,4 +1,4 @@
-# <a name="reference"><img alt="anticore" src="./logo.png" title="anticore" width="100" height="65" /></a>
+# <a name="reference"><img alt="anticore" src="./logo.png" title="anticore" width="200" /></a>
 
 [![npm](https://img.shields.io/npm/v/anticore.svg?style=plastic)]()
 [![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
