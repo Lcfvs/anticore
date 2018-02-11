@@ -6,7 +6,7 @@ export function onFileInput(element, listener, useCapture) {
   if (nodeName(element) === 'input' && element.type === 'file') {
     onChange(element, listener, useCapture);
     onDrop(element, listener, useCapture);
-  }
 
-  return listener;
+    return listener;
+  }
 }

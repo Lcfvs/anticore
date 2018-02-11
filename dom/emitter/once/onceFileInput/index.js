@@ -6,7 +6,7 @@ export function onceFileInput(element, listener, useCapture) {
   if (nodeName(element) === 'input' && element.type === 'file') {
     onceChange(element, listener, useCapture);
     onceDrop(element, listener, useCapture);
-  }
 
-  return listener;
+    return listener;
+  }
 }
