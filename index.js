@@ -3,6 +3,7 @@
  https://github.com/Lcfvs/anticore
  */
 
+import {prevent} from './dom/emitter/prevent';
 import {global} from './global';
 import {document} from './dom/node/document';
 import {all} from './dom/query/all';
@@ -158,7 +159,7 @@ anticore.fetchFromEvent = function (event) {
   request.target = target;
   request.originalTarget = one(selector, target.ownerDocument);
   request.fetchRequest = fetchRequest;
-  event.preventDefault();
+  prevent(event);
 
   request
   .fetch(anticore.trigger)

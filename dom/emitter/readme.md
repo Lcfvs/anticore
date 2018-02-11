@@ -3,3 +3,5 @@
 * [off](./off/#reference)
 * [on](./on/#reference)
 * [once](./one/#reference)
+* [prevent](./prevent/#reference)
+* [stop](./stop/#reference)
