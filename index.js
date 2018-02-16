@@ -148,6 +148,23 @@ anticore.populate = function (container) {
 };
 
 /**
+ * Builds a request
+ * @param {String} url
+ * @param {String} method (get or post)
+ * @param {Object} [body] (the post request body)
+ * @param {Element} [target] (the event target)
+ * @return {Object}
+ */
+anticore.request = function (url, method, body, target) {
+  let
+  instance = request(url, method, body, target);
+
+  instance.fetchRequest = fetchRequest;
+
+  return instance;
+}
+
+/**
  * Default fetcher listener
  * @param {Event} event
  */
