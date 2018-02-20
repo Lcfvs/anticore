@@ -1,6 +1,6 @@
 {
   "name": "anticore",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "A generic living DOM library to simplify your client code, like with its easiest middleware manager for AJAX requests.",
   "main": "index.js",
   "repository": {
