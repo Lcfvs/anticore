@@ -38,6 +38,8 @@ anticore.onTimeout(request)
 
 ## anticore.fetchFromEvent
 
+Can be prevented by `event.preventDefault()`
+
 ```js
 anticore.fetchFromEvent(event)
 ```
