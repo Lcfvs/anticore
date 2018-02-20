@@ -169,6 +169,10 @@ anticore.request = function (url, method, body, target) {
  * @param {Event} event
  */
 anticore.fetchFromEvent = function (event) {
+  if (event.defaultPrevented) {
+    return false;
+  }
+
   let
   target = event.target,
   request = anticore.fetcher(target);
