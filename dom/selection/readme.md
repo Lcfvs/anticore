@@ -5,6 +5,7 @@
 * [end](./end/#reference)
 * [ends](./ends/#reference)
 * [focus](./focus/#reference)
+* [insert](./insert/#reference)
 * [isCollapsed](./isCollapsed/#reference)
 * [next](./next/#reference)
 * [previous](./previous/#reference)
