@@ -2,3 +2,4 @@
 
 * [curry](./curry/#reference)
 * [demethodize](./demethodize/#reference)
+* [promise](./promise/#reference)
