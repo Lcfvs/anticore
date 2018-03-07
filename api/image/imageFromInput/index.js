@@ -2,7 +2,7 @@ import {onFileInput} from '../../../dom/emitter/on/onFileInput';
 import {curry} from '../../../primitive/function/curry';
 import {blobToImage} from '../../blob/blobToImage';
 
-export function fromInput(callback, input) {
+export function imageFromInput(callback, input) {
   onFileInput(input, curry(read, callback));
 }
 

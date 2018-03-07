@@ -8,7 +8,7 @@ const
 min = Math.min,
 max = Math.max;
 
-export function resize(options, img) {
+export function resizeImage(options, img) {
   options = parse(img.naturalWidth, img.naturalHeight, options);
 
   return promise(toCanvas, options, img)
