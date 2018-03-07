@@ -19,7 +19,8 @@ AJAX requests.
 
 ```js
 import {anticore} from 'anticore';
-import {onClick} from 'anticore/dom/emitter/onClick';
+import {getTarget} from 'anticore/dom/emitter/getTarget';
+import {onClick} from 'anticore/dom/emitter/on/onClick';
 import {closest} from 'anticore/dom/query/closest';
 import {one} from 'anticore/dom/query/one';
 import {append} from 'anticore/dom/tree/append';
@@ -27,7 +28,7 @@ import {remove} from 'anticore/dom/tree/remove';
 import {replace} from 'anticore/dom/tree/replace';
 
 function onClose(event) {
-  remove(closest('.modal', event.target));
+  remove(closest('.modal', getTarget(event)));
 }
 
 // middleware to treat a main element, loaded or contained by the current document

@@ -3,6 +3,7 @@
  https://github.com/Lcfvs/anticore
  */
 
+import {getTarget} from './dom/emitter/getTarget';
 import {prevent} from './dom/emitter/prevent';
 import {global} from './global';
 import {document} from './dom/node/document';
@@ -174,7 +175,7 @@ anticore.fetchFromEvent = function (event) {
   }
 
   let
-  target = event.target,
+  target = getTarget(event),
   request = anticore.fetcher(target);
 
   request.target = target;
@@ -263,7 +264,7 @@ function onResponse(response) {
 }
 
 function cleanAndFetch(event) {
-  forEach(all('.error', event.target), remove);
+  forEach(all('.error', getTarget(event)), remove);
   anticore.fetchFromEvent(event);
 }
 
