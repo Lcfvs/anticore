@@ -1,6 +1,6 @@
 import {element} from '../../../dom/node/element';
 import {update} from '../../../dom/tree/update';
-import {promise} from '../../../primitive/function/promise/index';
+import {promise} from '../../../primitive/function/promise';
 
 export function imageToCanvas(img) {
   return promise(toCanvas, img);

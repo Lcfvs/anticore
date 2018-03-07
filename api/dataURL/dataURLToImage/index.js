@@ -1,4 +1,4 @@
-import {getTarget} from '../../../dom/emitter/getTarget/index';
+import {getTarget} from '../../../dom/emitter/getTarget';
 import {global} from '../../../global';
 import {onceLoad} from '../../../dom/emitter/once/onceLoad';
 import {onceError} from '../../../dom/emitter/once/onceError';

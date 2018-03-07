@@ -1,5 +1,5 @@
 import {blobToBuffer} from '../../blob/blobToBuffer';
-import {canvasToBlob} from '../canvasToBlob/index';
+import {canvasToBlob} from '../canvasToBlob';
 
 export function canvasToBuffer(options, canvas) {
   return canvasToBlob(options, canvas)

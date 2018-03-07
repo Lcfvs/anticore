@@ -1,6 +1,6 @@
-import {curry} from '../../../primitive/function/curry/index';
-import {canvasToImage} from '../../canvas/canvasToImage/index';
-import {imageToCanvas} from '../imageToCanvas/index';
+import {curry} from '../../../primitive/function/curry';
+import {canvasToImage} from '../../canvas/canvasToImage';
+import {imageToCanvas} from '../imageToCanvas';
 
 export function compress(options, img) {
   return imageToCanvas(img)

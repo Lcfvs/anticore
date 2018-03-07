@@ -1,6 +1,6 @@
 import {curry} from '../../../primitive/function/curry';
-import {canvasToBlob} from '../../canvas/canvasToBlob/index';
-import {imageToCanvas} from '../imageToCanvas/index';
+import {canvasToBlob} from '../../canvas/canvasToBlob';
+import {imageToCanvas} from '../imageToCanvas';
 
 export function imageToBlob(options, img) {
   return imageToCanvas(img)

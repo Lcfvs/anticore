@@ -1,5 +1,5 @@
-import {blobToBuffer} from '../../blob/blobToBuffer/index';
-import {imageToBlob} from '../imageToBlob/index';
+import {blobToBuffer} from '../../blob/blobToBuffer';
+import {imageToBlob} from '../imageToBlob';
 
 export function imageToBuffer(options, img) {
   return imageToBlob(options, img)

@@ -1,6 +1,6 @@
 import {global} from '../../../global';
-import {dataURLToImage} from '../../dataURL/dataURLToImage/index';
-import {blobToDataURL} from '../blobToDataURL/index';
+import {dataURLToImage} from '../../dataURL/dataURLToImage';
+import {blobToDataURL} from '../blobToDataURL';
 
 const
 window = global(),
