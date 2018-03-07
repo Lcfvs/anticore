@@ -17,6 +17,8 @@ AJAX requests.
 
 ## <a name="usage">Usage</a>
 
+##Usage
+
 ```js
 import {anticore} from 'anticore';
 import {getTarget} from 'anticore/dom/emitter/getTarget';
@@ -82,6 +84,7 @@ If you need the previous version, you can install it by `npm i -D anticore@1.9.1
 
 ## <a name="tools">Tools</a>
 
+* [api](https://github.com/Lcfvs/anticore/blob/master/api/#reference)
 * [dom](https://github.com/Lcfvs/anticore/blob/master/dom/#reference)
 * [global](https://github.com/Lcfvs/anticore/blob/master/global/#reference)
 * [primitive](https://github.com/Lcfvs/anticore/blob/master/primitive/#reference)
