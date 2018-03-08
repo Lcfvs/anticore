@@ -3,7 +3,7 @@
 ##Usage
 
 ```js
-imageFromInput(function (promise) {
+imageFromInput(input, function (promise) {
   // do something
-}, input)
+})
 ```
