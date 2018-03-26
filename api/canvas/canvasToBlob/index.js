@@ -5,5 +5,5 @@ export function canvasToBlob(options, canvas) {
 }
 
 function toBlob(options, canvas, resolve) {
-  canvas.toBlob(resolve, options.mime, options.quality);
+  canvas.toBlob(resolve, options.mime, options.quality || 1);
 }
