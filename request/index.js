@@ -56,8 +56,13 @@ prototype.fetch = function (trigger) {
 
   return new Promise(function (resolve, reject) {
     item.request.resolve = resolve;
-    item.reject = reject;
     item.trigger = trigger;
+
+    item.reject = function (error) {
+      reject(error);
+      queue.next();
+    };
+
     item.request.fetchRequest();
   });
 };
