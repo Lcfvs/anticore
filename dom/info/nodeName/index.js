@@ -1,7 +1,7 @@
-export function nodeName(node) {
+export function nodeName (node) {
   if (!node) {
-    return null;
+    return null
   }
 
-  return node.nodeName.toLowerCase();
+  return node.nodeName.toLowerCase()
 }

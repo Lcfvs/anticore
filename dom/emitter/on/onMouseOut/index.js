@@ -1,5 +1,5 @@
-import {on} from '..';
+import { on } from '..'
 
-export function onMouseOut(element, listener, useCapture) {
-  return on('mouseout', element, listener, useCapture);
+export function onMouseOut (element, listener, useCapture) {
+  return on('mouseout', element, listener, useCapture)
 }

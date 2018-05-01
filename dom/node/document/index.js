@@ -1,5 +1,5 @@
-import {global} from '../../../global';
+import { global } from '../../../global'
 
-export function document() {
-  return global().document;
+export function document () {
+  return global().document
 }

@@ -1,1 +1,1 @@
-export const demethodize = Function.bind.bind(Function.call);
+export const demethodize = Function.bind.bind(Function.call)

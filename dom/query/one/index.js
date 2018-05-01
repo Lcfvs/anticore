@@ -1,7 +1,7 @@
-import {document} from '../../node/document';
+import { document } from '../../node/document'
 
-export function one(selector, refNode) {
-  refNode = (refNode || document());
+export function one (selector, refNode) {
+  refNode = ( refNode || document() )
 
-  return selector === undefined ? refNode : refNode.querySelector(selector);
+  return selector === undefined ? refNode : refNode.querySelector(selector)
 }

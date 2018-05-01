@@ -1,5 +1,5 @@
-import {on} from '..';
+import { on } from '..'
 
-export function onError(element, listener, useCapture) {
-  return on('error', element, listener, useCapture);
+export function onError (element, listener, useCapture) {
+  return on('error', element, listener, useCapture)
 }

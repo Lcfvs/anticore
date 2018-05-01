@@ -1,5 +1,5 @@
-import {off} from '..';
+import { off } from '..'
 
-export function offDrag(element, listener, useCapture) {
-  return off('drag', element, listener, useCapture);
+export function offDrag (element, listener, useCapture) {
+  return off('drag', element, listener, useCapture)
 }

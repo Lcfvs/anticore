@@ -1,3 +1,3 @@
-import {demethodize} from '../../function/demethodize';
+import { demethodize } from '../../function/demethodize'
 
-export const slice = demethodize(Array.prototype.slice);
+export const slice = demethodize(Array.prototype.slice)

@@ -1,3 +1,3 @@
-export function isElement(node) {
-  return node.nodeType === 1;
+export function isElement (node) {
+  return node.nodeType === 1
 }

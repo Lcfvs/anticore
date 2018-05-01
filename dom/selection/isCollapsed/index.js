@@ -1,5 +1,5 @@
-import {current} from '../current';
+import { current } from '../current'
 
-export function isCollapsed() {
-  return current().isCollapsed;
+export function isCollapsed () {
+  return current().isCollapsed
 }

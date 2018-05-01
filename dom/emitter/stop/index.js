@@ -1,9 +1,9 @@
-export function stop(event, immediate) {
+export function stop (event, immediate) {
   if (immediate) {
-    event.stopImmediatePropagation();
+    event.stopImmediatePropagation()
   } else {
-    event.stopPropagation();
+    event.stopPropagation()
   }
 
-  return event;
+  return event
 }

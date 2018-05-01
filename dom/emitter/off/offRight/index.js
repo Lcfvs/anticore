@@ -1,5 +1,5 @@
-import {off} from '..';
+import { off } from '..'
 
-export function offRight(element, listener, useCapture) {
-  return off('keydown', element, listener, useCapture);
+export function offRight (element, listener, useCapture) {
+  return off('keydown', element, listener, useCapture)
 }

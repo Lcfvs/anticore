@@ -2,6 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/anticore.svg?style=plastic)]()
 [![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 **anticore** is a generic living DOM library to simplify your client code, like with its easiest middleware manager for
 AJAX requests.
@@ -20,44 +21,44 @@ AJAX requests.
 ##Usage
 
 ```js
-import {anticore} from 'anticore';
-import {getTarget} from 'anticore/dom/emitter/getTarget';
-import {onClick} from 'anticore/dom/emitter/on/onClick';
-import {closest} from 'anticore/dom/query/closest';
-import {one} from 'anticore/dom/query/one';
-import {append} from 'anticore/dom/tree/append';
-import {remove} from 'anticore/dom/tree/remove';
-import {replace} from 'anticore/dom/tree/replace';
+import { anticore } from 'anticore'
+import { getTarget } from 'anticore/dom/emitter/getTarget'
+import { onClick } from 'anticore/dom/emitter/on/onClick'
+import { closest } from 'anticore/dom/query/closest'
+import { one } from 'anticore/dom/query/one'
+import { append } from 'anticore/dom/tree/append'
+import { remove } from 'anticore/dom/tree/remove'
+import { replace } from 'anticore/dom/tree/replace'
 
-function onClose(event) {
-  remove(closest('.modal', getTarget(event)));
+function onClose (event) {
+  remove(closest('.modal', getTarget(event)))
 }
 
 // middleware to treat a main element, loaded or contained by the current document
-anticore.on('main', function(element, next, loaded) {
+anticore.on('main', function (element, next, loaded) {
   // replace the current main by the new one, only if loaded
-  loaded && replace(element, one('main'));
+  loaded && replace(element, one('main'))
   // release the current process
-  next(); 
-});
+  next() 
+})
 
 // middleware to treat an element with a 'modal' class
-anticore.on('.modal', function(element, next) {
+anticore.on('.modal', function (element, next) {
   // append the modal to the body
-  append(element, one('body'));
-  next(); 
-});
+  append(element, one('body'))
+  next() 
+})
 
 // middleware to treat an button with a 'closer' class contained in a modal 
-anticore.on('.modal button.closer', function(element, next) {
+anticore.on('.modal button.closer', function (element, next) {
   // listen the click on the button to close the modal
-  onClick(element, onClose);
-  next(); 
-});
+  onClick(element, onClose)
+  next() 
+})
 
 // apply the defaults middlewares (to listen anchor/button click and form submit)
 // then trigger all the middlewares on the current document 
-anticore.defaults().populate();
+anticore.defaults().populate()
 ```
 
 ## <a name="what-s-new-in-the-v2">What's new in the V2?</a>

@@ -1,49 +1,50 @@
-import {create} from '../../primitive/object/create';
-import {global} from '../../global';
-import {call} from './.call';
+import { global } from '../../global'
+import { create } from '../../primitive/object/create'
+import { call } from './.call'
 
 const
-events = create(),
-listen = global().Element.prototype.addEventListener;
+  window = global(),
+  events = create(),
+  listen = window.Element.prototype.addEventListener
 
-events.blur = ['blur', 'touchcancel', 'touchleave'];
+events.blur = ['blur', 'touchcancel', 'touchleave']
 events.blur.listener = function (listener, event) {
-  return listener.call(this, event);
-};
+  return listener.call(this, event)
+}
 
-events.click = ['click', 'touchend'];
+events.click = ['click', 'touchend']
 events.click.listener = function (listener, event) {
   if (!event.touches || event.touches.length === 1) {
-    return listener.call(this, event);
+    return listener.call(this, event)
   }
-};
+}
 
-events.focus = ['focus', 'touchstart'];
-events.focus.listener = events.blur.listener;
+events.focus = ['focus', 'touchstart']
+events.focus.listener = events.blur.listener
 
-export function callEach(method, event, element, listener, useCapture) {
+export function callEach (method, event, element, listener, useCapture) {
   let
-  realListener = listener,
-  names,
-  key = 0,
-  length;
+    realListener = listener,
+    names,
+    key = 0,
+    length
 
   if (event in events) {
-    names = events[event];
-    length = names.length;
+    names = events[event]
+    length = names.length
 
     if (method === listen) {
-      realListener = names.listener.bind(element, realListener);
+      realListener = names.listener.bind(element, realListener)
     }
 
     for (key; key < length; key += 1) {
-      call(method, names[key], element, realListener, useCapture);
+      call(method, names[key], element, realListener, useCapture)
     }
 
-    return realListener;
+    return realListener
   }
 
-  call(method, event, element, realListener, useCapture);
+  call(method, event, element, realListener, useCapture)
 
-  return realListener;
+  return realListener
 }

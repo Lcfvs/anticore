@@ -1,11 +1,11 @@
-import {global} from '../../../global';
+import { global } from '../../../global'
 
 const
-window = global(),
-HTMLCollection = window.HTMLCollection,
-NodeList = window.NodeList;
+  window = global(),
+  HTMLCollection = window.HTMLCollection,
+  NodeList = window.NodeList
 
-export function isCollection(contents) {
+export function isCollection (contents) {
   return contents instanceof HTMLCollection
-  || contents instanceof NodeList;
+    || contents instanceof NodeList
 }

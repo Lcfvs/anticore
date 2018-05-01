@@ -1,3 +1,3 @@
-export function nextElement(node) {
-  return node.nextElementSibling;
+export function nextElement (node) {
+  return node.nextElementSibling
 }

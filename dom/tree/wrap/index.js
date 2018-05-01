@@ -1,7 +1,7 @@
-import {before} from '../before';
+import { before } from '../before'
 
-export function wrap(node, wrapper) {
-  before(node, null, wrapper);
+export function wrap (node, wrapper) {
+  before(node, null, wrapper)
 
-  return wrapper;
+  return wrapper
 }

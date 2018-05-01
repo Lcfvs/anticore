@@ -1,3 +1,3 @@
-export function rects(node) {
-  return node.getClientRects();
+export function rects (node) {
+  return node.getClientRects()
 }

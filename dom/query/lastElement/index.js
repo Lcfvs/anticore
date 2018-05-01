@@ -1,3 +1,3 @@
-export function lastElement(node) {
-  return node.lastElementChild;
+export function lastElement (node) {
+  return node.lastElementChild
 }

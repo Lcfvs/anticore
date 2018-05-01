@@ -1,5 +1,5 @@
-import {once} from '..';
+import { once } from '..'
 
-export function onceBack(element, listener, useCapture) {
-  return once('keydown', element, listener, useCapture);
+export function onceBack (element, listener, useCapture) {
+  return once('keydown', element, listener, useCapture)
 }

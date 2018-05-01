@@ -1,3 +1,3 @@
-export function isNull(value) {
-  return value === null;
+export function isNull (value) {
+  return value === null
 }

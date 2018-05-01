@@ -1,7 +1,7 @@
-import {firstNode} from '../firstNode';
+import { firstNode } from '../firstNode'
 
-export function firstOrSelf(node) {
+export function firstOrSelf (node) {
   return firstNode(node)
     ? firstOrSelf(firstNode(node))
-    : node;
+    : node
 }

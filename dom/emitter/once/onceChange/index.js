@@ -1,5 +1,5 @@
-import {once} from '..';
+import { once } from '..'
 
-export function onceChange(element, listener, useCapture) {
-  return once('change', element, listener, useCapture);
+export function onceChange (element, listener, useCapture) {
+  return once('change', element, listener, useCapture)
 }

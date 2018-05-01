@@ -1,3 +1,3 @@
-export function nodes(node) {
-  return node.childNodes;
+export function nodes (node) {
+  return node.childNodes
 }

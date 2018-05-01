@@ -1,5 +1,5 @@
-import {once} from '..';
+import { once } from '..'
 
-export function onceMouseOver(element, listener, useCapture) {
-  return once('mouseover', element, listener, useCapture);
+export function onceMouseOver (element, listener, useCapture) {
+  return once('mouseover', element, listener, useCapture)
 }

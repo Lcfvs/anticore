@@ -1,9 +1,9 @@
-import {demethodize} from '../demethodize';
-import {curry} from '../curry';
+import { curry } from '../curry'
+import { demethodize } from '../demethodize'
 
 const
-demethodizedCurry = demethodize(curry);
+  demethodizedCurry = demethodize(curry)
 
-export function promise(fn, ...args) {
-  return new Promise(demethodizedCurry(this, fn, ...args));
+export function promise (fn, ...args) {
+  return new Promise(demethodizedCurry(this, fn, ...args))
 }

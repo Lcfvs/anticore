@@ -1,3 +1,3 @@
-export function isText(node) {
-  return node.nodeType === 3;
+export function isText (node) {
+  return node.nodeType === 3
 }

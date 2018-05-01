@@ -1,12 +1,12 @@
-import {lastOrSelf} from '../../query/lastOrSelf';
-import {text} from '../../tree/text';
-import {select} from '../select';
+import { lastOrSelf } from '../../query/lastOrSelf'
+import { text } from '../../tree/text'
+import { select } from '../select'
 
-export function end(node) {
+export function end (node) {
   let
-  last = lastOrSelf(node);
+    last = lastOrSelf(node)
 
-  select(last, text(last).length);
+  select(last, text(last).length)
 
-  return last;
+  return last
 }

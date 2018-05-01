@@ -1,18 +1,18 @@
-import {matches} from '../../info/matches';
-import {parent} from '../parent';
+import { matches } from '../../info/matches'
+import { parent } from '../parent'
 
-export function closest(selector, node) {
+export function closest (selector, node) {
   let
-  last = node,
-  current;
+    last = node,
+    current
 
   while (current = parent(last)) {
     if (matches(selector, current)) {
-      return current;
+      return current
     }
 
-    last = current;
+    last = current
   }
 
-  return null;
+  return null
 }

@@ -1,5 +1,5 @@
-import {before} from '../before';
+import { before } from '../before'
 
-export function append(node, parent) {
-  return before(node, null, parent);
+export function append (node, parent) {
+  return before(node, null, parent)
 }

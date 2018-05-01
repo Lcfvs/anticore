@@ -1,5 +1,5 @@
-import {off} from '..';
+import { off } from '..'
 
-export function offMouseOver(element, listener, useCapture) {
-  return off('mouseover', element, listener, useCapture);
+export function offMouseOver (element, listener, useCapture) {
+  return off('mouseover', element, listener, useCapture)
 }

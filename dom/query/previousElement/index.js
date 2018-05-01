@@ -1,3 +1,3 @@
-export function previousElement(node) {
-  return node.previousElementSibling;
+export function previousElement (node) {
+  return node.previousElementSibling
 }

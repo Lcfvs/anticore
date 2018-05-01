@@ -1,19 +1,19 @@
-import {document} from '../document';
-import {isCollection} from '../../info/isCollection';
-import {wrapAll} from '../../tree/wrapAll';
-import {wrap} from '../../tree/wrap';
+import { isCollection } from '../../info/isCollection'
+import { wrap } from '../../tree/wrap'
+import { wrapAll } from '../../tree/wrapAll'
+import { document } from '../document'
 
-export function fragment(contents) {
+export function fragment (contents) {
   let
-  node = document().createDocumentFragment();
+    node = document().createDocumentFragment()
 
   if (!contents) {
-    return node;
+    return node
   }
 
   if (isCollection(contents)) {
-    return wrapAll(contents, node);
+    return wrapAll(contents, node)
   }
 
-  return wrap(contents);
+  return wrap(contents)
 }

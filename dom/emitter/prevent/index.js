@@ -1,5 +1,5 @@
-export function prevent(event) {
-  event.preventDefault();
+export function prevent (event) {
+  event.preventDefault()
 
-  return event;
+  return event
 }

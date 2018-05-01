@@ -1,5 +1,5 @@
-import {on} from '..';
+import { on } from '..'
 
-export function onDrop(element, listener, useCapture) {
-  return on('drop', element, listener, useCapture);
+export function onDrop (element, listener, useCapture) {
+  return on('drop', element, listener, useCapture)
 }

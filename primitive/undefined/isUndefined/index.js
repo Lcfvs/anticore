@@ -1,3 +1,3 @@
-export function isUndefined(value) {
-  return value === undefined;
+export function isUndefined (value) {
+  return value === undefined
 }

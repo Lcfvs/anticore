@@ -1,3 +1,3 @@
-export function lastNode(node) {
-  return node.lastChild;
+export function lastNode (node) {
+  return node.lastChild
 }

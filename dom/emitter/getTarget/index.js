@@ -1,3 +1,3 @@
-export function getTarget(event) {
-  return event.target;
+export function getTarget (event) {
+  return event.target
 }

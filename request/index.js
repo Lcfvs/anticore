@@ -1,22 +1,22 @@
-import {create} from '../primitive/object/create';
-import {one} from '../dom/query/one';
-import {queue} from './.queue';
-import {global} from '../global';
+import { one } from '../dom/query/one'
+import { global } from '../global'
+import { create } from '../primitive/object/create'
+import { queue } from './.queue'
 
 const
-window = global(),
-fetch = window.fetch,
-prototype = create(),
-selector = 'input[type=submit]:focus,'
-+ 'button[type=submit]:focus,'
-+ 'button:not([type]):focus,'
-+ 'input[type=submit]:hover,'
-+ 'button[type=submit]:hover,'
-+ 'button:not([type]):hover,'
-+ ':not(input):hover,'
-+ 'input[type=submit],'
-+ 'button[type=submit],'
-+ 'button:not([type])';
+  window = global(),
+  fetch = window.fetch,
+  prototype = create(),
+  selector = 'input[type=submit]:focus,'
+    + 'button[type=submit]:focus,'
+    + 'button:not([type]):focus,'
+    + 'input[type=submit]:hover,'
+    + 'button[type=submit]:hover,'
+    + 'button:not([type]):hover,'
+    + ':not(input):hover,'
+    + 'input[type=submit],'
+    + 'button[type=submit],'
+    + 'button:not([type])'
 
 /**
  * Adds a field value on an existing body
@@ -25,10 +25,10 @@ selector = 'input[type=submit]:focus,'
  * @return {Object}
  */
 prototype.body = function (name, value) {
-  this.options.body.append(name, value);
+  this.options.body.append(name, value)
 
-  return this;
-};
+  return this
+}
 
 /**
  * Adds credentials to the request
@@ -37,10 +37,10 @@ prototype.body = function (name, value) {
  * @return {Object}
  */
 prototype.credentials = function (value) {
-  this.options.credentials = value || 'same-origin';
+  this.options.credentials = value || 'same-origin'
 
-  return this;
-};
+  return this
+}
 
 /**
  * Fetches the request & adds a trigger callback for the response
@@ -49,23 +49,23 @@ prototype.credentials = function (value) {
  */
 prototype.fetch = function (trigger) {
   let
-  item = create();
+    item = create()
 
-  item.request = this;
-  queue.push(item);
+  item.request = this
+  queue.push(item)
 
   return new Promise(function (resolve, reject) {
-    item.request.resolve = resolve;
-    item.trigger = trigger;
+    item.request.resolve = resolve
+    item.trigger = trigger
 
     item.reject = function (error) {
-      reject(error);
-      queue.next();
-    };
+      reject(error)
+      queue.next()
+    }
 
-    item.request.fetchRequest();
-  });
-};
+    item.request.fetchRequest()
+  })
+}
 
 /**
  * Retries to fetch a request
@@ -73,14 +73,14 @@ prototype.fetch = function (trigger) {
  */
 prototype.retry = function () {
   if (!queue[0] || queue[0].request !== this) {
-    return this;
+    return this
   }
 
-  queue.unshift(1);
-  queue.next();
+  queue.unshift(1)
+  queue.next()
 
-  return this;
-};
+  return this
+}
 
 /**
  * Add a header to the request
@@ -89,10 +89,10 @@ prototype.retry = function () {
  * @returns {Object}
  */
 prototype.header = function (name, value) {
-  this.options.headers[name] = value;
+  this.options.headers[name] = value
 
-  return this;
-};
+  return this
+}
 
 /**
  * Adds an option to the request
@@ -101,23 +101,22 @@ prototype.header = function (name, value) {
  * @returns {Object}
  */
 prototype.option = function (name, value) {
-  this.options[name] = value;
+  this.options[name] = value
 
-  return this;
-};
+  return this
+}
 
 prototype.fetchRequest = function () {
   let
-  item = queue[0];
+    item = queue[0]
 
   if (queue[1]) {
-    return;
+    return
   }
 
-  return fetch(item.request.url, item.request.options)
-  .then(item.trigger || item.request.resolve)
-  .then(queue.next)
-  ['catch'](item.reject);
+  return fetch(item.request.url, item.request.options).then(item.trigger ||
+    item.request.resolve).then(queue.next)
+    ['catch'](item.reject)
 }
 
 /**
@@ -128,30 +127,30 @@ prototype.fetchRequest = function () {
  * @param {Element} [target] (the event target)
  * @return {Object}
  */
-export function request(url, method, body, target) {
+export function request (url, method, body, target) {
   let
-  request,
-  options;
+    request,
+    options
 
-  request = create(prototype);
-  options = create();
+  request = create(prototype)
+  options = create()
 
-  request.options = options;
+  request.options = options
 
   if (target) {
-    request.target = target;
-    request.originalTarget = one(selector, target.ownerDocument);
+    request.target = target
+    request.originalTarget = one(selector, target.ownerDocument)
   }
 
-  request.url = url;
+  request.url = url
 
-  options.headers = create();
-  options.headers['X-Requested-With'] = 'XMLHttpRequest';
-  options.method = method;
+  options.headers = create()
+  options.headers['X-Requested-With'] = 'XMLHttpRequest'
+  options.method = method
 
   if (method === 'post') {
-    options.body = body;
+    options.body = body
   }
 
-  return request;
+  return request
 }

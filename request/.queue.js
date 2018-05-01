@@ -1,9 +1,9 @@
-export const queue = [];
+export const queue = []
 
-queue.next = function() {
-  queue.shift();
+queue.next = function () {
+  queue.shift()
 
   if (queue.length) {
-    queue[0].fetchRequest();
+    queue[0].fetchRequest()
   }
-};
+}

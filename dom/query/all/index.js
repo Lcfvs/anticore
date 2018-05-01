@@ -1,5 +1,5 @@
-import {document} from '../../node/document';
+import { document } from '../../node/document'
 
-export function all(selector, refNode) {
-  return (refNode || document()).querySelectorAll(selector);
+export function all (selector, refNode) {
+  return ( refNode || document() ).querySelectorAll(selector)
 }

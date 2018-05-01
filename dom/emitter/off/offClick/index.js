@@ -1,5 +1,5 @@
-import {off} from '..';
+import { off } from '..'
 
-export function offClick(element, listener, useCapture) {
-  return off('click', element, listener, useCapture);
+export function offClick (element, listener, useCapture) {
+  return off('click', element, listener, useCapture)
 }

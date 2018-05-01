@@ -1,3 +1,3 @@
-import {global} from '../../../global';
+import { global } from '../../../global'
 
-export const current = global().getSelection;
+export const current = global().getSelection

@@ -1,7 +1,7 @@
-import {lastNode} from '../lastNode';
+import { lastNode } from '../lastNode'
 
-export function lastOrSelf(node) {
+export function lastOrSelf (node) {
   return lastNode(node)
     ? lastOrSelf(lastNode(node))
-    : node;
+    : node
 }

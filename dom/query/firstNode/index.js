@@ -1,3 +1,3 @@
-export function firstNode(node) {
-  return node.firstChild;
+export function firstNode (node) {
+  return node.firstChild
 }

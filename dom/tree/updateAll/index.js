@@ -1,10 +1,10 @@
-import {forEach} from '../../../primitive/array/forEach';
-import {update} from '../update';
+import { forEach } from '../../../primitive/array/forEach'
+import { update } from '../update'
 
-export function updateAll(elements, config) {
+export function updateAll (elements, config) {
   forEach(elements, function (element) {
-    update(element, config);
-  });
+    update(element, config)
+  })
 
-  return elements;
+  return elements
 }

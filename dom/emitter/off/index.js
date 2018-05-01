@@ -1,5 +1,8 @@
-import {callEach} from '../.callEach';
-import {global} from '../../../global';
+import { global } from '../../../global'
+import { callEach } from '../.callEach'
+
+const
+  window = global();
 
 /**
  * Forgets a listener of an event on an element (touch or not)
@@ -9,4 +12,5 @@ import {global} from '../../../global';
  * @param {Boolean} useCapture
  * @returns {Function} listener
  */
-export const off = callEach.bind(null, global().Element.prototype.removeEventListener);
+export const off = callEach.bind(null,
+  window.Element.prototype.removeEventListener)

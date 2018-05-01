@@ -1,3 +1,3 @@
-export function clone(node, deep) {
-  return node.cloneNode(deep);
+export function clone (node, deep) {
+  return node.cloneNode(deep)
 }

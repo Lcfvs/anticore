@@ -1,3 +1,3 @@
-export function boundingRect(node) {
-  return node.getBoundingClientRect();
+export function boundingRect (node) {
+  return node.getBoundingClientRect()
 }

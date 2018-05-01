@@ -1,29 +1,29 @@
-import {current} from '../current';
-import {parent} from '../../query/parent';
-import {contains} from '../../info/contains';
-import {firstNode} from '../../query/firstNode';
+import { contains } from '../../info/contains'
+import { firstNode } from '../../query/firstNode'
+import { parent } from '../../query/parent'
+import { current } from '../current'
 
-export function starts(node) {
+export function starts (node) {
   let
-  selection = current(),
-  anchor = selection.anchorNode,
-  offset = selection.anchorOffset;
+    selection = current(),
+    anchor = selection.anchorNode,
+    offset = selection.anchorOffset
 
   if (offset || !contains(anchor, node)) {
-    return false;
+    return false
   }
 
   while (anchor) {
     if (firstNode(parent(anchor)) !== anchor) {
-      return false;
+      return false
     }
 
     if (anchor === node || anchor === firstNode(node)) {
-      return true;
+      return true
     }
 
-    anchor = parent(anchor);
+    anchor = parent(anchor)
   }
 
-  return false;
+  return false
 }

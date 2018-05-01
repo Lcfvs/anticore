@@ -1,3 +1,3 @@
-export function elements(node) {
-  return node.children;
+export function elements (node) {
+  return node.children
 }

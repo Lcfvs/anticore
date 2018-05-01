@@ -1,9 +1,9 @@
-import {forEach} from '../../../primitive/array/forEach';
-import {remove} from '../remove';
-import {slice} from '../../../primitive/array/slice';
+import { forEach } from '../../../primitive/array/forEach'
+import { slice } from '../../../primitive/array/slice'
+import { remove } from '../remove'
 
-export function removeAll(nodes) {
-  forEach(slice(nodes, 0), remove);
+export function removeAll (nodes) {
+  forEach(slice(nodes, 0), remove)
 
-  return nodes;
+  return nodes
 }

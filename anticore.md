@@ -6,7 +6,7 @@
 ##Usage
 
 ```js
-anticore.on(selector, element, middleware)
+anticore.on(selector, middleware)
 ```
 
 ## anticore.defaults
