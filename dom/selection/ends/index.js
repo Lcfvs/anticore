@@ -3,13 +3,12 @@ import { lastNode } from '../../query/lastNode'
 import { current } from '../current'
 
 export function ends (node) {
-  let
-    selection = current(),
-    anchor = selection.anchorNode,
-    offset = selection.anchorOffset,
-    elements = all('*', node),
-    last = lastNode(elements[elements.length - 1])
+  const selection = current()
+  const anchor = selection.anchorNode
+  const offset = selection.anchorOffset
+  const elements = all('*', node)
+  const last = lastNode(elements[elements.length - 1])
 
-  return anchor === last
-    && last.nodeValue.length - 1 === offset
+  return anchor === last &&
+    last.nodeValue.length - 1 === offset
 }

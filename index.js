@@ -25,26 +25,24 @@ import { queue } from './request/.queue'
 
 export const anticore = create()
 
-const
-  window = global(),
-  encodeURIComponent = window.encodeURIComponent,
-  fetch = window.fetch,
-  URL = window.URL,
-  FormData = window.FormData,
-  registry = create(),
-  types = ['html', 'svg', 'xml'],
-  selector = 'input[type=submit]:focus,'
-    + 'button[type=submit]:focus,'
-    + 'button:not([type]):focus,'
-    + 'input[type=submit]:hover,'
-    + 'button[type=submit]:hover,'
-    + 'button:not([type]):hover,'
-    +
-    'input[name]:not([type=file]):not([type=reset]):not([type=submit]):not([type=checkbox]):not([type=radio]):not(:disabled),'
-    + 'input[name][type=checkbox]:checked:not(:disabled),'
-    + 'input[name][type=radio]:checked:not(:disabled),'
-    + 'textarea[name]:not(:disabled),'
-    + 'select[name]:not(:disabled) [selected=selected]'
+const window = global()
+const encodeURIComponent = window.encodeURIComponent
+const fetch = window.fetch
+const URL = window.URL
+const FormData = window.FormData
+const registry = create()
+const types = ['html', 'svg', 'xml']
+const selector = 'input[type=submit]:focus,' +
+    'button[type=submit]:focus,' +
+    'button:not([type]):focus,' +
+    'input[type=submit]:hover,' +
+    'button[type=submit]:hover,' +
+    'button:not([type]):hover,' +
+    'input[name]:not([type=file]):not([type=reset]):not([type=submit]):not([type=checkbox]):not([type=radio]):not(:disabled),' +
+    'input[name][type=checkbox]:checked:not(:disabled),' +
+    'input[name][type=radio]:checked:not(:disabled),' +
+    'textarea[name]:not(:disabled),' +
+    'select[name]:not(:disabled) [selected=selected]'
 
 anticore.fetchers = create()
 anticore.request = request
@@ -64,10 +62,9 @@ anticore.fetchers.a = function (a) {
  * @returns {Object} request
  */
 anticore.fetchers.form = function (form) {
-  let
-    action = new URL(form.action || form.ownerDocument.location.href),
-    method = form.method,
-    data
+  const action = new URL(form.action || form.ownerDocument.location.href)
+  const method = form.method
+  let data
 
   if (method === 'post') {
     data = new FormData(form)
@@ -157,8 +154,7 @@ anticore.populate = function (container) {
  * @return {Object}
  */
 anticore.request = function (url, method, body, target) {
-  let
-    instance = request(url, method, body, target)
+  const instance = request(url, method, body, target)
 
   instance.fetchRequest = fetchRequest
 
@@ -174,17 +170,15 @@ anticore.fetchFromEvent = function (event) {
     return false
   }
 
-  let
-    target = getTarget(event),
-    request = anticore.fetcher(target)
+  const target = getTarget(event)
+  const request = anticore.fetcher(target)
 
   request.target = target
   request.originalTarget = one(selector, target.ownerDocument)
   request.fetchRequest = fetchRequest
   prevent(event)
 
-  request.fetch(anticore.trigger)
-    ['catch'](anticore.onError)
+  request.fetch(anticore.trigger)['catch'](anticore.onError)
 
   return false
 }
@@ -217,14 +211,13 @@ function stringify (item) {
     return
   }
 
-  this.search += '&' + encodeURIComponent(( nodeName(item) === 'option'
+  this.search += '&' + encodeURIComponent((nodeName(item) === 'option'
     ? parent(item)
-    : item ).name) + '=' + encodeURIComponent(item.value).replace(/%20/g, '+')
+    : item).name) + '=' + encodeURIComponent(item.value).replace(/%20/g, '+')
 }
 
 function notify (response) {
-  let
-    target = queue[0].request.originalTarget
+  const target = queue[0].request.originalTarget
 
   if (target) {
     target.classList.toggle('fetching')
@@ -234,8 +227,7 @@ function notify (response) {
 }
 
 function fetchRequest () {
-  let
-    item = queue[0]
+  const item = queue[0]
 
   if (queue[1]) {
     return
@@ -245,16 +237,14 @@ function fetchRequest () {
 
   return fetch(item.request.url, item.request.options).then(onResponse).then(
     notify).then(onFragment).then(item.trigger || item.request.resolve).then(
-    queue.next)
-    ['catch'](item.reject)
+    queue.next)['catch'](item.reject)
 }
 
 function onResponse (response) {
-  let
-    type = ( ( response.headers.get('content-type') ||
-      'application/octet-stream' ).match(/json|html|svg|xml|text(?=\/plain)/) ||
-      ['blob'] )[0],
-    item = queue[0]
+  const type = ((response.headers.get('content-type') ||
+      'application/octet-stream').match(/json|html|svg|xml|text(?=\/plain)/) ||
+      ['blob'])[0]
+  const item = queue[0]
 
   item.type = type
   item.request.response = response
@@ -281,8 +271,7 @@ function onFragment (data) {
 }
 
 function nextRecord (resolve) {
-  let
-    record = this.shift()
+  const record = this.shift()
 
   if (!record) {
     return resolve && resolve()
@@ -292,9 +281,8 @@ function nextRecord (resolve) {
 }
 
 function onSelector (selector) {
-  let
-    queue = this,
-    nodes = all(selector, queue.container)
+  const queue = this
+  const nodes = all(selector, queue.container)
 
   queue.selector = selector
   forEach(nodes, onElement, queue)
@@ -314,8 +302,7 @@ function onListener (listener) {
 
 function populate (container, loaded) {
   return new Promise(function (resolve) {
-    let
-      queue = []
+    const queue = []
 
     queue.container = container
     queue.loaded = loaded

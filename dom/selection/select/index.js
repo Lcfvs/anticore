@@ -2,9 +2,8 @@ import { document } from '../../node/document'
 import { current } from '../current'
 
 export function select (node, begin, end) {
-  let
-    range = document().createRange(),
-    selection = current()
+  const range = document().createRange()
+  const selection = current()
 
   range.selectNodeContents(node)
 

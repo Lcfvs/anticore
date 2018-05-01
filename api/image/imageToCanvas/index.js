@@ -7,12 +7,11 @@ export function imageToCanvas (img) {
 }
 
 function toCanvas (img, resolve) {
-  const
-    canvas = update(element('canvas'), {
-      width: img.naturalWidth,
-      height: img.naturalHeight,
-    }),
-    context = canvas.getContext('2d')
+  const canvas = update(element('canvas'), {
+    width: img.naturalWidth,
+    height: img.naturalHeight
+  })
+  const context = canvas.getContext('2d')
 
   context.fillStyle = 'transparent'
   context.fillRect(0, 0, img.naturalWidth, img.naturalHeight)

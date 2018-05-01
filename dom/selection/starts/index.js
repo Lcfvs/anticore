@@ -4,10 +4,9 @@ import { parent } from '../../query/parent'
 import { current } from '../current'
 
 export function starts (node) {
-  let
-    selection = current(),
-    anchor = selection.anchorNode,
-    offset = selection.anchorOffset
+  const selection = current()
+  const offset = selection.anchorOffset
+  let anchor = selection.anchorNode
 
   if (offset || !contains(anchor, node)) {
     return false

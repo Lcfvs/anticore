@@ -4,9 +4,8 @@ import { promise } from '../../../primitive/function/promise'
 import { create } from '../../../primitive/object/create'
 import { canvasToImage } from '../../canvas/canvasToImage'
 
-const
-  min = Math.min,
-  max = Math.max
+const min = Math.min
+const max = Math.max
 
 export function resizeImage (options, img) {
   options = parse(img.naturalWidth, img.naturalHeight, options)
@@ -15,8 +14,7 @@ export function resizeImage (options, img) {
 }
 
 function toCanvas (options, img, resolve) {
-  const
-    canvas = element('canvas')
+  const canvas = element('canvas')
 
   canvas.width = options.width
   canvas.height = options.height
@@ -26,8 +24,7 @@ function toCanvas (options, img, resolve) {
 }
 
 function draw (options, img, canvas) {
-  const
-    context = canvas.getContext('2d')
+  const context = canvas.getContext('2d')
 
   context.fillStyle = 'transparent'
   context.fillRect(0, 0, options.width, options.height)
@@ -37,9 +34,8 @@ function draw (options, img, canvas) {
 }
 
 function parse (width, height, options) {
-  const
-    result = create(),
-    ratio = width / height
+  const result = create()
+  const ratio = width / height
 
   result.natural = normalize(width, height, ratio)
   result.max = normalize(options.maxWidth, options.maxHeight, ratio, Infinity)
@@ -53,8 +49,7 @@ function parse (width, height, options) {
 }
 
 function normalize (width, height, ratio, defaultValue) {
-  const
-    config = create()
+  const config = create()
 
   config.width = width || defaultValue
   config.height = height || defaultValue
@@ -75,6 +70,6 @@ function normalize (width, height, ratio, defaultValue) {
 }
 
 function minMax (key, config) {
-  config[key] = ~~min(config.max[key], max(config.fixed[key], config.min[key]))
-    || config.natural[key]
+  config[key] = ~~min(config.max[key], max(config.fixed[key], config.min[key])) ||
+    config.natural[key]
 }

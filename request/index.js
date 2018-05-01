@@ -3,20 +3,19 @@ import { global } from '../global'
 import { create } from '../primitive/object/create'
 import { queue } from './.queue'
 
-const
-  window = global(),
-  fetch = window.fetch,
-  prototype = create(),
-  selector = 'input[type=submit]:focus,'
-    + 'button[type=submit]:focus,'
-    + 'button:not([type]):focus,'
-    + 'input[type=submit]:hover,'
-    + 'button[type=submit]:hover,'
-    + 'button:not([type]):hover,'
-    + ':not(input):hover,'
-    + 'input[type=submit],'
-    + 'button[type=submit],'
-    + 'button:not([type])'
+const window = global()
+const fetch = window.fetch
+const prototype = create()
+const selector = 'input[type=submit]:focus,' +
+    'button[type=submit]:focus,' +
+    'button:not([type]):focus,' +
+    'input[type=submit]:hover,' +
+    'button[type=submit]:hover,' +
+    'button:not([type]):hover,' +
+    ':not(input):hover,' +
+    'input[type=submit],' +
+    'button[type=submit],' +
+    'button:not([type])'
 
 /**
  * Adds a field value on an existing body
@@ -115,8 +114,7 @@ prototype.fetchRequest = function () {
   }
 
   return fetch(item.request.url, item.request.options).then(item.trigger ||
-    item.request.resolve).then(queue.next)
-    ['catch'](item.reject)
+    item.request.resolve).then(queue.next)['catch'](item.reject)
 }
 
 /**

@@ -1,1 +1,1 @@
-export const global = new Function('return this')
+export const global = (x => x).constructor('return this')

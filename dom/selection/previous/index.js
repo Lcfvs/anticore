@@ -3,12 +3,15 @@ import { parent } from '../../query/parent'
 import { end } from '../end'
 
 export function previous (node, targets) {
-  let
-    key = indexOf(targets, node)
+  let key = indexOf(targets, node)
 
-  while (node = targets[key -= 1]) {
+  node = targets[key -= 1]
+
+  while (node) {
     if (parent(node)) {
       return end(node)
     }
+
+    node = targets[key -= 1]
   }
 }

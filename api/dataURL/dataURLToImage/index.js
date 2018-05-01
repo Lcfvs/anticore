@@ -4,17 +4,15 @@ import { onceLoad } from '../../../dom/emitter/once/onceLoad'
 import { global } from '../../../global'
 import { promise } from '../../../primitive/function/promise'
 
-const
-  window = global(),
-  Image = window.Image
+const window = global()
+const Image = window.Image
 
 export function dataURLToImage (url) {
   return promise(read, url).then(getTarget)
 }
 
 function read (url, resolve, reject) {
-  const
-    img = new Image()
+  const img = new Image()
 
   img.src = url
   onceLoad(img, resolve)

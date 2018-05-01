@@ -5,9 +5,8 @@ import { text } from '../../node/text'
 import { current } from '../current'
 
 export function insert (node) {
-  let
-    selection = current(),
-    range = selection.getRangeAt(0)
+  const selection = current()
+  const range = selection.getRangeAt(0)
 
   if (isString(node) || isNumber(node) || isBoolean(node)) {
     node = text(node)

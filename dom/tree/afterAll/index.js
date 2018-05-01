@@ -3,15 +3,13 @@ import { slice } from '../../../primitive/array/slice'
 import { after } from '../after'
 
 export function afterAll (nodes, refNode) {
-  let
-    items = slice(nodes, 0),
-    last
+  const items = slice(nodes, 0)
 
   if (items.length) {
     return
   }
 
-  last = after(items.shift(), refNode)
+  let last = after(items.shift(), refNode)
 
   forEach(items, function (item) {
     last = after(item, last)

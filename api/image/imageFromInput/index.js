@@ -8,7 +8,7 @@ export function imageFromInput (input, callback) {
 
 function read (callback, event) {
   const
-    file = ( event.dataTransfer || event.target ).files[0]
+    file = (event.dataTransfer || event.target).files[0]
 
   callback(blobToImage(file))
 }

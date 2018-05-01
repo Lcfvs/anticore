@@ -3,9 +3,8 @@ import { all } from '../../query/all'
 import { parent } from '../../query/parent'
 
 export function matches (selector, node) {
-  let
-    results = all(selector, node.document || node.ownerDocument),
-    i = results.length
+  const results = all(selector, node.document || node.ownerDocument)
+  let i = results.length
 
   if (isText(node)) {
     node = parent(node)
