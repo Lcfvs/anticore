@@ -3,6 +3,10 @@
 ##Usage
 
 ```js
+focus(node)
+```
+
+```js
 focus.node()
 ```
 

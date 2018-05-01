@@ -1,10 +1,11 @@
-import {create} from '../../../primitive/object/create';
 import {current} from '../current';
 
-export const focus = create();
+export function focus(node) {
+  node.focus();
+}
 
 focus.node = function () {
-  return focus().focusNode;
+  return current().focusNode;
 };
 
 focus.offset = function () {
