@@ -10,6 +10,7 @@ import { prevent } from './dom/emitter/prevent'
 import { nodeName } from './dom/info/nodeName'
 import { rects } from './dom/info/rects'
 import { document } from './dom/node/document'
+import { element } from './dom/node/element'
 import { all } from './dom/query/all'
 import { one } from './dom/query/one'
 import { parent } from './dom/query/parent'
@@ -26,6 +27,7 @@ import { queue } from './request/.queue'
 export const anticore = create()
 
 const window = global()
+const console = window.console
 const encodeURIComponent = window.encodeURIComponent
 const URL = window.URL
 const FormData = window.FormData
@@ -45,6 +47,8 @@ const selector = 'input[type=submit]:focus,' +
 
 anticore.fetchers = create()
 anticore.request = request
+
+function noop () {}
 
 /**
  * Builds a request based on an anchor
@@ -113,6 +117,7 @@ anticore.on = function (selector, middleware) {
   registry[selector] = registry[selector] || []
 
   if (indexOf(registry[selector], middleware) < 0) {
+    anticore.debug.onMiddleware(selector, middleware)
     registry[selector].push(middleware)
   }
 
@@ -290,14 +295,20 @@ function onSelector (selector) {
 }
 
 function onElement (element) {
-  let queue = this
+  const queue = this
 
   queue.element = element
-  forEach(registry[queue.selector], onListener, queue)
+  forEach(registry[selector], onListener, queue)
 }
 
 function onListener (listener) {
-  this.push([listener, this.element, this.loaded])
+  const queue = this
+  const element = queue.element
+  const loaded = queue.loaded
+  const selector = queue.selector
+
+  anticore.debug.onMatch(selector, listener, element, loaded)
+  queue.push([listener, element, loaded])
 }
 
 function populate (container, loaded) {
@@ -311,3 +322,7 @@ function populate (container, loaded) {
     queue.next()
   })
 }
+
+anticore.debug = create()
+anticore.debug.onMiddleware = noop
+anticore.debug.onMatch = noop

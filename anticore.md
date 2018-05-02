@@ -89,3 +89,31 @@ anticore.fetchers.a(a)
 ```js
 anticore.fetchers.form(form)
 ```
+
+## anticore.debug.onMiddleware
+
+##Usage
+
+```js
+anticore.debug.onMiddleware = function (selector, listener) {
+  console.log({
+    listener: listener,
+    selector: selector
+  })
+}
+```
+
+## anticore.debug.onMatch
+
+##Usage
+
+```js
+anticore.debug.onMatch = function (selector, listener, element, loaded) {
+  console.log({
+    element: element,
+    listener: listener,
+    loaded: loaded,
+    selector: selector
+  })
+}
+```
