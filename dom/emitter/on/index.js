@@ -1,8 +1,7 @@
 import { global } from '../../../global'
 import { callEach } from '../.callEach'
 
-const
-  window = global()
+const window = global()
 
 /**
  * Listens an event on an element (touch or not)

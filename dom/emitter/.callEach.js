@@ -2,8 +2,7 @@ import { global } from '../../global'
 import { create } from '../../primitive/object/create'
 import { call } from './.call'
 
-const
-  window = global(),
+const window = global(),
   events = create(),
   listen = window.Element.prototype.addEventListener
 
@@ -23,8 +22,7 @@ events.focus = ['focus', 'touchstart']
 events.focus.listener = events.blur.listener
 
 export function callEach (method, event, element, listener, useCapture) {
-  let
-    realListener = listener,
+  let realListener = listener,
     names,
     key = 0,
     length

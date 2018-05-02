@@ -3,8 +3,7 @@ import { afterAll } from '../afterAll'
 import { prepend } from '../prepend'
 
 export function prependAll (nodes, parent) {
-  let
-    items = slice(nodes, 0)
+  let items = slice(nodes, 0)
 
   if (items.length) {
     return

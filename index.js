@@ -33,16 +33,16 @@ const FormData = window.FormData
 const registry = create()
 const types = ['html', 'svg', 'xml']
 const selector = 'input[type=submit]:focus,' +
-    'button[type=submit]:focus,' +
-    'button:not([type]):focus,' +
-    'input[type=submit]:hover,' +
-    'button[type=submit]:hover,' +
-    'button:not([type]):hover,' +
-    'input[name]:not([type=file]):not([type=reset]):not([type=submit]):not([type=checkbox]):not([type=radio]):not(:disabled),' +
-    'input[name][type=checkbox]:checked:not(:disabled),' +
-    'input[name][type=radio]:checked:not(:disabled),' +
-    'textarea[name]:not(:disabled),' +
-    'select[name]:not(:disabled) [selected=selected]'
+  'button[type=submit]:focus,' +
+  'button:not([type]):focus,' +
+  'input[type=submit]:hover,' +
+  'button[type=submit]:hover,' +
+  'button:not([type]):hover,' +
+  'input[name]:not([type=file]):not([type=reset]):not([type=submit]):not([type=checkbox]):not([type=radio]):not(:disabled),' +
+  'input[name][type=checkbox]:checked:not(:disabled),' +
+  'input[name][type=radio]:checked:not(:disabled),' +
+  'textarea[name]:not(:disabled),' +
+  'select[name]:not(:disabled) [selected=selected]'
 
 anticore.fetchers = create()
 anticore.request = request
@@ -211,9 +211,9 @@ function stringify (item) {
     return
   }
 
-  this.search += '&' + encodeURIComponent((nodeName(item) === 'option'
+  this.search += '&' + encodeURIComponent(( nodeName(item) === 'option'
     ? parent(item)
-    : item).name) + '=' + encodeURIComponent(item.value).replace(/%20/g, '+')
+    : item ).name) + '=' + encodeURIComponent(item.value).replace(/%20/g, '+')
 }
 
 function notify (response) {
@@ -235,15 +235,18 @@ function fetchRequest () {
 
   notify()
 
-  return fetch(item.request.url, item.request.options).then(onResponse).then(
+  const url = item.request.url
+  const fetch = item.request.negotiate(url)
+
+  return fetch(url, item.request.options).then(onResponse).then(
     notify).then(onFragment).then(item.trigger || item.request.resolve).then(
     queue.next)['catch'](item.reject)
 }
 
 function onResponse (response) {
-  const type = ((response.headers.get('content-type') ||
-      'application/octet-stream').match(/json|html|svg|xml|text(?=\/plain)/) ||
-      ['blob'])[0]
+  const type = ( ( response.headers.get('content-type') ||
+    'application/octet-stream' ).match(/json|html|svg|xml|text(?=\/plain)/) ||
+    ['blob'] )[0]
   const item = queue[0]
 
   item.type = type
@@ -258,8 +261,7 @@ function cleanAndFetch (event) {
 }
 
 function onFragment (data) {
-  let
-    item = queue[0]
+  let item = queue[0]
 
   if (indexOf(types, item.type) > -1) {
     item.request.response.result = toDOM(data)
@@ -289,8 +291,7 @@ function onSelector (selector) {
 }
 
 function onElement (element) {
-  let
-    queue = this
+  let queue = this
 
   queue.element = element
   forEach(registry[queue.selector], onListener, queue)

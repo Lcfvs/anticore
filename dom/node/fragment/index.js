@@ -4,8 +4,7 @@ import { wrapAll } from '../../tree/wrapAll'
 import { document } from '../document'
 
 export function fragment (contents) {
-  let
-    node = document().createDocumentFragment()
+  let node = document().createDocumentFragment()
 
   if (!contents) {
     return node

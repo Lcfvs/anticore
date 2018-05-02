@@ -70,6 +70,7 @@ function normalize (width, height, ratio, defaultValue) {
 }
 
 function minMax (key, config) {
-  config[key] = ~~min(config.max[key], max(config.fixed[key], config.min[key])) ||
+  config[key] = ~~min(config.max[key],
+    max(config.fixed[key], config.min[key])) ||
     config.natural[key]
 }

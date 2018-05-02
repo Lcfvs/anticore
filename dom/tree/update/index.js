@@ -12,8 +12,7 @@ import { text } from '../text'
 export function update (element, config) {
   if (isObject(config)) {
     forEach(keys(config), function (name) {
-      let
-        value = config[name]
+      let value = config[name]
 
       if (name.substr(0, 2) === 'on') {
         on(name.substr(2).toLowerCase(), element, value)

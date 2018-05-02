@@ -7,15 +7,15 @@ const window = global()
 const fetch = window.fetch
 const prototype = create()
 const selector = 'input[type=submit]:focus,' +
-    'button[type=submit]:focus,' +
-    'button:not([type]):focus,' +
-    'input[type=submit]:hover,' +
-    'button[type=submit]:hover,' +
-    'button:not([type]):hover,' +
-    ':not(input):hover,' +
-    'input[type=submit],' +
-    'button[type=submit],' +
-    'button:not([type])'
+  'button[type=submit]:focus,' +
+  'button:not([type]):focus,' +
+  'input[type=submit]:hover,' +
+  'button[type=submit]:hover,' +
+  'button:not([type]):hover,' +
+  ':not(input):hover,' +
+  'input[type=submit],' +
+  'button[type=submit],' +
+  'button:not([type])'
 
 /**
  * Adds a field value on an existing body
@@ -47,8 +47,7 @@ prototype.credentials = function (value) {
  * @returns {Promise}
  */
 prototype.fetch = function (trigger) {
-  let
-    item = create()
+  let item = create()
 
   item.request = this
   queue.push(item)
@@ -106,15 +105,42 @@ prototype.option = function (name, value) {
 }
 
 prototype.fetchRequest = function () {
-  let
-    item = queue[0]
+  let item = queue[0]
 
   if (queue[1]) {
     return
   }
 
-  return fetch(item.request.url, item.request.options).then(item.trigger ||
+  const url = item.request.url
+  const fetch = item.request.negotiate(url)
+
+  return fetch(url, item.request.options).then(item.trigger ||
     item.request.resolve).then(queue.next)['catch'](item.reject)
+}
+
+prototype.negotiate = function (url) {
+  return url.substr(0, 8) === 'file:///'
+    ? fetchFile
+    : fetch
+}
+
+function fetchFile (url) {
+  return new Promise(function (resolve, reject) {
+    const xhr = new XMLHttpRequest()
+
+    xhr.onload = function () {
+      resolve(new Response(xhr.responseText, {
+        status: xhr.status
+      }))
+    }
+
+    xhr.onerror = function () {
+      reject(new TypeError('Local request failed'))
+    }
+
+    xhr.open('GET', url)
+    xhr.send(null)
+  })
 }
 
 /**
@@ -126,8 +152,7 @@ prototype.fetchRequest = function () {
  * @return {Object}
  */
 export function request (url, method, body, target) {
-  let
-    request,
+  let request,
     options
 
   request = create(prototype)
