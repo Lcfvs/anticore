@@ -119,7 +119,8 @@ prototype.fetchRequest = function () {
 }
 
 prototype.negotiate = function (url) {
-  return url.substr(0, 8) === 'file:///'
+  return window.location.href.substr(0, 8) === 'file:///'
+  && /^\.|\//.test(url)
     ? fetchFile
     : fetch
 }
