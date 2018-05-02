@@ -133,7 +133,7 @@ function fetchFile (url) {
 
     xhr.addEventListener('load', function () {
       resolve(new Response(xhr.responseText, {
-        status: xhr.status
+        status: xhr.status || 200
       }))
     })
 
