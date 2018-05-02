@@ -304,7 +304,7 @@ function onElement (element) {
 function onListener (listener) {
   const queue = this
   const element = queue.element
-  const loaded = queue.loaded
+  const loaded = queue.loaded || false
   const selector = queue.selector
 
   anticore.debug.onMatch(selector, listener, element, loaded)
