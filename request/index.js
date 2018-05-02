@@ -5,6 +5,9 @@ import { queue } from './.queue'
 
 const window = global()
 const fetch = window.fetch
+const XMLHttpRequest = window.XMLHttpRequest
+const Response = window.Response
+const TypeError = window.TypeError
 const prototype = create()
 const selector = 'input[type=submit]:focus,' +
   'button[type=submit]:focus,' +
@@ -119,8 +122,7 @@ prototype.fetchRequest = function () {
 }
 
 prototype.negotiate = function (url) {
-  return window.location.href.substr(0, 8) === 'file:///'
-  && /^\.|\//.test(url)
+  return window.location.href.substr(0, 8) === 'file:///' && /^\.|\//.test(url)
     ? fetchFile
     : fetch
 }
@@ -129,15 +131,15 @@ function fetchFile (url) {
   return new Promise(function (resolve, reject) {
     const xhr = new XMLHttpRequest()
 
-    xhr.onload = function () {
+    xhr.addEventListener('load', function () {
       resolve(new Response(xhr.responseText, {
         status: xhr.status
       }))
-    }
+    })
 
-    xhr.onerror = function () {
+    xhr.addEventListener('error', function () {
       reject(new TypeError('Local request failed'))
-    }
+    })
 
     xhr.open('GET', url)
     xhr.send(null)

@@ -27,7 +27,6 @@ export const anticore = create()
 
 const window = global()
 const encodeURIComponent = window.encodeURIComponent
-const fetch = window.fetch
 const URL = window.URL
 const FormData = window.FormData
 const registry = create()
@@ -211,9 +210,9 @@ function stringify (item) {
     return
   }
 
-  this.search += '&' + encodeURIComponent(( nodeName(item) === 'option'
+  this.search += '&' + encodeURIComponent((nodeName(item) === 'option'
     ? parent(item)
-    : item ).name) + '=' + encodeURIComponent(item.value).replace(/%20/g, '+')
+    : item).name) + '=' + encodeURIComponent(item.value).replace(/%20/g, '+')
 }
 
 function notify (response) {
@@ -244,9 +243,9 @@ function fetchRequest () {
 }
 
 function onResponse (response) {
-  const type = ( ( response.headers.get('content-type') ||
-    'application/octet-stream' ).match(/json|html|svg|xml|text(?=\/plain)/) ||
-    ['blob'] )[0]
+  const type = ((response.headers.get('content-type') ||
+    'application/octet-stream').match(/json|html|svg|xml|text(?=\/plain)/) ||
+    ['blob'])[0]
   const item = queue[0]
 
   item.type = type
