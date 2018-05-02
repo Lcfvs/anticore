@@ -298,7 +298,7 @@ function onElement (element) {
   const queue = this
 
   queue.element = element
-  forEach(registry[selector], onListener, queue)
+  forEach(registry[queue.selector], onListener, queue)
 }
 
 function onListener (listener) {
