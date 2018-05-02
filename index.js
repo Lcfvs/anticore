@@ -238,8 +238,8 @@ function fetchRequest () {
   const url = item.request.url
   const fetch = item.request.negotiate(url)
 
-  return fetch(url, item.request.options).then(onResponse).then(
-    notify).then(onFragment).then(item.trigger || item.request.resolve).then(
+  return fetch(url, item.request.options).then(onResponse).then(notify).then(
+    onFragment).then(item.trigger || item.request.resolve).then(
     queue.next)['catch'](item.reject)
 }
 

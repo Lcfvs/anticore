@@ -11,10 +11,10 @@ import { on } from '../on'
  */
 export function once (event, element, listener, useCapture) {
   let realListener = on(event, element, function (event) {
-      off(event.type, element, realListener, useCapture)
+    off(event.type, element, realListener, useCapture)
 
-      return listener.call(this, event)
-    }, useCapture)
+    return listener.call(this, event)
+  }, useCapture)
 
   return realListener
 }
