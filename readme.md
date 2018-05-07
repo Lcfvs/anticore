@@ -18,8 +18,6 @@ AJAX requests.
 
 ## <a name="usage">Usage</a>
 
-##Usage
-
 ```js
 import { anticore } from 'anticore'
 import { getTarget } from 'anticore/dom/emitter/getTarget'

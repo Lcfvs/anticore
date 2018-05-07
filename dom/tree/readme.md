@@ -16,6 +16,7 @@
 * [remove](./remove/#reference)
 * [removeAll](./removeAll/#reference)
 * [replace](./replace/#reference)
+* [sanitize](./sanitize/#reference)
 * [text](./text/#reference)
 * [update](./update/#reference)
 * [updateAll](./updateAll/#reference)
