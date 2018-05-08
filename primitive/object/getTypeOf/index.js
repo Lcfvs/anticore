@@ -1,18 +1,15 @@
 import { global } from '../../../global'
-import { isUndefined } from '../../undefined/isUndefined'
 import { toString } from '../toString'
 
 const window = global()
-const typePattern = /[a-z]+/
+const typePattern = /Boolean|Function|Number|String|Symbol|Undefined/
 
 export function getTypeOf (value) {
-  if (value === window){
+  if (value === window) {
     return 'object'
   }
 
-  if (isUndefined(value)) {
-    return 'undefined'
-  }
+  const matches = toString(value).match(typePattern)
 
-  return toString(value).match(typePattern)[0]
+  return matches ? matches[0].toLowerCase() : 'object'
 }
