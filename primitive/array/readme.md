@@ -5,6 +5,7 @@
 * [forEach](./forEach/#reference)
 * [grep](./grep/#reference)
 * [indexOf](./indexOf/#reference)
+* [isArray](./isArray/#reference)
 * [map](./map/#reference)
 * [reverse](./reverse/#reference)
 * [slice](./slice/#reference)
