@@ -16,7 +16,7 @@ const constructors = [
 export function getPrimitiveOf (value) {
   const type = getTypeOf(value)
 
-  if (type !== 'object') {
+  if (type !== 'object' || isNull(value)) {
     return type
   }
 
