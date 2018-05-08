@@ -7,4 +7,5 @@
 * [number](./number/#reference)
 * [object](./object/#reference)
 * [string](./string/#reference)
+* [symbol](./symbol/#reference)
 * [undefined](./undefined/#reference)

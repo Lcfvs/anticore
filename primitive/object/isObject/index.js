@@ -1,3 +1,5 @@
+import { getTypeOf } from '../getTypeOf'
+
 export function isObject (value) {
-  return typeof value === 'object'
+  return getTypeOf(value) === 'object'
 }
