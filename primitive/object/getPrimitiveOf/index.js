@@ -1,6 +1,7 @@
 import { global } from '../../../global'
 import { indexOf } from '../../array/indexOf'
 import { isNull } from '../../null/isNull'
+import { toLowerCase } from '../../string/toLowerCase'
 import { getTypeOf } from '../getTypeOf'
 
 const window = global()
@@ -33,7 +34,7 @@ export function getPrimitiveOf (value) {
   const constructor = prototype.constructor
 
   if (indexOf(constructors, constructor) > -1) {
-    return constructor.name.toLowerCase()
+    return toLowerCase(constructor.name)
   }
 
   return getPrimitiveOf(prototype)

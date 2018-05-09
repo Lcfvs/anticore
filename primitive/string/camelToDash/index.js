@@ -1,5 +1,7 @@
+import { toLowerCase } from '../toLowerCase'
+
 function format (value) {
-  return '-'.concat(value.toLowerCase())
+  return '-'.concat(toLowerCase(value))
 }
 
 export function camelToDash (value) {

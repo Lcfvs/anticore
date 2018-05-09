@@ -1,8 +1,9 @@
 import { on } from '..'
+import { matches } from '../../.matches'
 
 export function onShiftEnter (element, listener, useCapture) {
   return on('keydown', element, function (event) {
-    if (event.which === 13 && event.shiftKey && !event.ctrlKey) {
+    if (matches(event, false, true, ['Enter'], 13)) {
       return listener.call(this, event)
     }
   }, useCapture)

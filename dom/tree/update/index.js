@@ -1,6 +1,7 @@
 import { forEach } from '../../../primitive/array/forEach'
 import { isObject } from '../../../primitive/object/isObject'
 import { keys } from '../../../primitive/object/keys'
+import { toLowerCase } from '../../../primitive/string/toLowerCase'
 import { on } from '../../emitter/on'
 import { append } from '../append'
 import { attr } from '../attr'
@@ -15,7 +16,7 @@ export function update (element, config) {
       let value = config[name]
 
       if (name.substr(0, 2) === 'on') {
-        on(name.substr(2).toLowerCase(), element, value)
+        on(toLowerCase(name.substr(2)), element, value)
       } else if (name === 'style' && isObject(value)) {
         forEach(keys(value), function (name) {
           style(element, name, value[name])

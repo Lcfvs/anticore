@@ -1,8 +1,9 @@
 import { on } from '..'
+import { matches } from '../../.matches'
 
 export function onBack (element, listener, useCapture) {
   return on('keydown', element, function (event) {
-    if (event.which === 8 && !event.shiftKey && !event.ctrlKey) {
+    if (matches(event, false, false, ['Backspace'], 8)) {
       return listener.call(this, event)
     }
   }, useCapture)

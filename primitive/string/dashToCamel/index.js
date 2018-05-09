@@ -1,5 +1,7 @@
+import { toUpperCase } from '../toUpperCase'
+
 function format (value) {
-  return value.toUpperCase().replace('-', '')
+  return toUpperCase(value).replace('-', '')
 }
 
 export function dashToCamel (value) {
