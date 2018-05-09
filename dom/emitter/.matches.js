@@ -5,6 +5,8 @@ export function matches (e, ctrl, alt, shift, keys, code) {
     return false
   }
 
-  return keys &&
-    (indexOf(keys, e.key) > -1 || e.which === code || e.keyCode === code)
+  return !keys ||
+    indexOf(keys, e.key) > -1 ||
+    e.which === code ||
+    e.keyCode === code
 }
