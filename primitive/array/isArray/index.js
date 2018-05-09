@@ -1,7 +1,9 @@
-import { getPrimitiveOf } from '../../object/getPrimitiveOf'
+import { global } from '../../../global'
+import { isInstanceOf } from '../../object/isInstanceOf'
 
-const type = 'array'
+const window = global()
+const Array = window.Array
 
 export function isArray (value) {
-  return getPrimitiveOf(value) === type
+  return isInstanceOf(Array, value)
 }

@@ -6,7 +6,7 @@ import { getTypeOf } from '../getTypeOf'
 const window = global()
 const getPrototypeOf = Object.getPrototypeOf
 const constructors = [
-  window.Array,
+  window.Boolean,
   window.Function,
   window.Number,
   window.String,
