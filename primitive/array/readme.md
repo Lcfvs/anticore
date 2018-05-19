@@ -9,3 +9,4 @@
 * [map](./map/#reference)
 * [reverse](./reverse/#reference)
 * [slice](./slice/#reference)
+* [slot](./slot/#reference)
