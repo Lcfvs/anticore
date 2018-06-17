@@ -14,6 +14,17 @@ anticore.on(selector, middleware)
 ##Usage
 
 ```js
+/**
+ * Intercepts:
+ * a[href^="http"]:not([download]):not([target]),
+ * a[href^="http"][target=_self]:not([download]),
+ * a[href^="."]:not([download]):not([target]),
+ * a[href^="."][target=_self]:not([download]),
+ * a[href^="/"]:not([download]):not([target]),
+ * a[href^="/"][target=_self]:not([download]),
+ * form:not([target]),
+ * form[target=_self]
+ */
 anticore.defaults()
 ```
 

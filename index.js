@@ -189,12 +189,22 @@ anticore.fetchFromEvent = function (event) {
 anticore.onError = console.error.bind(console)
 
 /**
- * Adds default a:not([download]):not([target]):not([href^="data:"]),a[target=_self]:not([download]):not([href^="data:"]) & form middlewares
+ * Intercepts:
+ * a[href^="http"]:not([download]):not([target]),
+ * a[href^="http"][target=_self]:not([download]),
+ * a[href^="."]:not([download]):not([target]),
+ * a[href^="."][target=_self]:not([download]),
+ * a[href^="/"]:not([download]):not([target]),
+ * a[href^="/"][target=_self]:not([download]),
+ * form:not([target]),
+ * form[target=_self]
  * @returns {Object} anticore
  */
 anticore.defaults = function () {
   anticore.on(
-    'a:not([download]):not([target]):not([href^="data:"]),a[target=_self]:not([download]):not([href^="data:"])',
+    'a[href^="http"]:not([download]):not([target]),a[href^="http"][target=_self]:not([download]),' +
+    'a[href^="."]:not([download]):not([target]),a[href^="."][target=_self]:not([download]),' +
+    'a[href^="/"]:not([download]):not([target]),a[href^="/"][target=_self]:not([download])',
     function (element, next) {
       onClick(element, anticore.fetchFromEvent)
       next()
