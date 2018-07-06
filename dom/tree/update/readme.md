@@ -19,7 +19,6 @@ update(element, config)
 ```js
 update(element, {
   text: 'this is the text content',
-  parent: document.body,
   next: one('main'),
   dataset: {
     id: 123
