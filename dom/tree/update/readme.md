@@ -19,7 +19,7 @@ update(element, {
     color: 'red'
   },
   title: 'this is the title attribute content',
-  onClick: function(event) {
+  onClick: function (event) {
     console.log('click on', event.target);
   }
 })
