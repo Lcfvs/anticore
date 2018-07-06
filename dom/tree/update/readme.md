@@ -6,7 +6,7 @@
 update(element, config)
 ```
 
-## Valid option properties
+## Valid config properties
 
 * `text`: text content of the element
 * `parent`: parent node, useful to modify the node and to append it at once
