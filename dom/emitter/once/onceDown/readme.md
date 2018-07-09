@@ -1,6 +1,6 @@
 # [anticore](../../../../../../#reference)/[dom](../../../#reference)/[emitter](../../#reference)/[once](../#reference)/<a name="reference">onDown</a>
 
-##Usage
+## Usage
 
 ```js
 onceDown(node, listener, useCapture)

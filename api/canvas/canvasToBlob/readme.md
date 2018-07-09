@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[api](../../#reference)/[canvas](../#reference)/<a name="reference">canvasToBlob</a>
 
-##Usage
+## Usage
 
 ```js
 canvasToBlob(options, canvas)

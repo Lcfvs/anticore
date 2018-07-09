@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[primitive](../../#reference)/[string](../#reference)/<a name="reference">toUpperCase</a>
 
-##Usage
+## Usage
 
 ```js
 toUpperCase(str)

@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[tree](../#reference)/<a name="reference">before</a>
 
-##Usage
+## Usage
 
 ```js
 before(node, refNode, parentNode)

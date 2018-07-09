@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[info](../#reference)/<a name="reference">isText</a>
 
-##Usage
+## Usage
 
 ```js
 isText(node)

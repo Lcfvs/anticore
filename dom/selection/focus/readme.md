@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[selection](../#reference)/<a name="reference">focus</a>
 
-##Usage
+## Usage
 
 ```js
 focus(node)
@@ -10,7 +10,7 @@ focus(node)
 focus.node()
 ```
 
-##Usage
+## Usage
 
 ```js
 focus.offset()

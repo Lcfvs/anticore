@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[api](../../#reference)/[image](../#reference)/<a name="reference">imageToCanvas</a>
 
-##Usage
+## Usage
 
 ```js
 imageToCanvas(options, img)

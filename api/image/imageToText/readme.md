@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[api](../../#reference)/[image](../#reference)/<a name="reference">imageToText</a>
 
-##Usage
+## Usage
 
 ```js
 imageToText(options, img)

@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[selection](../#reference)/<a name="reference">end</a>
 
-##Usage
+## Usage
 
 ```js
 end(node)

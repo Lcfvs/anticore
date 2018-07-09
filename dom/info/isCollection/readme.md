@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[info](../#reference)/<a name="reference">isCollection</a>
 
-##Usage
+## Usage
 
 ```js
 isCollection(contents)

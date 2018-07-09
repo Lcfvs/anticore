@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[info](../#reference)/<a name="reference">contains</a>
 
-##Usage
+## Usage
 
 ```js
 contains(value, node)

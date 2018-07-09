@@ -3,6 +3,7 @@ import { isObject } from '../../../primitive/object/isObject'
 import { keys } from '../../../primitive/object/keys'
 import { toLowerCase } from '../../../primitive/string/toLowerCase'
 import { on } from '../../emitter/on'
+import { after } from '../after'
 import { append } from '../append'
 import { attr } from '../attr'
 import { before } from '../before'
@@ -31,6 +32,8 @@ export function update (element, config) {
         append(element, value)
       } else if (name === 'next') {
         before(element, value)
+      } else if (name === 'prev') {
+        after(element, value)
       } else {
         attr(element, name, value)
       }

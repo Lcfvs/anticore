@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[tree](../#reference)/<a name="reference">updateAll</a>
 
-##Usage
+## Usage
 
 ```js
 updateAll(nodes, config)

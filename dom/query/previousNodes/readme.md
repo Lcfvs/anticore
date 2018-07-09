@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[query](../#reference)/<a name="reference">previousNodes</a>
 
-##Usage
+## Usage
 
 ```js
 previousNodes(node)

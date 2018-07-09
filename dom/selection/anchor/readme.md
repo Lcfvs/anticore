@@ -1,12 +1,12 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[selection](../#reference)/<a name="reference">anchor</a>
 
-##Usage
+## Usage
 
 ```js
 anchor.node()
 ```
 
-##Usage
+## Usage
 
 ```js
 anchor.offset()

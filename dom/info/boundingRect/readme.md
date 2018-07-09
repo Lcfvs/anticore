@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[info](../#reference)/<a name="reference">boundingRect</a>
 
-##Usage
+## Usage
 
 ```js
 boundingRect(node)

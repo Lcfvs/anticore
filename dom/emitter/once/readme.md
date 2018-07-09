@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[emitter](../#reference)/<a name="reference">once</a>
 
-##Usage
+## Usage
 
 ```js
 once(event, node, listener, useCapture)

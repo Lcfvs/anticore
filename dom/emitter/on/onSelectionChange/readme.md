@@ -1,6 +1,6 @@
 # [anticore](../../../../../../#reference)/[dom](../../../#reference)/[emitter](../../#reference)/[on](../#reference)/<a name="reference">onSelectionChange</a>
 
-##Usage
+## Usage
 
 ```js
 onSelectionChange(listener, useCapture)

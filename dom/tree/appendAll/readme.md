@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[tree](../#reference)/<a name="reference">appendAll</a>
 
-##Usage
+## Usage
 
 ```js
 appendAll(nodes, parent)

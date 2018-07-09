@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[selection](../#reference)/<a name="reference">next</a>
 
-##Usage
+## Usage
 
 ```js
 next(node, targets)

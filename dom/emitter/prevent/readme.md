@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[emitter](../#reference)/<a name="reference">prevent</a>
 
-##Usage
+## Usage
 
 ```js
 prevent(event)

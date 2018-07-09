@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[primitive](../../#reference)/[number](../#reference)/<a name="reference">isNumber</a>
 
-##Usage
+## Usage
 
 ```js
 isNumber(value)

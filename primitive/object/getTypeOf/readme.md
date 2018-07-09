@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[primitive](../../#reference)/[object](../#reference)/<a name="reference">getTypeOf</a>
 
-##Usage
+## Usage
 
 ```js
 getTypeOf(value)

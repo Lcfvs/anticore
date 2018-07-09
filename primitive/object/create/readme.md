@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[primitive](../../#reference)/[object](../#reference)/<a name="reference">create</a>
 
-##Usage
+## Usage
 
 ```js
 create(prototype, descriptors)

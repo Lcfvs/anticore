@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[primitive](../../#reference)/[object](../#reference)/<a name="reference">keys</a>
 
-##Usage
+## Usage
 
 ```js
 keys(value)

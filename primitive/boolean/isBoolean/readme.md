@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[primitive](../../#reference)/[number](../#reference)/<a name="reference">isBoolean</a>
 
-##Usage
+## Usage
 
 ```js
 isBoolean(value)

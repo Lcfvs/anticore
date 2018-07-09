@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[primitive](../../#reference)/[array](../#reference)/<a name="reference">reverse</a>
 
-##Usage
+## Usage
 
 ```js
 reverse(values)

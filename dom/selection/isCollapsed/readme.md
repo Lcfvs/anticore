@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[selection](../#reference)/<a name="reference">isCollapsed</a>
 
-##Usage
+## Usage
 
 ```js
 isCollapsed()

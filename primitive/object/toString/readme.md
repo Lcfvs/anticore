@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[primitive](../../#reference)/[object](../#reference)/<a name="reference">toString</a>
 
-##Usage
+## Usage
 
 ```js
 toString(value)

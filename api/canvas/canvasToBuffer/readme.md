@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[api](../../#reference)/[canvas](../#reference)/<a name="reference">canvasToBuffer</a>
 
-##Usage
+## Usage
 
 ```js
 canvasToBuffer(options, canvas)

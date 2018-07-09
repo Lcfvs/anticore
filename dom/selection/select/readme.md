@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[selection](../#reference)/<a name="reference">select</a>
 
-##Usage
+## Usage
 
 ```js
 select(node, targets)

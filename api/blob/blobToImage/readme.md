@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[api](../../#reference)/[blob](../#reference)/<a name="reference">blobToImage</a>
 
-##Usage
+## Usage
 
 ```js
 blobToImage(blob)

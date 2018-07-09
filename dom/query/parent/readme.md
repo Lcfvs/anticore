@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[query](../#reference)/<a name="reference">parent</a>
 
-##Usage
+## Usage
 
 ```js
 parent(node)

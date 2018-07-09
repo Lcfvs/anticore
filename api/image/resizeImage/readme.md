@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[api](../../#reference)/[image](../#reference)/<a name="reference">resizeImage</a>
 
-##Usage
+## Usage
 
 ```js
 resizeImage(options, img)

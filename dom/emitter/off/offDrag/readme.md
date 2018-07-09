@@ -1,6 +1,6 @@
 # [anticore](../../../../../../#reference)/[dom](../../../#reference)/[emitter](../../#reference)/[off](../#reference)/<a name="reference">offDrag</a>
 
-##Usage
+## Usage
 
 ```js
 offDrag(node, listener, useCapture)

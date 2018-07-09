@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[tree](../#reference)/<a name="reference">clone</a>
 
-##Usage
+## Usage
 
 ```js
 clone(node)

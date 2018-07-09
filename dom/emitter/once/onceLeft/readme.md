@@ -1,6 +1,6 @@
 # [anticore](../../../../../../#reference)/[dom](../../../#reference)/[emitter](../../#reference)/[once](../#reference)/<a name="reference">onceLeft</a>
 
-##Usage
+## Usage
 
 ```js
 onceLeft(node, listener, useCapture)

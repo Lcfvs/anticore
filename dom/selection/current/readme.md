@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[selection](../#reference)/<a name="reference">current</a>
 
-##Usage
+## Usage
 
 ```js
 current()

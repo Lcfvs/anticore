@@ -1,6 +1,6 @@
 # [anticore](../../../../../../#reference)/[dom](../../../#reference)/[emitter](../../#reference)/[on](../#reference)/<a name="reference">onLeft</a>
 
-##Usage
+## Usage
 
 ```js
 onLeft(node, listener, useCapture)

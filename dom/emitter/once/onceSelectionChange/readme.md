@@ -1,6 +1,6 @@
 # [anticore](../../../../../../#reference)/[dom](../../../#reference)/[emitter](../../#reference)/[once](../#reference)/<a name="reference">onceSelectionChange</a>
 
-##Usage
+## Usage
 
 ```js
 onceSelectionChange(listener, useCapture)

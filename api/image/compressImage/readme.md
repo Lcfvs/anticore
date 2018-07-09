@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[api](../../#reference)/[image](../#reference)/<a name="reference">compressImage</a>
 
-##Usage
+## Usage
 
 ```js
 compressImage(options, img)

@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[primitive](../../#reference)/[array](../#reference)/<a name="reference">indexOf</a>
 
-##Usage
+## Usage
 
 ```js
 indexOf(values, value)

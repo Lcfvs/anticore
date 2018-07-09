@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[query](../#reference)/<a name="reference">firstNode</a>
 
-##Usage
+## Usage
 
 ```js
 firstNode(node)

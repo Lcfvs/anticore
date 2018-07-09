@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[api](../../#reference)/[image](../#reference)/<a name="reference">imageToDataURL</a>
 
-##Usage
+## Usage
 
 ```js
 imageToDataURL(options, img)

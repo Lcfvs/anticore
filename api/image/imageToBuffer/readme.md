@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[api](../../#reference)/[image](../#reference)/<a name="reference">imageToBuffer</a>
 
-##Usage
+## Usage
 
 ```js
 imageToBuffer(options, img)

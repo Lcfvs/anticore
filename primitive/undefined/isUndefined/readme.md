@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[primitive](../../#reference)/[undefined](../#reference)/<a name="reference">isUndefined</a>
 
-##Usage
+## Usage
 
 ```js
 isUndefined(value)

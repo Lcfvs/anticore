@@ -3,7 +3,7 @@
 
 ## anticore.on
 
-##Usage
+## Usage
 
 ```js
 anticore.on(selector, middleware)
@@ -11,7 +11,7 @@ anticore.on(selector, middleware)
 
 ## anticore.defaults
 
-##Usage
+## Usage
 
 ```js
 /**
@@ -30,7 +30,7 @@ anticore.defaults()
 
 ## anticore.populate
 
-##Usage
+## Usage
 
 ```js
 anticore.populate(document)
@@ -38,14 +38,14 @@ anticore.populate(document)
 
 ## anticore.trigger
 
-##Usage
+## Usage
 
 ```js
 anticore.trigger(request)
 ```
 
 ## anticore.request
-##Usage
+## Usage
 
 ```js
 anticore.request(url, method, body, target)
@@ -53,7 +53,7 @@ anticore.request(url, method, body, target)
 
 ## anticore.onTimeout
 
-##Usage
+## Usage
 
 ```js
 anticore.onTimeout(request)
@@ -63,7 +63,7 @@ anticore.onTimeout(request)
 
 Can be prevented by `event.preventDefault()`
 
-##Usage
+## Usage
 
 ```js
 anticore.fetchFromEvent(event)
@@ -71,7 +71,7 @@ anticore.fetchFromEvent(event)
 
 ## anticore.onError
 
-##Usage
+## Usage
 
 ```js
 anticore.onError(error)
@@ -79,7 +79,7 @@ anticore.onError(error)
 
 ## anticore.fetcher
 
-##Usage
+## Usage
 
 ```js
 anticore.fetcher(element)
@@ -87,7 +87,7 @@ anticore.fetcher(element)
 
 ## anticore.fetchers.a
 
-##Usage
+## Usage
 
 ```js
 anticore.fetchers.a(a)
@@ -95,7 +95,7 @@ anticore.fetchers.a(a)
 
 ## anticore.fetchers.form
 
-##Usage
+## Usage
 
 ```js
 anticore.fetchers.form(form)
@@ -103,7 +103,7 @@ anticore.fetchers.form(form)
 
 ## anticore.debug.onMiddleware
 
-##Usage
+## Usage
 
 ```js
 anticore.debug.onMiddleware = function (selector, listener) {
@@ -116,7 +116,7 @@ anticore.debug.onMiddleware = function (selector, listener) {
 
 ## anticore.debug.onMatch
 
-##Usage
+## Usage
 
 ```js
 anticore.debug.onMatch = function (selector, listener, element, loaded) {

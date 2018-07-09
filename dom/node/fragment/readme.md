@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[node](../#reference)/<a name="reference">fragment</a>
 
-##Usage
+## Usage
 
 ```js
 fragment(contents)

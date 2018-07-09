@@ -1,6 +1,6 @@
 # [anticore](../../../../../../#reference)/[dom](../../../#reference)/[emitter](../../#reference)/[on](../#reference)/<a name="reference">onEnter</a>
 
-##Usage
+## Usage
 
 ```js
 onEnter(node, listener, useCapture)

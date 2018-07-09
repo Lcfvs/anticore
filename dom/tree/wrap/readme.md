@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[tree](../#reference)/<a name="reference">wrap</a>
 
-##Usage
+## Usage
 
 ```js
 wrap(node, wrapper)

@@ -1,6 +1,6 @@
 # [anticore](../../../../../../#reference)/[dom](../../../#reference)/[emitter](../../#reference)/[off](../#reference)/<a name="reference">offMouseOut</a>
 
-##Usage
+## Usage
 
 ```js
 offMouseOut(node, listener, useCapture)

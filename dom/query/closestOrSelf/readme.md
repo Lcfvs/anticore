@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[query](../#reference)/<a name="reference">closestOrSelf</a>
 
-##Usage
+## Usage
 
 ```js
 closestOrSelf(selector, node)

@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[tree](../#reference)/<a name="reference">replace</a>
 
-##Usage
+## Usage
 
 ```js
 replace(node, refNode)

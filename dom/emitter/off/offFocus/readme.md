@@ -1,6 +1,6 @@
 # [anticore](../../../../../../#reference)/[dom](../../../#reference)/[emitter](../../#reference)/[off](../#reference)/<a name="reference">offFocus</a>
 
-##Usage
+## Usage
 
 ```js
 offFocus(node, listener, useCapture)

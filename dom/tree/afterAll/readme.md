@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[tree](../#reference)/<a name="reference">afterAll</a>
 
-##Usage
+## Usage
 
 ```js
 afterAll(nodes, refNode)

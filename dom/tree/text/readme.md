@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[tree](../#reference)/<a name="reference">text</a>
 
-##Usage
+## Usage
 
 ```js
 text(node, data)

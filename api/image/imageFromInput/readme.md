@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[api](../../#reference)/[image](../#reference)/<a name="reference">imageFromInput</a>
 
-##Usage
+## Usage
 
 ```js
 imageFromInput(input, function (promise) {

@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[primitive](../../#reference)/[null](../#reference)/<a name="reference">isNull</a>
 
-##Usage
+## Usage
 
 ```js
 isNull(value)

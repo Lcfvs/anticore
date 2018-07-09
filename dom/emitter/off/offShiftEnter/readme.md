@@ -1,6 +1,6 @@
 # [anticore](../../../../../../#reference)/[dom](../../../#reference)/[emitter](../../#reference)/[off](../#reference)/<a name="reference">offShiftEnter</a>
 
-##Usage
+## Usage
 
 ```js
 offShiftEnter(node, listener, useCapture)

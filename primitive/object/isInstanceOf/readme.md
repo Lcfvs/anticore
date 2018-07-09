@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[primitive](../../#reference)/[object](../#reference)/<a name="reference">isInstanceOf</a>
 
-##Usage
+## Usage
 
 ```js
 isInstanceOf(constructor, value)

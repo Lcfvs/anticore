@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[tree](../#reference)/<a name="reference">sanitize</a>
 
-##Usage
+## Usage
 
 ```js
 sanitize(element)

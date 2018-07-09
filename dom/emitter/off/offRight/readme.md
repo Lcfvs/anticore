@@ -1,6 +1,6 @@
 # [anticore](../../../../../../#reference)/[dom](../../../#reference)/[emitter](../../#reference)/[off](../#reference)/<a name="reference">offRight</a>
 
-##Usage
+## Usage
 
 ```js
 offRight(node, listener, useCapture)

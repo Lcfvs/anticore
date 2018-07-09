@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[tree](../#reference)/<a name="reference">remove</a>
 
-##Usage
+## Usage
 
 ```js
 remove(node)

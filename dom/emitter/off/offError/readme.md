@@ -1,6 +1,6 @@
 # [anticore](../../../../../../#reference)/[dom](../../../#reference)/[emitter](../../#reference)/[off](../#reference)/<a name="reference">offError</a>
 
-##Usage
+## Usage
 
 ```js
 offError(node, listener, useCapture)

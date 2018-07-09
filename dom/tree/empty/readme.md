@@ -1,6 +1,6 @@
 # [anticore](../../../../../#reference)/[dom](../../#reference)/[tree](../#reference)/<a name="reference">empty</a>
 
-##Usage
+## Usage
 
 ```js
 empty(node)
