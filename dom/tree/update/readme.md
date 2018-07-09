@@ -11,6 +11,7 @@ update(element, config)
 * `text`: text content of the element
 * `parent`: parent node, useful to modify the node and to append it at once
 * `next`: next node, useful to modify the node and to insert it before the next node at once
+* `prev`: previous node, useful to modify the node and to insert it after the previous node at once
 * `dataset`: object to declare `data-*` attributes
 * `style`: object to declare the style properties
 * `*`: declare any attribute... or declare a listener if the property is prefixed by `on`, like `onClick`
