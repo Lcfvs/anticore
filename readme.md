@@ -86,6 +86,7 @@ If you need the previous version, you can install it by `npm i -D anticore@1.9.1
 * [api](https://github.com/Lcfvs/anticore/blob/master/api/#reference)
 * [dom](https://github.com/Lcfvs/anticore/blob/master/dom/#reference)
 * [global](https://github.com/Lcfvs/anticore/blob/master/global/#reference)
+* [middleware](https://github.com/Lcfvs/anticore/blob/master/global/#reference)
 * [primitive](https://github.com/Lcfvs/anticore/blob/master/primitive/#reference)
 * [request](https://github.com/Lcfvs/anticore/blob/master/request/#reference)
 
