@@ -169,7 +169,7 @@ anticore.request = function (url, method, body, target) {
  * @param {Event} event
  */
 anticore.fetchFromEvent = function (event) {
-  if (event.defaultPrevented) {
+  if (event.defaultPrevented || event.cancelBubble) {
     return false
   }
 
