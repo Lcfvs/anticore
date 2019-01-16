@@ -14,5 +14,5 @@ export function fragment (contents) {
     return wrapAll(contents, node)
   }
 
-  return wrap(contents)
+  return wrap(contents, node)
 }
