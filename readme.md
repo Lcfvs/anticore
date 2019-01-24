@@ -47,7 +47,7 @@ anticore.on('.modal', function (element, next) {
   next() 
 })
 
-// middleware to treat an button with a 'closer' class contained in a modal 
+// middleware to treat a button with a 'closer' class contained in a modal 
 anticore.on('.modal button.closer', function (element, next) {
   // listen the click on the button to close the modal
   onClick(element, onClose)
