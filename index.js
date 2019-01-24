@@ -230,7 +230,8 @@ function stringify (item) {
 }
 
 function notify (response) {
-  const target = queue[0].request.originalTarget
+  const request = queue[0].request
+  const target = request.originalTarget || request.target
 
   if (target) {
     target.classList.toggle('fetching')
