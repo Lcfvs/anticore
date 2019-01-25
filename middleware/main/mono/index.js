@@ -9,6 +9,10 @@ const window = global()
 const history = create()
 history.entries = create()
 
+function cleanHref (href) {
+  return href.toString().split('#')[0]
+}
+
 function getTitle (element) {
   return text(one('h1', element)).trim()
 }
@@ -24,18 +28,19 @@ function updateTitle (element) {
 function listen () {
   const main = one('main')
 
-  register(main, window.location.href)
+  register(main, cleanHref(window.location.href))
   window.addEventListener('popstate', onPopState)
   history.branding = window.document.title.trim()
     .replace(getTitle(main), '$1')
 }
 
 function onPopState (event) {
-  const main = history.entries[event.target.location.href]
+  const registered = history.entries[cleanHref(event.target.location.href)]
+  const current = one('main')
 
-  if (main) {
-    updateTitle(main)
-    replace(main, one('main'))
+  if (registered && registered !== current) {
+    updateTitle(registered)
+    replace(registered, current)
   }
 }
 
