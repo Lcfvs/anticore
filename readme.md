@@ -33,9 +33,10 @@ function onClose (event) {
 }
 
 // middleware to treat a main element, loaded or contained by the current document
-anticore.on('main', function (element, next, loaded) {
+anticore.on('main', function (element, next, loaded, url) {
   // replace the current main by the new one, only if loaded
   loaded && replace(element, one('main'))
+  console.log(url)
   // release the current process
   next() 
 })

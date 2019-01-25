@@ -98,8 +98,8 @@ anticore.trigger = function (request) {
     return anticore
   }
 
-  populate(request.response.result, true).then(request.resolve).then(
-    function () {
+  populate(request.response.result, true, request.url).then(request.resolve)
+    .then(function () {
       return request
     })
 
@@ -293,7 +293,7 @@ function nextRecord (resolve) {
     return resolve && resolve()
   }
 
-  record[0](record[1], this.next, this.loaded)
+  record[0](record[1], this.next, this.loaded, this.url)
 }
 
 function onSelector (selector) {
@@ -316,17 +316,19 @@ function onListener (listener) {
   const element = queue.element
   const loaded = queue.loaded || false
   const selector = queue.selector
+  const url = queue.url
 
-  anticore.debug.onMatch(selector, listener, element, loaded)
-  queue.push([listener, element, loaded])
+  anticore.debug.onMatch(selector, listener, element, loaded, url)
+  queue.push([listener, element, loaded, url])
 }
 
-function populate (container, loaded) {
+function populate (container, loaded, url) {
   return new Promise(function (resolve) {
     const queue = []
 
     queue.container = container
     queue.loaded = loaded
+    queue.url = url
     forEach(keys(registry), onSelector, queue)
     queue.next = nextRecord.bind(queue, resolve)
     queue.next()

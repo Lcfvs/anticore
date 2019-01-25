@@ -119,12 +119,13 @@ anticore.debug.onMiddleware = function (selector, listener) {
 ## Usage
 
 ```js
-anticore.debug.onMatch = function (selector, listener, element, loaded) {
+anticore.debug.onMatch = function (selector, listener, element, loaded, url) {
   console.log({
     element: element,
     listener: listener,
     loaded: loaded,
-    selector: selector
+    selector: selector,
+    url: url
   })
 }
 ```
