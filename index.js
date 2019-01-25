@@ -5,6 +5,8 @@
 
 import { getTarget } from './dom/emitter/getTarget'
 import { onClick } from './dom/emitter/on/onClick'
+import { onError } from './dom/emitter/on/onError'
+import { onMessage } from './dom/emitter/on/onMessage'
 import { onSubmit } from './dom/emitter/on/onSubmit'
 import { prevent } from './dom/emitter/prevent'
 import { nodeName } from './dom/info/nodeName'
@@ -30,6 +32,7 @@ const console = window.console
 const encodeURIComponent = window.encodeURIComponent
 const URL = window.URL
 const FormData = window.FormData
+const EventSource = window.EventSource
 const registry = create()
 const types = ['html', 'svg', 'xml']
 const selector = 'input[type=submit]:focus,' +
@@ -186,6 +189,28 @@ anticore.fetchFromEvent = function (event) {
   return false
 }
 
+/**
+ * Listens an event source
+ * turns the contents to DOM, except if a reviver is provided
+ * @param {string} url
+ * @param {object} config
+ * @param {function} reviver
+ * @returns {EventSource} source
+ */
+anticore.sse = function (url, config, reviver) {
+  const source = new EventSource(url, config)
+
+  onMessage(source, function (event) {
+    populate((reviver || toDOM)(event.data), true, url)
+  })
+
+  onError(source, function (event) {
+    anticore.onError(event)
+  })
+
+  return source
+}
+
 anticore.onError = console.error.bind(console)
 
 /**
@@ -258,10 +283,10 @@ function fetchRequest () {
 }
 
 function onResponse (response) {
+  const item = queue[0]
   const type = ((response.headers.get('content-type') ||
     'application/octet-stream').match(/json|html|svg|xml|text(?=\/plain)/) ||
     ['blob'])[0]
-  const item = queue[0]
 
   item.type = type
   item.request.response = response

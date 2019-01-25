@@ -69,6 +69,22 @@ Can be prevented by `event.preventDefault()`
 anticore.fetchFromEvent(event)
 ```
 
+## anticore.sse
+
+## Usage
+
+To use the internal `toDom()` reviver
+
+```js
+source = anticore.sse(url, config)
+```
+
+To use your own reviver
+
+```js
+source = anticore.sse(url, config, reviver)
+```
+
 ## anticore.onError
 
 ## Usage
