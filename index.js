@@ -204,9 +204,7 @@ anticore.sse = function (url, config, reviver) {
     populate((reviver || toDOM)(event.data), true, url)
   })
 
-  onError(source, function (event) {
-    anticore.onError(event)
-  })
+  onError(source, anticore.onError)
 
   return source
 }
