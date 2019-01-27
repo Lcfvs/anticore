@@ -19,6 +19,10 @@ AJAX requests.
 
 `npm i -D anticore`
 
+## <a name="quick-start">Or try it in a few seconds</a>
+
+https://lcfvs.github.io/anticore-quick-start
+
 ## <a name="demos">Demos</a>
 
 * [Live demos](http://lcfvs.github.io/anticore)
