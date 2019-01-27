@@ -72,10 +72,10 @@ anticore.on('main', function (element, next, loaded, url) {
     replace(element, one('main'))
   }
 
-  const current = one('body > nav a.current')
-  const anchors = all('a', closest('ol,ul', current))
+  const current = url && one('body nav a.current')
+  const anchors = current && all('a', closest('ol, ul', current))
 
-  if (url && current && anchors) {
+  if (anchors) {
     every(anchors, curry(tagCurrent, cleanHref(url), current))
   }
 
