@@ -7,6 +7,14 @@
 **anticore** is a generic living DOM library to simplify your client code, like with its easiest middleware manager for
 AJAX requests.
 
+## <a name="what-it-solves">What it solves?</a>
+
+* **Based on the ES6 modules**, each middleware should be written in a separated module, ideally following the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), improving the maintainability
+* You can create your middlewares as **specific or generic as you need**, increasing the **reusable components between projects**
+* A middleware is really short to write, **easy to replace/remove**, no need to check if it doesn't risk to break your code, there is no chain
+* **No need to build any AJAX requests**, anticore is based on the forms/anchors attributes
+* **No need to check the response status/content**, everything is content based, targeted by the middleware selector, then it requires <abbr title="Server-Side Rendering">SSR</abbr> contents
+
 ## <a name="install">Install</a>
 
 `npm i -D anticore`
@@ -32,15 +40,6 @@ function onClose (event) {
   remove(closest('.modal', getTarget(event)))
 }
 
-// middleware to treat a main element, loaded or contained by the current document
-anticore.on('main', function (element, next, loaded, url) {
-  // replace the current main by the new one, only if loaded
-  loaded && replace(element, one('main'))
-  console.log(url)
-  // release the current process
-  next() 
-})
-
 // middleware to treat an element with a 'modal' class
 anticore.on('.modal', function (element, next) {
   // append the modal to the body
@@ -57,6 +56,7 @@ anticore.on('.modal button.closer', function (element, next) {
 
 // apply the defaults middlewares (to listen anchor/button click and form submit)
 // then trigger all the middlewares on the current document 
+import 'anticore/middleware/main/mono'
 anticore.defaults().populate()
 ```
 

@@ -1,8 +1,12 @@
 import {anticore} from '../../../index'
+import {global} from '../../../global'
+import {all} from '../../../dom/query/all'
+import {closest} from '../../../dom/query/closest'
 import {one} from '../../../dom/query/one'
 import {replace} from '../../../dom/tree/replace'
 import {text} from '../../../dom/tree/text'
-import {global} from '../../../global'
+import {every} from '../../../primitive/array/every'
+import {curry} from '../../../primitive/function/curry'
 import {create} from '../../../primitive/object/create'
 
 const window = global()
@@ -45,16 +49,34 @@ function onPopState (event) {
 }
 
 function register (element, url) {
-  if (url) {
-    history.entries[url] = element
+  history.entries[url] = element
+}
+
+function tagCurrent (url, current, candidate) {
+  if (cleanHref(candidate.href) === url) {
+    current.classList.remove('current')
+    candidate.classList.add('current')
+
+    return false
   }
+
+  return true
 }
 
 anticore.on('main', function (element, next, loaded, url) {
-  if (loaded) {
-    register(element, url)
-    window.history.pushState(null, updateTitle(element), url)
-    replace(element, one('main'))
+  if (!url) {
+    return
+  }
+
+  const current = one('body > nav a.current')
+  const anchors = all('a', closest('ol,ul', current))
+
+  register(element, url)
+  window.history.pushState(null, updateTitle(element), url)
+  replace(element, one('main'))
+
+  if (current && anchors) {
+    every(anchors, curry(tagCurrent, cleanHref(url), current))
   }
 
   next()
