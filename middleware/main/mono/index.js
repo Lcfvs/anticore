@@ -49,7 +49,9 @@ function onPopState (event) {
 }
 
 function register (element, url) {
-  history.entries[url] = element
+  if (url) {
+    history.entries[url] = element
+  }
 }
 
 function tagCurrent (url, current, candidate) {
@@ -64,18 +66,16 @@ function tagCurrent (url, current, candidate) {
 }
 
 anticore.on('main', function (element, next, loaded, url) {
-  if (!url) {
-    return
+  if (loaded) {
+    register(element, url)
+    window.history.pushState(null, updateTitle(element), url)
+    replace(element, one('main'))
   }
 
   const current = one('body > nav a.current')
   const anchors = all('a', closest('ol,ul', current))
 
-  register(element, url)
-  window.history.pushState(null, updateTitle(element), url)
-  replace(element, one('main'))
-
-  if (current && anchors) {
+  if (url && current && anchors) {
     every(anchors, curry(tagCurrent, cleanHref(url), current))
   }
 
