@@ -1,3 +1,5 @@
+import { isObject } from '../../../primitive/object/isObject'
+
 export function isElement (node) {
-  return node.nodeType === 1
+  return isObject(node) && node.nodeType === 1
 }

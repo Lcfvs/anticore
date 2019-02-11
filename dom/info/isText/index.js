@@ -1,3 +1,5 @@
+import { isObject } from '../../../primitive/object/isObject'
+
 export function isText (node) {
-  return node.nodeType === 3
+  return isObject(node) && node.nodeType === 3
 }
