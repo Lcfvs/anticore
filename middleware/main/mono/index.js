@@ -66,7 +66,7 @@ function tagCurrent (url, current, candidate) {
 }
 
 anticore.on('main', function (element, next, loaded, url) {
-  if (loaded) {
+  if (loaded && one('h1', element)) {
     register(element, url)
     window.history.pushState(null, updateTitle(element), url)
     replace(element, one('main'))
