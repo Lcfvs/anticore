@@ -4,5 +4,6 @@
 * [off](./off/#reference)
 * [on](./on/#reference)
 * [once](./one/#reference)
+* [options](./options/#reference)
 * [prevent](./prevent/#reference)
 * [stop](./stop/#reference)
