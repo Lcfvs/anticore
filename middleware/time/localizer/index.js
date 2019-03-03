@@ -16,11 +16,13 @@ const localizer = {
     toLocaleTimeString: /^\d+:\d+:\d+/
   },
   format: function (element) {
-    const offset = new Date().getTimezoneOffset() * 60000
     const time = element.getAttribute('datetime')
-    const date = new Date(Date.parse(time) - offset)
+    const date = new Date(Date.parse(time))
     const locale = this.locale.parse(element)
     const methods = Object.keys(this.patterns)
+    const offset = new Date().getTimezoneOffset()
+
+    date.setUTCHours(date.getUTCHours() + offset / 60)
 
     do {
       let method = methods.shift()
