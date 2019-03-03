@@ -17,12 +17,9 @@ const localizer = {
   },
   format: function (element) {
     const time = element.getAttribute('datetime')
-    const date = new Date(Date.parse(time))
+    const date = new Date(time)
     const locale = this.locale.parse(element)
     const methods = Object.keys(this.patterns)
-    const offset = new Date().getTimezoneOffset()
-
-    date.setUTCHours(date.getUTCHours() + offset / 60)
 
     do {
       let method = methods.shift()
