@@ -2,9 +2,9 @@ import { global } from '../../global'
 import { create } from '../../primitive/object/create'
 import { call } from './.call'
 
-const window = global(),
-  events = create(),
-  listen = window.Element.prototype.addEventListener
+const window = global()
+const events = create()
+const listen = window.Element.prototype.addEventListener
 
 events.blur = ['blur', 'touchcancel', 'touchleave']
 events.blur.listener = function (listener, event) {
@@ -22,14 +22,12 @@ events.focus = ['focus', 'touchstart']
 events.focus.listener = events.blur.listener
 
 export function callEach (method, event, element, listener, useCapture) {
-  let realListener = listener,
-    names,
-    key = 0,
-    length
+  let realListener = listener
+  let key = 0
 
   if (event in events) {
-    names = events[event]
-    length = names.length
+    const names = events[event]
+    const length = names.length
 
     if (method === listen) {
       realListener = names.listener.bind(element, realListener)

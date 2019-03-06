@@ -145,10 +145,12 @@ anticore.onTimeout = function (request) {
  * Launches the selectors tests to find the related listeners,
  * takes the scoped document if not passed as argument
  * @param {Document|HTMLElement|DocumentFragment} [container=global.document)
+ * @param {boolean} [loaded]
+ * @param {string} [url]
  * @returns {Object} anticore
  */
-anticore.populate = function (container) {
-  return populate(container || document())
+anticore.populate = function (container, loaded, url) {
+  return populate(container || document(), loaded, url)
 }
 
 /**

@@ -33,7 +33,7 @@ anticore.defaults()
 ## Usage
 
 ```js
-anticore.populate(document)
+anticore.populate(document, loaded, url)
 ```
 
 ## anticore.trigger
