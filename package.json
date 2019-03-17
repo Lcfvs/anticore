@@ -1,6 +1,6 @@
 {
   "name": "anticore",
-  "version": "2.25.0",
+  "version": "3.0.6",
   "description": "A generic living DOM library to simplify your client code, like with its easiest middleware manager for AJAX requests.",
   "main": "index.js",
   "module": "index.js",
@@ -21,6 +21,10 @@
     "url": "https://github.com/Lcfvs/anticore/issues"
   },
   "homepage": "https://github.com/Lcfvs/anticore#readme",
-  "dependencies": {},
+  "dependencies": {
+    "anticore-core": "^1.0.0",
+    "anticore-dom": "^1.0.1",
+    "anticore-utils": "^1.0.0"
+  },
   "devDependencies": {}
 }

@@ -1,99 +1,90 @@
-# <a name="reference"><img alt="anticore" src="./logo.png" title="anticore" width="200" /></a>
+# <a name="reference"><img alt="anticore" src="./logo.png" title="BETA anticore" width="200" /></a>
 
 [![npm](https://img.shields.io/npm/v/anticore.svg?style=plastic)]()
 [![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-**anticore** is a generic living DOM library to simplify your client code, like with its easiest middleware manager for
-AJAX requests.
-
-## <a name="what-it-solves">What it solves?</a>
-
-* **Based on the ES6 modules**, each middleware should be written in a separated module, ideally following the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), improving the maintainability
-* You can create your middlewares as **specific or generic as you need**, increasing the **reusable components between projects**
-* A middleware is really short to write, **easy to replace/remove**, no need to check if it doesn't risk to break your code, there is no chain
-* **No need to build any AJAX requests**, anticore is based on the forms/anchors attributes
-* **No need to check the response status/content**, everything is content based, targeted by the middleware selector, then it requires <abbr title="Server-Side Rendering">SSR</abbr> contents
+**anticore** is a library to handle your AJAX/SSE DOM contents, using some contracts.
 
 ## <a name="install">Install</a>
 
-`npm i -D anticore`
+`npm i anticore`
 
-## <a name="quick-start">Or try it in a few seconds</a>
-
-https://lcfvs.github.io/anticore-quick-start
-
-## <a name="demos">Demos</a>
-
-* [Live demos](http://lcfvs.github.io/anticore)
-* [Demo sources](https://github.com/Lcfvs/anticore/tree/gh-pages)
-
-## <a name="usage">Usage</a>
+## <a name="basic-usage">Basic usage</a>
 
 ```js
-import { anticore } from 'anticore'
-import { getTarget } from 'anticore/dom/emitter/getTarget'
-import { onClick } from 'anticore/dom/emitter/on/onClick'
-import { closest } from 'anticore/dom/query/closest'
-import { one } from 'anticore/dom/query/one'
-import { append } from 'anticore/dom/tree/append'
-import { remove } from 'anticore/dom/tree/remove'
-import { replace } from 'anticore/dom/tree/replace'
+import { trigger } from 'anticore'
+// begin of custom contracts
 
-function onClose (event) {
-  remove(closest('.modal', getTarget(event)))
-}
+// end of custom contracts
+import 'anticore-contracts/fetchers/defaults'
+import 'anticore-contracts/main/mono'
 
-// middleware to treat an element with a 'modal' class
-anticore.on('.modal', function (element, next) {
-  // append the modal to the body
-  append(element, one('body'))
-  next() 
-})
-
-// middleware to treat a button with a 'closer' class contained in a modal 
-anticore.on('.modal button.closer', function (element, next) {
-  // listen the click on the button to close the modal
-  onClick(element, onClose)
-  next() 
-})
-
-// apply the defaults middlewares (to listen anchor/button click and form submit)
-// then trigger all the middlewares on the current document 
-import 'anticore/middleware/main/mono'
-anticore.defaults().populate()
+trigger()
 ```
 
-## <a name="what-s-new-in-the-v2">What's new in the V2?</a>
+## <a name="apis">APIs</a>
 
-If the V1 was really lightweight, the V2 isn't, because it comes with a lot of generic utils (proposals are
-welcome), useful to easily write your client code, without any unused features and with a better
-minification result... but without growing your `dist` package.
+### <a name="on">on(selector, listener)</a>
+Useful to declare a contract to be applied for any element matching the selector, where:
+* `selector`: a query selector
+* `listener`: a function to be applied on the matching elements
+  * `element`: the matching element
+  * `next`: a function to let the other contracts declared after this one (**must be always called!**) 
+  * `url`: the url providing the node (can be empty)
 
-You can use the anticore methods or not... or both, if you need some offered functions, these functions are
-embed in your `dist`, but never if your don't import it explicitly.
+```js
+import { on } from 'anticore'
 
-On an other aspect, the V2 is 100% based on `import`/`export`.
+on('body', (element, next, url) => {
+  element.innerHTML = `This is the called url: ${url}`
+  next()
+})
+```
 
-## <a name="breaking-changes-from-the-v1">Breaking changes from the V1</a>
+### <a name="populate">trigger([node])</a>
+Useful to apply the declared contracts on the provided `node`, where:
+* **optional** `node`: the targeted node (element or document))
 
-The anticore methods are unchanged, but all the utils are rewritten as separated modules.
+```js
+import { trigger } from 'anticore'
 
-If you need the previous version, you can install it by `npm i -D anticore@1.9.1`
+trigger(document)
+```
+
+### <a name="fetch">fetch(target, request[, interval = 1000[, retries = Infinity]])</a>
+
+Useful to create your own DOM content fetchers, where:
+* `event`: the event invoking the `fetch`
+* `target`: the element invoking the `fetch` (gets a `.fetching`, until resolved)
+* `request`: the [Request](https://developer.mozilla.org/fr/docs/Web/API/Request) instance
+* **optional** `options`: the options object
+    * **optional** `interval`: the delay before a retry, if the fetch fails
+    * **optional** `retries`: the number of possible retries
+
+```js
+import { fetch } from 'anticore'
+
+fetch(event, element, request, options)
+```
+
+## <a name="sse">sse(url, [options, [reviver]])</a>
+
+Useful to listen Server-Sent Events
+```js
+import sse from 'anticore/sse'
+
+const eventSource = sse(url, options, reviver)
+```
 
 
-## <a name="anticore-methods">anticore methods</a>
+## <a name="companions">Companions</a>
 
-[anticore methods](https://github.com/Lcfvs/anticore/blob/master/anticore.md#reference)
+* [anticore-contracts](https://github.com/Lcfvs/anticore-contracts)
+* [anticore-core](https://github.com/Lcfvs/anticore-core)
+* [anticore-dom](https://github.com/Lcfvs/anticore-dom)
+* [anticore-utils](https://github.com/Lcfvs/anticore-utils)
 
-## <a name="tools">Tools</a>
-
-* [api](https://github.com/Lcfvs/anticore/blob/master/api/#reference)
-* [dom](https://github.com/Lcfvs/anticore/blob/master/dom/#reference)
-* [global](https://github.com/Lcfvs/anticore/blob/master/global/#reference)
-* [middleware](https://github.com/Lcfvs/anticore/blob/master/global/#reference)
-* [primitive](https://github.com/Lcfvs/anticore/blob/master/primitive/#reference)
-* [request](https://github.com/Lcfvs/anticore/blob/master/request/#reference)
 
 ## <a name="license">License</a>
 

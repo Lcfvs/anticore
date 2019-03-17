@@ -1,365 +1,150 @@
-/*
- Copyright MIT 2017 Lcf.vs
- https://github.com/Lcfvs/anticore
- */
+import globalFetch from 'anticore-core/apis/fetch/index'
+import clone from 'anticore-core/apis/Request/clone'
+import bind from 'anticore-core/Function/bind'
+import curry from 'anticore-core/Function/curry'
+import promise from 'anticore-core/Function/promise'
+import forEach from 'anticore-core/Array/forEach'
+import map from 'anticore-core/Array/map'
+import empty from 'anticore-core/Object/empty'
+import prevent from 'anticore-dom/emitter/prevent'
+import document from 'anticore-dom/node/document'
+import all from 'anticore-dom/query/all'
+import one from 'anticore-dom/query/one'
+import fromString from 'anticore-dom/tree/fromString'
+import error from 'anticore-utils/console/error'
+import log from 'anticore-utils/console/log'
+import noop from 'anticore-utils/noop'
+import pool from 'anticore-utils/pool'
 
-import { getTarget } from './dom/emitter/getTarget'
-import { onClick } from './dom/emitter/on/onClick'
-import { onError } from './dom/emitter/on/onError'
-import { onMessage } from './dom/emitter/on/onMessage'
-import { onSubmit } from './dom/emitter/on/onSubmit'
-import { prevent } from './dom/emitter/prevent'
-import { nodeName } from './dom/info/nodeName'
-import { rects } from './dom/info/rects'
-import { document } from './dom/node/document'
-import { all } from './dom/query/all'
-import { one } from './dom/query/one'
-import { parent } from './dom/query/parent'
-import { remove } from './dom/tree/remove'
-import { global } from './global'
-import { forEach } from './primitive/array/forEach'
-import { indexOf } from './primitive/array/indexOf'
-import { create } from './primitive/object/create'
-import { keys } from './primitive/object/keys'
-import { toDOM } from './primitive/string/toDOM'
-import { request } from './request'
-import { queue } from './request/.queue'
+const fetching = 'fetching'
+const contracts = []
+const requests = pool()
+const selector = `
+a:focus,
+[type=submit]:focus,
+button:not([type]):focus,
+a:hover,
+[type=submit]:hover,
+button:not([type]):hover
+[type=submit],
+button:not([type])`
+const defaults = empty({
+  interval: 1000,
+  retries: Infinity
+})
 
-export const anticore = create()
+function attempt (current = requests.current() || requests.next()) {
+  if (current && !current.pending) {
+    current.pending = true
 
-const window = global()
-const console = window.console
-const encodeURIComponent = window.encodeURIComponent
-const URL = window.URL
-const FormData = window.FormData
-const EventSource = window.EventSource
-const registry = create()
-const types = ['html', 'svg', 'xml']
-const selector = 'input[type=submit]:focus,' +
-  'button[type=submit]:focus,' +
-  'button:not([type]):focus,' +
-  'input[type=submit]:hover,' +
-  'button[type=submit]:hover,' +
-  'button:not([type]):hover,' +
-  'input[name]:not([type=file]):not([type=reset]):not([type=submit]):not([type=checkbox]):not([type=radio]):not(:disabled),' +
-  'input[name][type=checkbox]:checked:not(:disabled),' +
-  'input[name][type=radio]:checked:not(:disabled),' +
-  'textarea[name]:not(:disabled),' +
-  'select[name]:not(:disabled) [selected=selected]'
-
-anticore.fetchers = create()
-anticore.request = request
-
-function noop () {}
-
-/**
- * Builds a request based on an anchor
- * @param {HTMLAnchorElement} a
- * @returns {Object} request
- */
-anticore.fetchers.a = function (a) {
-  return request(a.href, 'get', null, a)
+    globalFetch(clone(current.request))
+    .then(parse)
+    .then(fromString)
+    .then(triggerContracts)
+    .then(current.notify)
+    .then(requests.next)
+    .then(attempt)
+    .catch(retry)
+  }
 }
 
-/**
- * Builds a request based on a form
- * @param {HTMLFormElement} form
- * @returns {Object} request
- */
-anticore.fetchers.form = function (form) {
-  const action = new URL(form.action || form.ownerDocument.location.href)
-  const method = form.method
-  let data
+function parse (response) {
+  requests.current().response = response
 
-  if (method === 'post') {
-    data = new FormData(form)
-  } else {
-    action.search += indexOf(action.search, '?') > -1 ? '' : '?'
-    forEach(all(selector, form), stringify, action)
+  return response.text()
+}
+
+function triggerContracts (fragment) {
+  const url = requests.current().response.url
+
+  return promise(dispatch, matchAll(fragment), url)
+}
+
+function notify (target, method = 'remove') {
+  target.classList[method](fetching)
+}
+
+function retry (error) {
+  const current = requests.current()
+
+  debug.onError(error)
+
+  if (!current.retries) {
+    requests.next()
+
+    return attempt()
   }
 
-  return request(action.toString(), method, data, form)
+  current.pending = false
+  current.retries -= 1
+  log(`Retrying in ${current.interval / 1000}s`)
+  setTimeout(attempt, current.interval)
 }
 
-/**
- * Builds a request based on an element
- * (form or anchor, for more, extend anticore fetchers)
- * @param {HTMLElement} element
- * @returns {Object} request
- */
-anticore.fetcher = function (element) {
-  return anticore.fetchers[nodeName(element)](element)
-}
+function dispatch (matches, url, callback = noop) {
+  const match = matches.next()
+  const listener = match.value
 
-/**
- * Populates the request response
- * @param {Object} request
- * @returns {Object} anticore
- */
-anticore.trigger = function (request) {
-  if (anticore.onTimeout(request)) {
-    return anticore
+  if (match.done) {
+    return callback()
   }
 
-  populate(request.response.result, true, request.url).then(request.resolve)
-    .then(function () {
-      return request
-    })
-
-  return anticore
+  listener(bind(next, empty(), matches, url, callback), url)
 }
 
-/**
- * Adds a listener, based on a querySelectorAll
- * @param {String} selector
- * @param {Function} middleware
- * @returns {Object} anticore
- */
-anticore.on = function (selector, middleware) {
-  registry[selector] = registry[selector] || []
-
-  if (indexOf(registry[selector], middleware) < 0) {
-    anticore.debug.onMiddleware(selector, middleware)
-    registry[selector].push(middleware)
+function next (matches, url, callback) {
+  if (!this.called) {
+    this.called = true
+    dispatch(matches, url, callback)
   }
-
-  return anticore
 }
 
-/**
- * Handles any requests timeout & retry if any
- * @param {Object} request
- * @returns {Boolean}
- */
-anticore.onTimeout = function (request) {
-  if (request.response.status === 408) {
-    request.retry()
+function matchAll (fragment) {
+  const elements = []
 
-    return true
-  }
+  forEach(map(contracts, match, fragment), flat, elements)
 
-  return false
+  return elements.values()
 }
 
-/**
- * Launches the selectors tests to find the related listeners,
- * takes the scoped document if not passed as argument
- * @param {Document|HTMLElement|DocumentFragment} [container=global.document)
- * @param {boolean} [loaded]
- * @param {string} [url]
- * @returns {Object} anticore
- */
-anticore.populate = function (container, loaded, url) {
-  return populate(container || document(), loaded, url)
+function match (contract) {
+  return map([...all(contract.selector, this)], prepare, contract)
 }
 
-/**
- * Builds a request
- * @param {String} url
- * @param {String} method (get or post)
- * @param {Object} [body] (the post request body)
- * @param {Element} [target] (the event target)
- * @return {Object}
- */
-anticore.request = function (url, method, body, target) {
-  const instance = request(url, method, body, target)
-
-  instance.fetchRequest = fetchRequest
-
-  return instance
+function prepare (element) {
+  return curry(this.listener, element)
 }
 
-/**
- * Default fetcher listener
- * @param {Event} event
- */
-anticore.fetchFromEvent = function (event) {
+function flat (values) {
+  this.push(...values)
+}
+
+export function fetch (event, target, request, options) {
   if (event.defaultPrevented || event.cancelBubble) {
-    return false
+    return
   }
 
-  const target = getTarget(event)
-  const request = anticore.fetcher(target)
+  const entry = empty(defaults, options, {
+    request,
+    notify: curry(notify, one(selector, target.parentNode))
+  })
 
-  request.target = target
-  request.originalTarget = one(selector, target.ownerDocument)
-  request.fetchRequest = fetchRequest
   prevent(event)
-
-  request.fetch(anticore.trigger)['catch'](anticore.onError)
-
-  return false
+  requests.push(entry)
+  entry.notify('add')
+  attempt()
 }
 
-/**
- * Listens an event source
- * turns the contents to DOM, except if a reviver is provided
- * @param {string} url
- * @param {object} config
- * @param {function} reviver
- * @returns {EventSource} source
- */
-anticore.sse = function (url, config, reviver) {
-  const source = new EventSource(url, config)
-
-  onMessage(source, function (event) {
-    populate((reviver || toDOM)(event.data), true, url)
-  })
-
-  onError(source, anticore.onError)
-
-  return source
+export function on (selector, listener) {
+  contracts.push(empty({selector, listener}))
 }
 
-anticore.onError = console.error.bind(console)
-
-/**
- * Intercepts:
- * a[href^="http"]:not([download]):not([target]),
- * a[href^="http"][target=_self]:not([download]),
- * a[href^="."]:not([download]):not([target]),
- * a[href^="."][target=_self]:not([download]),
- * a[href^="/"]:not([download]):not([target]),
- * a[href^="/"][target=_self]:not([download]),
- * form:not([target]),
- * form[target=_self]
- * @returns {Object} anticore
- */
-anticore.defaults = function () {
-  anticore.on(
-    'a[href^="http"]:not([download]):not([target]),a[href^="http"][target=_self]:not([download]),' +
-    'a[href^="."]:not([download]):not([target]),a[href^="."][target=_self]:not([download]),' +
-    'a[href^="/"]:not([download]):not([target]),a[href^="/"][target=_self]:not([download])',
-    function (element, next) {
-      onClick(element, anticore.fetchFromEvent)
-      next()
-    })
-
-  anticore.on('form:not([target]),form[target=_self]',
-    function (element, next) {
-      onSubmit(element, cleanAndFetch)
-      next()
-    })
-
-  return anticore
+export function trigger (node, url) {
+  dispatch(matchAll(node || document()), url)
 }
 
-function stringify (item) {
-  if (!item.offsetWidth && !item.offsetHeight && !rects(item).length) {
-    return
-  }
-
-  this.search += '&' + encodeURIComponent((nodeName(item) === 'option'
-    ? parent(item)
-    : item).name) + '=' + encodeURIComponent(item.value).replace(/%20/g, '+')
-}
-
-function notify (response) {
-  const request = queue[0].request
-  const target = request.originalTarget || request.target
-
-  if (target) {
-    target.classList.toggle('fetching')
-  }
-
-  return response
-}
-
-function fetchRequest () {
-  const item = queue[0]
-
-  if (queue[1]) {
-    return
-  }
-
-  notify()
-
-  const url = item.request.url
-  const fetch = item.request.negotiate(url)
-
-  return fetch(url, item.request.options).then(onResponse).then(notify).then(
-    onFragment).then(item.trigger || item.request.resolve).then(
-    queue.next)['catch'](item.reject)
-}
-
-function onResponse (response) {
-  const item = queue[0]
-  const type = ((response.headers.get('content-type') ||
-    'application/octet-stream').match(/json|html|svg|xml|text(?=\/plain)/) ||
-    ['blob'])[0]
-
-  item.type = type
-  item.request.response = response
-
-  return response[indexOf(types, type) > -1 ? 'text' : type]()
-}
-
-function cleanAndFetch (event) {
-  forEach(all('.error', getTarget(event)), remove)
-  anticore.fetchFromEvent(event)
-}
-
-function onFragment (data) {
-  let item = queue[0]
-
-  if (indexOf(types, item.type) > -1) {
-    item.request.response.result = toDOM(data)
-  } else {
-    item.request.response.result = data
-  }
-
-  return item.request
-}
-
-function nextRecord (resolve) {
-  const record = this.shift()
-
-  if (!record) {
-    return resolve && resolve()
-  }
-
-  record[0](record[1], this.next, this.loaded, this.url)
-}
-
-function onSelector (selector) {
-  const queue = this
-  const nodes = all(selector, queue.container)
-
-  queue.selector = selector
-  forEach(nodes, onElement, queue)
-}
-
-function onElement (element) {
-  const queue = this
-
-  queue.element = element
-  forEach(registry[queue.selector], onListener, queue)
-}
-
-function onListener (listener) {
-  const queue = this
-  const element = queue.element
-  const loaded = queue.loaded || false
-  const selector = queue.selector
-  const url = queue.url
-
-  anticore.debug.onMatch(selector, listener, element, loaded, url)
-  queue.push([listener, element, loaded, url])
-}
-
-function populate (container, loaded, url) {
-  return new Promise(function (resolve) {
-    const queue = []
-
-    queue.container = container
-    queue.loaded = loaded
-    queue.url = url
-    forEach(keys(registry), onSelector, queue)
-    queue.next = nextRecord.bind(queue, resolve)
-    queue.next()
-  })
-}
-
-anticore.debug = create()
-anticore.debug.onMiddleware = noop
-anticore.debug.onMatch = noop
+export const debug = empty({
+  onError: error,
+  onMiddleware: noop,
+  onMatch: noop
+})
