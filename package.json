@@ -1,7 +1,7 @@
 {
   "name": "anticore",
-  "version": "3.0.6",
-  "description": "A generic living DOM library to simplify your client code, like with its easiest middleware manager for AJAX requests.",
+  "version": "3.0.7",
+  "description": "A library to handle your AJAX/SSE DOM contents, using some contracts.",
   "main": "index.js",
   "module": "index.js",
   "repository": {
@@ -9,11 +9,11 @@
     "url": "git+https://github.com/Lcfvs/anticore.git"
   },
   "keywords": [
-    "simple",
-    "generic",
-    "DOM",
+    "library",
     "AJAX",
-    "library"
+    "SSE",
+    "DOM",
+    "contracts"
   ],
   "author": "Lcf.vs",
   "license": "MIT",
