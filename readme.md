@@ -131,7 +131,7 @@ Useful to declare a contract to be applied for any element matching the selector
 import { on } from 'anticore'
 
 on('body', (element, next, url = document.location.href) => {
-  element.innerHTML = `Hello world from ${url}`
+  element.appendChild(document.createTextNode(`Hello world from ${url}`))
   next()
 })
 ```
