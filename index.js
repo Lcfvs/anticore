@@ -20,13 +20,9 @@ const fetching = 'fetching'
 const contracts = []
 const requests = pool()
 const selector = `
-a:focus,
-[type=submit]:focus,
-button:not([type]):focus,
-a:hover,
-[type=submit]:hover,
-button:not([type]):hover
-[type=submit],
+:focus,
+:hover,
+button[type=submit],
 button:not([type])`
 const defaults = empty({
   interval: 1000,
@@ -126,13 +122,21 @@ export function fetch (event, target, request, options) {
 
   const entry = empty(defaults, options, {
     request,
-    notify: curry(notify, one(selector, target.parentNode))
+    notify: curry(notify, find(target, event.type))
   })
 
   prevent(event)
   requests.push(entry)
   entry.notify('add')
   attempt()
+}
+
+function find (target, type) {
+  if (type !== 'submit') {
+    return target
+  }
+
+  return one(selector, target)
 }
 
 export function on (selector, listener) {
