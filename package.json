@@ -1,6 +1,6 @@
 {
   "name": "anticore",
-  "version": "3.0.10",
+  "version": "3.0.11",
   "description": "A library to handle your AJAX/SSE DOM contents, using some contracts.",
   "main": "index.js",
   "module": "index.js",
@@ -22,9 +22,9 @@
   },
   "homepage": "https://github.com/Lcfvs/anticore#readme",
   "dependencies": {
-    "anticore-core": "^1.0.0",
-    "anticore-dom": "^1.0.1",
-    "anticore-utils": "^1.0.0"
+    "anticore-core": "^1.0.1",
+    "anticore-dom": "^1.0.3",
+    "anticore-utils": "^1.0.1"
   },
   "devDependencies": {}
 }

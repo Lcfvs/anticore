@@ -1,8 +1,8 @@
-import EventSource from 'anticore-core/apis/EventSource'
-import onError from 'anticore-dom/emitter/onError'
-import onMessage from 'anticore-dom/emitter/onMessage'
-import fromString from 'anticore-dom/tree/fromString'
-import { trigger, debug } from './index'
+import EventSource from 'anticore-core/apis/EventSource/index.js'
+import onError from 'anticore-dom/emitter/onError.js'
+import onMessage from 'anticore-dom/emitter/onMessage.js'
+import fromString from 'anticore-dom/tree/fromString.js'
+import { trigger, debug } from './index.js'
 
 /**
  * Listens an event source

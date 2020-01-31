@@ -48,7 +48,7 @@ on(selector, listener)
 
   Once fetched by anticore, the contents are triggered on the defined contracts.
 ```js
-import 'anticore-contracts/fetchers/defaults'
+import 'anticore-contracts/fetchers/defaults.js'
 ```
 </details>
 
@@ -58,7 +58,7 @@ import 'anticore-contracts/fetchers/defaults'
   It's important to have the same process on the loaded document and on the fetched contents.
 
 ```js
-import { trigger } from 'anticore'
+import { trigger } from 'anticore/index.js'
 
 trigger()
 ```
@@ -95,8 +95,8 @@ Used to **anticore**'s initialization and load the **contracts**
 import './hello'
 // End of custom contracts
 // Handle the anchors `click` and forms `submit`, to fetch them in AJAX, automatically
-import 'anticore-contracts/fetchers/defaults'
-import { trigger } from 'anticore'
+import 'anticore-contracts/fetchers/defaults.js'
+import { trigger } from 'anticore/index.js'
 
 // Triggers the contracts on the current document
 trigger()
@@ -107,7 +107,7 @@ trigger()
 A simple "Hello world"
 
 ```js
-import { on } from 'anticore'
+import { on } from 'anticore/index.js'
 
 // Prints a simple text in the body
 on('body', (element, next, url = document.location.href) => {
@@ -128,7 +128,7 @@ Useful to declare a contract to be applied for any element matching the selector
   * `url`: the url providing the node (can be empty, e.g. when the nodes are already in the current page)
 
 ```js
-import { on } from 'anticore'
+import { on } from 'anticore/index.js'
 
 on('body', (element, next, url = document.location.href) => {
   element.appendChild(document.createTextNode(`Hello world from ${url}`))
@@ -141,7 +141,7 @@ Useful to apply the declared contracts on the provided `node`, where:
 * **optional** `node`: the targeted node (element or document))
 
 ```js
-import { trigger } from 'anticore'
+import { trigger } from 'anticore/index.js'
 
 trigger(document)
 ```
@@ -157,7 +157,7 @@ Useful to create your own DOM content fetchers, where:
     * **optional** `retries`: the number of possible retries
 
 ```js
-import { fetch } from 'anticore'
+import { fetch } from 'anticore/index.js'
 
 fetch(event, element, request, options)
 ```
@@ -166,7 +166,7 @@ fetch(event, element, request, options)
 
 Useful to listen Server-Sent Events
 ```js
-import sse from 'anticore/sse'
+import sse from 'anticore/sse.js'
 
 const eventSource = sse(url, options, reviver)
 ```
