@@ -117,6 +117,22 @@ on('body', (element, next, url = document.location.href) => {
 ```
 
 
+
+## <a name="loaded">Target an AJAX/SSE loaded element only</a>
+
+```js
+import { on } from 'anticore/index.js'
+
+// Replaces the current main by any new one
+on('template.anticore main', (element, next, url = document.location.href) => {
+  const main = document.querySelector('main')
+
+  main.parentNode.replaceChild(element, main)
+  next()
+})
+```
+
+
 ## <a name="apis">APIs</a>
 
 ### <a name="on">on(selector, listener)</a>

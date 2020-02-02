@@ -8,8 +8,11 @@ import map from 'anticore-core/Array/map.js'
 import empty from 'anticore-core/Object/empty.js'
 import prevent from 'anticore-dom/emitter/prevent.js'
 import document from 'anticore-dom/node/document.js'
+import element from 'anticore-dom/node/element.js'
 import all from 'anticore-dom/query/all.js'
 import one from 'anticore-dom/query/one.js'
+import append from 'anticore-dom/tree/append.js'
+import attr from 'anticore-dom/tree/attr.js'
 import fromString from 'anticore-dom/tree/fromString.js'
 import error from 'anticore-utils/console/error.js'
 import log from 'anticore-utils/console/log.js'
@@ -52,8 +55,9 @@ function parse (response) {
 
 function triggerContracts (fragment) {
   const url = requests.current().response.url
+  const template = append(fragment, attr(element('template'), 'class', 'anticore'))
 
-  return promise(dispatch, matchAll(fragment), url)
+  return promise(dispatch, matchAll(template.content), url)
 }
 
 function notify (target, method = 'remove') {
