@@ -124,7 +124,7 @@ on('body', (element, next, url = document.location.href) => {
 import { on } from 'anticore/index.js'
 
 // Replaces the current main by any new one
-on('template.anticore main', (element, next, url = document.location.href) => {
+on('body.anticore main', (element, next, url = document.location.href) => {
   const main = document.querySelector('main')
 
   main.parentNode.replaceChild(element, main)
