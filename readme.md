@@ -6,6 +6,10 @@
 
 **anticore** is a library to handle your AJAX/SSE DOM contents, using some contracts.
 
+## <a name="demo">Demo</a>
+
+https://glitch.com/edit/#!/anticore-simple-demo
+
 ## <a name="install">Install</a>
 
 `npm i anticore`

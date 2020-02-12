@@ -87,21 +87,13 @@ function retry (error) {
 }
 
 function dispatch (matches, url, callback = noop) {
-  const match = matches.next()
-  const listener = match.value
-
-  if (match.done) {
-    return callback()
-  }
-
-  listener(bind(next, empty(), matches, url, callback), url)
-}
-
-function next (matches, url, callback) {
-  if (!this.called) {
-    this.called = true
-    dispatch(matches, url, callback)
-  }
+  return ([...matches])
+    .reduce((promise, listener) =>
+      promise.then(() =>
+        new Promise(resolve => listener(resolve, url))
+      ), Promise.resolve()
+    )
+    .then(callback)
 }
 
 function matchAll (fragment) {
