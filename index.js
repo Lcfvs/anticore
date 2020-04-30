@@ -1,155 +1,277 @@
-import globalFetch from 'anticore-core/apis/fetch/index.js'
-import clone from 'anticore-core/apis/Request/clone.js'
-import bind from 'anticore-core/Function/bind.js'
-import curry from 'anticore-core/Function/curry.js'
-import promise from 'anticore-core/Function/promise.js'
-import forEach from 'anticore-core/Array/forEach.js'
-import map from 'anticore-core/Array/map.js'
-import empty from 'anticore-core/Object/empty.js'
-import prevent from 'anticore-dom/emitter/prevent.js'
-import document from 'anticore-dom/node/document.js'
-import element from 'anticore-dom/node/element.js'
-import all from 'anticore-dom/query/all.js'
-import one from 'anticore-dom/query/one.js'
-import append from 'anticore-dom/tree/append.js'
-import appendAll from 'anticore-dom/tree/appendAll.js'
-import attr from 'anticore-dom/tree/attr.js'
-import fromString from 'anticore-dom/tree/fromString.js'
-import replace from 'anticore-dom/tree/replace.js'
-import error from 'anticore-utils/console/error.js'
-import log from 'anticore-utils/console/log.js'
-import noop from 'anticore-utils/noop.js'
-import pool from 'anticore-utils/pool.js'
+const noop = () => {}
 
-const fetching = 'fetching'
-const contracts = []
-const requests = pool()
-const selector = `
+export const config = {
+  anchor: `
+a[href^="http"]:not([download]):not([target]),
+a[href^="http"][target=_self]:not([download]),
+a[href^="."]:not([download]):not([target]),
+a[href^="."][target=_self]:not([download]),
+a[href^="/"]:not([download]):not([target]),
+a[href^="/"][target=_self]:not([download])
+`,
+  form: `
+form:not([target]),
+form[target=_self]
+`,
+  focused: `
 :focus,
 :hover,
 button[type=submit],
-button:not([type])`
-const defaults = empty({
+button:not([type])`,
+  className: 'fetching',
+  credentials: 'same-origin',
   interval: 1000,
-  retries: Infinity
+  redirect: 'follow',
+  retries: Infinity,
+  onContract: noop,
+  onError: console.error.bind(console)
+}
+
+export const {
+  defaults,
+  fetch,
+  on,
+  trigger
+} = anticore({
+  window: typeof self !== 'undefined' && self
 })
 
-function attempt (current = requests.current() || requests.next()) {
-  if (current && !current.pending) {
-    current.pending = true
+const fetcher = {
+  event: null,
+  target: null,
+  request: null,
+  session: null,
+  retries: null,
+  async fetch () {
+    const { request, session } = this
+    const { window } = session
+    let body
 
-    globalFetch(clone(current.request))
-    .then(parse)
-    .then(fromString)
-    .then(triggerContracts)
-    .then(current.notify)
-    .then(requests.next)
-    .then(attempt)
-    .catch(retry)
+    try {
+      const response = await window.fetch(request.clone())
+      const { url = request.url } = response
+      const data = await response.text()
+
+      body = fromString(data, url)
+      await this.trigger(body, url)
+    } catch (error) {
+      const { interval, retries = session.retries } = this
+
+      if (!body && retries) {
+        this.retries -= 1
+        console.log(`Retrying in ${interval / 1000}s`)
+        await sleep(interval)
+        await this.fetch()
+      } else {
+        return Promise.reject(error)
+      }
+    }
+  },
+  async trigger (node, url) {
+    const matches = []
+
+    this.session.contracts.forEach(({ selector, listener }) => {
+      matches.push(...[...node.querySelectorAll(selector)]
+        .map(current => url => listener(current, url)))
+    })
+
+    return Promise.all(matches.map(triggerMatch, { url }))
   }
 }
 
-function parse (response) {
-  requests.current().response = response
+const events = {}
 
-  return response.text()
+events.blur = ['blur', 'touchcancel', 'touchleave']
+events.blur.listener = function (listener, event) {
+  return listener.call(this, event)
 }
 
-function triggerContracts (fragment) {
-  const url = requests.current().response.url
-  const body = element('body')
-
-  attr(body, 'class', 'anticore')
-  append(fragment, body)
-
-  return promise(dispatch, matchAll(body), url)
+events.click = ['click', 'touchend']
+events.click.listener = function (listener, event) {
+  if (!event.touches || event.touches.length === 1) {
+    return listener.call(this, event)
+  }
 }
 
-function notify (target, method = 'remove') {
-  target.classList[method](fetching)
+events.focus = ['focus', 'touchstart']
+events.focus.listener = events.blur.listener
+
+function fromString (data, url) {
+  const body = window.document.createElement('body')
+  body.classList.add('anticore')
+  body.id = url
+  body.innerHTML = data
+
+  return body
 }
 
-function retry (error) {
-  const current = requests.current()
+function sleep (interval) {
+  return new Promise(resolve => setTimeout(resolve, interval))
+}
 
-  debug.onError(error)
+function register (event, target, listener, options) {
+  if (`on${event}` in target) {
+    target.addEventListener(event, listener, options)
+  }
+}
 
-  if (!current.retries) {
-    requests.next()
+function each (event, target, listener, options = {}) {
+  if (Object.prototype.hasOwnProperty.call(events, event)) {
+    const names = events[event]
+    const length = names.length
 
-    return attempt()
+    listener = names.listener.bind(target, listener)
+
+    for (let key = 0; key < length; key += 1) {
+      register(names[key], target, listener, options)
+    }
+  } else {
+    register(event, target, listener, options)
+  }
+}
+
+async function triggerMatch (match) {
+  const { url } = this
+
+  await match(url)
+}
+
+function request (session, target) {
+  const { window } = session
+  const { Request } = window
+  const { init, url } = build(session, target)
+
+  return new Request(url, init)
+}
+
+function build (session, target) {
+  const { credentials, redirect, window } = session
+  const { FormData, Headers, URL, URLSearchParams } = window
+  const { action, elements, href } = target
+  const method = (target.method || 'GET').toUpperCase()
+  const hasBody = !['GET', 'HEAD'].includes(method)
+  const url = new URL(action || href || target.ownerDocument.location.href)
+
+  if (elements && !hasBody) {
+    const searches = [url.search, new FormData(target)].filter(length)
+
+    url.search = new URLSearchParams(searches.join('&')).toString()
   }
 
-  current.pending = false
-  current.retries -= 1
-  log(`Retrying in ${current.interval / 1000}s`)
-  setTimeout(attempt, current.interval)
+  return {
+    init: {
+      ...hasBody && {
+        body: new FormData(target)
+      },
+      credentials,
+      headers: new Headers({
+        'X-Requested-With': 'XMLHttpRequest'
+      }),
+      method,
+      redirect
+    },
+    url: url.toString()
+  }
 }
 
-function dispatch (matches, url, callback = noop) {
-  return ([...matches])
-    .reduce((promise, listener) =>
-      promise.then(() =>
-        new Promise(resolve => listener(resolve, url))
-      ), Promise.resolve()
-    )
-    .then(callback)
+function length (params) {
+  return params.toString().length
 }
 
-function matchAll (fragment) {
-  const elements = []
-
-  forEach(map(contracts, match, fragment), flat, elements)
-
-  return elements.values()
-}
-
-function match (contract) {
-  return map([...all(contract.selector, this)], prepare, contract)
-}
-
-function prepare (element) {
-  return curry(this.listener, element)
-}
-
-function flat (values) {
-  this.push(...values)
-}
-
-export function fetch (event, target, request, options) {
-  if (event.defaultPrevented || event.cancelBubble) {
-    return
+export default function anticore ({
+  anchor = config.anchor,
+  className = config.className,
+  credentials = config.credentials,
+  focused = config.focused,
+  form = config.form,
+  interval = config.interval,
+  onContract = config.onContract,
+  onError = config.onError,
+  redirect = config.redirect,
+  retries = config.retries,
+  window
+}) {
+  const session = {
+    className,
+    credentials,
+    interval,
+    onContract,
+    onError,
+    redirect,
+    retries,
+    window,
+    contracts: [],
+    url: window.location.href
   }
 
-  const entry = empty(defaults, options, {
-    request,
-    notify: curry(notify, find(target, event.type))
-  })
+  const handler = {
+    defaults () {
+      handler.on(anchor, element => {
+        each('click', element, event => {
+          return handler.fetch(request(session, element), event, element)
+            .catch(onError)
+        })
+      })
 
-  prevent(event)
-  requests.push(entry)
-  entry.notify('add')
-  attempt()
-}
+      handler.on(form, element => {
+        each('submit', element, event => {
+          element.querySelectorAll('.error').forEach(error => error.remove())
 
-function find (target, type) {
-  if (type !== 'submit') {
-    return target
+          return handler.fetch(request(session, element), event, element)
+            .catch(onError)
+        })
+      })
+    },
+    async fetch (request, event, target = event && event.target) {
+      const fetchable = {
+        ...fetcher,
+        event,
+        request,
+        target,
+        session
+      }
+
+      if (!event) {
+        return fetchable.fetch()
+      }
+
+      if (event.defaultPrevented || event.cancelBubble) {
+        return
+      }
+
+      const emitter = event.type === 'submit'
+        ? target.querySelector(focused)
+        : target
+
+      event.preventDefault()
+
+      emitter.classList.add(className)
+      await fetchable.fetch()
+      emitter.classList.remove(className)
+    },
+    on (selector, listener) {
+      session.contracts.push({ listener, selector })
+      session.onContract(selector, listener)
+    },
+    sse (url, config, reviver = fromString) {
+      const source = new window.EventSource(url, config)
+
+      source.addEventListener('message', event => {
+        handler.trigger(reviver(event.data, url), url)
+      })
+
+      source.addEventListener('error', onError)
+
+      return source
+    },
+    trigger (
+      node = session.window.document,
+      url = session.window.document.location.href
+    ) {
+      return { ...fetcher, session }.trigger(node, url)
+        .catch(onError)
+    }
   }
 
-  return one(selector, target)
+  return handler
 }
-
-export function on (selector, listener) {
-  contracts.push(empty({selector, listener}))
-}
-
-export function trigger (node, url) {
-  dispatch(matchAll(node || document()), url)
-}
-
-export const debug = empty({
-  onError: error,
-  onMiddleware: noop,
-  onMatch: noop
-})

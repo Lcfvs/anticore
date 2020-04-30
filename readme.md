@@ -20,7 +20,7 @@ https://glitch.com/edit/#!/anticore-simple-demo
 * You can create your contracts as **specific or generic as you need**, increasing the **reusable components between projects**
 * A contract is really short to write, **easy to replace/remove**, no need to check if it doesn't risk to break your code, there is no chain
 * **No need to build any AJAX requests**, anticore is based on the forms/anchors attributes
-* **No need to check the response status/content**, everything is content based, targeted by the middleware selector, then it requires <abbr title="Server-Side Rendering">SSR</abbr> contents
+* **No need to check the response status/content**, everything is content based, targeted by the contract selector, then it requires <abbr title="Server-Side Rendering">SSR</abbr> contents
 
 ## <a name="how-it-works">How it works?</a>
 
@@ -47,12 +47,12 @@ on(selector, listener)
   <summary name="define-the-fetchers">Define the fetchers</summary>
   
   The fetchers are some specific contracts, used to define how the anticore's requests are built, to automate their fetching.
-  
-  See [anticore-contracts/fetchers](https://github.com/Lcfvs/anticore-contracts/fetchers#readme)
 
-  Once fetched by anticore, the contents are triggered on the defined contracts.
+  Once fetched by anticore, the defined contracts are triggered on the contents.
 ```js
-import 'anticore-contracts/fetchers/defaults.js'
+import { defaults } from 'anticore'
+
+defaults()
 ```
 </details>
 
@@ -62,7 +62,7 @@ import 'anticore-contracts/fetchers/defaults.js'
   It's important to have the same process on the loaded document and on the fetched contents.
 
 ```js
-import { trigger } from 'anticore/index.js'
+import { trigger } from 'anticore'
 
 trigger()
 ```
@@ -75,7 +75,7 @@ trigger()
 
   * For each contract, it tries to find all the elements matching the contract selector.
   * Based on the contracts order, for each match, it provides the element to the related contract.
-  * Each contract resolution **must** call the `next()` to let the next contract resolve too.
+  * Each contract resolves as a promise.
 </details>
 
 <details>
@@ -84,8 +84,8 @@ trigger()
   * It depends on your chosen fetchers, but if you use the `defaults`, it waits a `click` on an anchor or a `submit` on a form.
   * Once the event is emitted the fetcher provides the request to anticore
   * anticore fetches the request and waits the response
-  * anticore parses the response to a `DocumentFragment`
-  * anticore triggers on the fragment, [applying all the contracts on it](#anticore-applies-all-the-contracts)
+  * anticore parses the response into a `<body class="anticore" id="${response.url}">`
+  * anticore triggers on that body, [applying all the contracts on it](#anticore-applies-all-the-contracts)
 </details>
 
 ## <a name="basic-usage">Basic usage</a>
@@ -98,10 +98,10 @@ Used to **anticore**'s initialization and load the **contracts**
 // Begin of custom contracts
 import './hello'
 // End of custom contracts
-// Handle the anchors `click` and forms `submit`, to fetch them in AJAX, automatically
-import 'anticore-contracts/fetchers/defaults.js'
-import { trigger } from 'anticore/index.js'
+import { defaults, trigger } from 'anticore'
 
+// Handle the anchors `click` and forms `submit`, to fetch them in AJAX, automatically
+defaults()
 // Triggers the contracts on the current document
 trigger()
 ```
@@ -111,7 +111,7 @@ trigger()
 A simple "Hello world"
 
 ```js
-import { on } from 'anticore/index.js'
+import { on } from 'anticore'
 
 // Prints a simple text in the body
 on('body', (element, next, url = document.location.href) => {
@@ -125,10 +125,10 @@ on('body', (element, next, url = document.location.href) => {
 ## <a name="loaded">Target an AJAX/SSE loaded element only</a>
 
 ```js
-import { on } from 'anticore/index.js'
+import { on } from 'anticore'
 
 // Replaces the current main by any new one
-on('body.anticore main', (element, next, url = document.location.href) => {
+on('body.anticore main', (element, url) => {
   const main = document.querySelector('main')
 
   main.parentNode.replaceChild(element, main)
@@ -144,61 +144,57 @@ Useful to declare a contract to be applied for any element matching the selector
 * `selector`: a query selector
 * `listener`: a function to be applied on the matching elements
   * `element`: the matching element
-  * `next`: a function to let the other contracts declared after this one (**must be always called!**) 
   * `url`: the url providing the node (can be empty, e.g. when the nodes are already in the current page)
 
 ```js
-import { on } from 'anticore/index.js'
+import { on } from 'anticore'
 
-on('body', (element, next, url = document.location.href) => {
+on('body', (element, url) => {
   element.appendChild(document.createTextNode(`Hello world from ${url}`))
   next()
 })
 ```
 
-### <a name="populate">trigger([node])</a>
+### <a name="trigger">trigger([node])</a>
 Useful to apply the declared contracts on the provided `node`, where:
-* **optional** `node`: the targeted node (element or document))
+* **optional** `node`: the targeted node (element or current document))
 
 ```js
-import { trigger } from 'anticore/index.js'
+import { trigger } from 'anticore'
 
 trigger(document)
 ```
 
-### <a name="fetch">fetch(target, request[, interval = 1000[, retries = Infinity]])</a>
+### <a name="fetch">fetch(request, event = null, target = null)</a>
 
 Useful to create your own DOM content fetchers, where:
+* `request`: the [Request](https://developer.mozilla.org/fr/docs/Web/API/Request) instance
 * `event`: the event invoking the `fetch`
 * `target`: the element invoking the `fetch` (gets a `.fetching`, until resolved)
-* `request`: the [Request](https://developer.mozilla.org/fr/docs/Web/API/Request) instance
-* **optional** `options`: the options object
-    * **optional** `interval`: the delay before a retry, if the fetch fails
-    * **optional** `retries`: the number of possible retries
+
+** If no `event` is provided, anticore just fetches without DOM parsing, not contracts triggering **
 
 ```js
-import { fetch } from 'anticore/index.js'
+import { fetch } from 'anticore'
 
-fetch(event, element, request, options)
+fetch(request, event, target) // uses triggers the contracts
+fetch(request) // just fetches
+
 ```
 
 ## <a name="sse">sse(url, [options, [reviver]])</a>
 
 Useful to listen Server-Sent Events
 ```js
-import sse from 'anticore/sse.js'
+import { sse } from 'anticore'
 
 const eventSource = sse(url, options, reviver)
 ```
 
+## <a name="notable-changes">Notable changes from V3</a>
 
-## <a name="companions">Companions</a>
-
-* [anticore-contracts](https://github.com/Lcfvs/anticore-contracts)
-* [anticore-core](https://github.com/Lcfvs/anticore-core)
-* [anticore-dom](https://github.com/Lcfvs/anticore-dom)
-* [anticore-utils](https://github.com/Lcfvs/anticore-utils)
-
+The **V4** is now promise-based, the V3 `next()` is removed, if you need to await some async operations, just use an `async` listener.
+ 
 
 ## <a name="license">License</a>
 
