@@ -201,6 +201,7 @@ export default function anticore ({
     retries,
     window,
     contracts: [],
+    promise: Promise.resolve(),
     url: window.location.href
   }
 
@@ -245,9 +246,13 @@ export default function anticore ({
 
       event.preventDefault()
 
-      emitter.classList.add(className)
-      await fetchable.fetch()
-      emitter.classList.remove(className)
+      session.promise = session.promise.then(async () => {
+        emitter.classList.add(className)
+        await fetchable.fetch()
+        emitter.classList.remove(className)
+      })
+
+      return session.promise
     },
     on (selector, listener) {
       session.contracts.push({ listener, selector })
