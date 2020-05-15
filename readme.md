@@ -4,138 +4,181 @@
 [![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-**anticore** is a library to handle your AJAX/SSE DOM contents, using some contracts.
+* **Content based**, anticore is a utility used to easily interact with any
+  [DOM](https://developer.mozilla.org/en-US/docs/Glossary/DOM) server-side rendered element, even received in AJAX or SSE.
 
-## <a name="demo">Demo</a>
+* **Contracts oriented**, just like an event listener, you can write some contracts to define some process on any element
+  matching a selector when anticore receives it, regardless of how many (various) views needs them.
 
-https://glitch.com/edit/#!/anticore-simple-demo
+* **Automated on demand**, by a single function call, during the script initialization, **it avoids the need to write any
+  AJAX request**, they are automatically deduced by the anchor/form attributes, on the user related event.
+
+* **Very low front**, weighing only **4.1Ko minified** without dependency, it provides a strategy to incite you to keep
+  your front code lightest as possible, letting your rendering strategy and the control to the server side.
+ 
+  The front code is only used as an [unobstrusive](https://en.wikipedia.org/wiki/Unobtrusive_JavaScript) overlay to
+  improve the user experience and let the client resources available for any other operations.
+
+* **Reusable**, through projects, you have a lot of as **generic contracts** to cover most of your needs **at once**...
+  but you can also write any project-specific contracts if needed, just based on the selector precision.
+
+* **Server-side/framework agnostic**, no specific server configuration needed, just to receive some DOM contents
+  (HTML, SVG, ...). It can be used in conjunction to your favorite libraries & frameworks.
+
+* **Easy to maintain**, it doesn't chain all the process, each contract, ideally following the
+  [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), is simply
+  replaceable/removable without the need to check the entire project.
+
+[Live demo](https://anticore-live.glitch.me)
+
 
 ## <a name="install">Install</a>
 
+Using NPM:
 `npm i anticore`
 
-## <a name="what-it-solves">What it solves?</a>
-
-* **Based on the ES6 modules**, each contract should be written in a separated module, ideally following the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), improving the maintainability
-* You can create your contracts as **specific or generic as you need**, increasing the **reusable components between projects**
-* A contract is really short to write, **easy to replace/remove**, no need to check if it doesn't risk to break your code, there is no chain
-* **No need to build any AJAX requests**, anticore is based on the forms/anchors attributes
-* **No need to check the response status/content**, everything is content based, targeted by the contract selector, then it requires <abbr title="Server-Side Rendering">SSR</abbr> contents
-
-## <a name="how-it-works">How it works?</a>
-
-### <a name="steps">Steps</a>
-anticore doesn't do anything alone, it requires to define how to work on your contents by these 3 following steps:
-
-<details>
-  <summary name="define-your-contracts">Define your contracts</summary>
-  
-  A contract is defined to apply any operations (event listening, pre-validation, ...) on the elements, founds by anticore, matching the provided selector.
-  
-  **Important:** anticore does not appends the elements itself, import your own contracts to do it.
-  
-  (As a best practice, you should import the "injectors" and the end, to avoid the browser redraws as possible.)
-  
+Or using a CDN:
 ```js
-import { on } from 'anticore'
-
-on(selector, listener)
-```
-</details>
-
-<details>
-  <summary name="define-the-fetchers">Define the fetchers</summary>
-  
-  The fetchers are some specific contracts, used to define how the anticore's requests are built, to automate their fetching.
-
-  Once fetched by anticore, the defined contracts are triggered on the contents.
-```js
-import { defaults } from 'anticore'
-
-defaults()
-```
-</details>
-
-<details>
-  <summary name="trigger-the-contracts-on-the-current-document">Trigger the contracts on the current document</summary>
-
-  It's important to have the same process on the loaded document and on the fetched contents.
-
-```js
-import { trigger } from 'anticore'
-
-trigger()
-```
-</details>
-
-### <a name="Then-let-anticore-do-the-rest">Then let anticore do the rest...</a>
-
-<details>
-  <summary name="anticore-applies-all-the-contracts">anticore applies all the contracts</summary>
-
-  * For each contract, it tries to find all the elements matching the contract selector.
-  * Based on the contracts order, for each match, it provides the element to the related contract.
-  * Each contract resolves as a promise.
-</details>
-
-<details>
-  <summary name="just-wait-the-fetchers-requests">Just wait the fetchers requests</summary>
-
-  * It depends on your chosen fetchers, but if you use the `defaults`, it waits a `click` on an anchor or a `submit` on a form.
-  * Once the event is emitted the fetcher provides the request to anticore
-  * anticore fetches the request and waits the response
-  * anticore parses the response into a `<body class="anticore" id="${response.url}">`
-  * anticore triggers on that body, [applying all the contracts on it](#anticore-applies-all-the-contracts)
-</details>
-
-## <a name="basic-usage">Basic usage</a>
-
-`project/assets/js/index.js`
-
-Used to **anticore**'s initialization and load the **contracts**
-
-```js
-// Begin of custom contracts
-import './hello'
-// End of custom contracts
-import { defaults, trigger } from 'anticore'
-
-// Handle the anchors `click` and forms `submit`, to fetch them in AJAX, automatically
-defaults()
-// Triggers the contracts on the current document
-trigger()
+import anticore, { defaults, on, trigger } from 'https://unpkg.com/anticore@latest/index.js'
 ```
 
-`project/assets/js/hello.js`
 
-A simple "Hello world"
+## <a name="contract-anatomy">Contract anatomy</a>
+
+By default, once triggered, anticore triggers the contracts on any element matching a provided selector, event if that
+element is already in the document or received after.
 
 ```js
 import { on } from 'anticore'
 
-// Prints a simple text in the body
-on('body', (element, next, url = document.location.href) => {
-  element.appendChild(document.createTextNode(`Hello world from ${url}`))
-  next()
+on('a.query.selector', (matchingElement, serverResponseURL) => {
+  // processes to apply on the element
 })
 ```
 
 
+## <a name="loaded">Target the AJAX/SSE loaded elements only</a>
 
-## <a name="loaded">Target an AJAX/SSE loaded element only</a>
+anticore loads the contents in a `<body class="anticore">`, then you can use that class in your selector to target that
+elements, specifically.
+
+For example, we don't want to replace an already embedded element by itself. 
 
 ```js
 import { on } from 'anticore'
 
 // Replaces the current main by any new one
-on('body.anticore main', (element, url) => {
-  const main = document.querySelector('main')
-
-  main.parentNode.replaceChild(element, main)
-  next()
+on('.anticore a.query.selector', (matchingElement, serverResponseURL) => {
+  // processes to apply on the element
 })
 ```
 
+## <a name="initialization">Initialization</a> (aka `main.js`)
+
+```js
+import { defaults, trigger } from 'anticore'
+// import all your contracts here
+
+defaults() // register the default contracts, to handle your anchors/forms
+trigger() // applies the contracts on the current document elements
+```
+
+## <a name="a-very-first-contract">A very first contract</a> (aka `view-switcher.js`)
+
+When you create an AJAX navigation, the most common operation is to replace the current contents by the user requested
+contents.
+
+To do that, commonly...
+
+* you need to create a lot of functions to build some AJAX (`XMLHttpRequest`/`fetch`) requests
+* you need to check if the response is the expected response (eg. 403, 404, 500, ...)
+* you need to write some functions to treat the received contents
+* you need to update the user's history
+
+... requiring an abstraction to avoid code repetitions
+
+With anticore, it's really shorter/simpler!
+
+Since the `<main>` & `<title>` are unique in a page, you can easily write that process with a unique contract.
+
+```js
+import { on } from 'anticore'
+
+// matching any received <main> / <title>
+on('.anticore > main, .anticore title', (element, url) => {
+  // creating a selector based on the element node name
+  const selector = element.nodeName.toLowerCase()
+  // retrieving the same embedded element in the document
+  const current = document.querySelector(selector)
+
+  if (selector === 'title') {
+    // updating the history
+    history.pushState({}, title.innerHTML, url)
+  }
+
+  // replacing the embedded element by the new one
+  current.parentNode.replaceChild(element, current)
+})
+```
+
+_Voilà_, import it in your `main.js` and your AJAX navigation is resolved **for all your pages, at once!**.
+
+**Caution**: to improve the user experience and the performances, it's recommanded to import the "switchers" as very last
+contracts, in your `main.js`.
+
+```js
+import { defaults, trigger } from 'anticore'
+// non-switching contracts here
+import './view-switcher.js'
+
+defaults()
+trigger()
+```
+
+Example:
+
+`index.html`
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Initial title</title>
+        <script src="/assets/main.js" type="module"></script>
+    </head>
+    <body>
+        <main>
+            <h1>Initial title</h1>
+            <a href="/response">Load the response</a> 
+        </main>
+    </body>
+</html>
+```
+
+`response`
+```html
+<title>Response title</title>
+<main>
+    <h1>Response title</h1>
+</main>
+```
+
+Resolves to
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Response title</title>
+        <script src="/assets/main.js" type="module"></script>
+    </head>
+    <body>
+        <main>
+            <h1>Response title</h1>
+        </main>
+    </body>
+</html>
+```
 
 ## <a name="apis">APIs</a>
 
