@@ -29,7 +29,7 @@
   [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), is simply
   replaceable/removable without the need to check the entire project.
 
-[Live demo](https://anticore-live.glitch.me)
+[Live demo](https://anticore.io)
 
 
 ## <a name="install">Install</a>

@@ -1,6 +1,6 @@
 {
   "name": "anticore",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "A library to handle your AJAX/SSE DOM contents, using some contracts.",
   "main": "index.js",
   "type": "module",
@@ -20,5 +20,5 @@
   "bugs": {
     "url": "https://github.com/Lcfvs/anticore/issues"
   },
-  "homepage": "https://github.com/Lcfvs/anticore#readme"
+  "homepage": "https://anticore.io"
 }
