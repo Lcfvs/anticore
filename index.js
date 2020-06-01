@@ -3,15 +3,11 @@ const noop = () => {}
 export const config = {
   anchor: `
 a[href^="http"]:not([download]):not([target]),
-a[href^="http"][target=_self]:not([download]),
 a[href^="."]:not([download]):not([target]),
-a[href^="."][target=_self]:not([download]),
-a[href^="/"]:not([download]):not([target]),
-a[href^="/"][target=_self]:not([download])
+a[href^="/"]:not([download]):not([target])
 `,
   form: `
-form:not([target]),
-form[target=_self]
+form:not([target])
 `,
   focused: `
 :focus,

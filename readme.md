@@ -79,7 +79,7 @@ on('.anticore a.query.selector', (matchingElement, serverResponseURL) => {
 import { defaults, trigger } from 'anticore'
 // import all your contracts here
 
-defaults() // register the default contracts, to handle your anchors/forms
+defaults() // register the default contracts, to handle your anchors/forms without target attribute
 trigger() // applies the contracts on the current document elements
 ```
 
