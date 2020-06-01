@@ -113,7 +113,7 @@ on('.anticore > main, .anticore title', (element, url) => {
 
   if (selector === 'title') {
     // updating the history
-    history.pushState({}, title.innerHTML, url)
+    history.pushState({}, element.innerHTML, url)
   }
 
   // replacing the embedded element by the new one
