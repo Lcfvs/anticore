@@ -234,6 +234,17 @@ import { sse } from 'anticore'
 const eventSource = sse(url, options, reviver)
 ```
 
+## <a name="listen">listen(event, target, listener[, options])</a>
+
+Useful to listen events, on any support (touch and/or not)
+
+It provides a function to remove the listener, without any arguments needed
+```js
+import { listen } from 'anticore'
+
+const forget = listen(event, target, listener, options)
+```
+
 ## <a name="notable-changes">Notable changes from V3</a>
 
 The **V4** is now promise-based, the V3 `next()` is removed, if you need to await some async operations, just use an `async` listener.

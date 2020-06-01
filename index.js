@@ -30,6 +30,7 @@ button:not([type])`,
 export const {
   defaults,
   fetch,
+  listen,
   on,
   trigger
 } = anticore({
@@ -109,24 +110,16 @@ function sleep (interval) {
   return new Promise(resolve => setTimeout(resolve, interval))
 }
 
-function register (event, target, listener, options) {
-  if (`on${event}` in target) {
-    target.addEventListener(event, listener, options)
-  }
-}
+function apply (method, event, target, listener, options) {
+  const names = events[event] || [event]
+  const { length } = names
 
-function each (event, target, listener, options = {}) {
-  if (Object.prototype.hasOwnProperty.call(events, event)) {
-    const names = events[event]
-    const length = names.length
+  for (let key = 0; key < length; key += 1) {
+    const name = names[key]
 
-    listener = names.listener.bind(target, listener)
-
-    for (let key = 0; key < length; key += 1) {
-      register(names[key], target, listener, options)
+    if (`on${name}` in target) {
+      target[method](name, listener, options)
     }
-  } else {
-    register(event, target, listener, options)
   }
 }
 
@@ -208,14 +201,14 @@ export default function anticore ({
   const handler = {
     defaults () {
       handler.on(anchor, element => {
-        each('click', element, event => {
+        handler.listen('click', element, event => {
           return handler.fetch(request(session, element), event, element)
             .catch(onError)
         })
       })
 
       handler.on(form, element => {
-        each('submit', element, event => {
+        handler.listen('submit', element, event => {
           element.querySelectorAll('.error').forEach(error => error.remove())
 
           return handler.fetch(request(session, element), event, element)
@@ -253,6 +246,16 @@ export default function anticore ({
       })
 
       return session.promise
+    },
+    listen (event, target, listener, options = {}) {
+      const names = events[event]
+      const cb = Array.isArray(names)
+        ? names.listener.bind(target, listener)
+        : listener
+
+      apply('addEventListener', event, target, cb, options)
+
+      return () => apply('removeEventListener', event, target, cb, options)
     },
     on (selector, listener) {
       session.contracts.push({ listener, selector })
