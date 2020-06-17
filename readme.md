@@ -13,7 +13,7 @@
 * **Automated on demand**, by a single function call, during the script initialization, **it avoids the need to write any
   AJAX request**, they are automatically deduced by the anchor/form attributes, on the user related event.
 
-* **Very low front**, weighing only **4.1Ko minified** without dependency, it provides a strategy to incite you to keep
+* **Very low front**, weighing only **4Ko minified** without dependency, it provides a strategy to incite you to keep
   your front code lightest as possible, letting your rendering strategy and the control to the server side.
  
   The front code is only used as an [unobstrusive](https://en.wikipedia.org/wiki/Unobtrusive_JavaScript) overlay to
@@ -111,13 +111,15 @@ on('.anticore > main, .anticore title', (element, url) => {
   // retrieving the same embedded element in the document
   const current = document.querySelector(selector)
 
+  // replacing the embedded element by the new one
+  current.parentNode.replaceChild(element, current)
+
   if (selector === 'title') {
     // updating the history
     history.pushState({}, element.innerHTML, url)
+  } else {
+    window.scrollTo(0, 0)
   }
-
-  // replacing the embedded element by the new one
-  current.parentNode.replaceChild(element, current)
 })
 ```
 
