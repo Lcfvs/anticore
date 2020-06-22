@@ -28,6 +28,7 @@ export const {
   fetch,
   listen,
   on,
+  sse,
   trigger
 } = anticore({
   window: typeof self !== 'undefined' && self
