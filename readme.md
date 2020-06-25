@@ -255,3 +255,7 @@ The **V4** is now promise-based, the V3 `next()` is removed, if you need to awai
 ## <a name="license">License</a>
 
 [MIT](https://github.com/Lcfvs/anticore/blob/master/licence.md)
+
+## <a name="sponsors">Sponsors</a>
+
+[![JetBrains](./sponsors/jetbrains-variant-4.png)](https://www.jetbrains.com/?from=anticore)
