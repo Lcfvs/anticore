@@ -194,9 +194,9 @@ Useful to declare a contract to be applied for any element matching the selector
 ```js
 import { on } from 'anticore'
 
-on('body', (element, url) => {
+// An listener can be async
+on('body', async (element, url) => {
   element.appendChild(document.createTextNode(`Hello world from ${url}`))
-  next()
 })
 ```
 
