@@ -1,4 +1,10 @@
+const policies = new WeakMap()
+
 const noop = () => {}
+
+const policy = {
+  createHTML: source => source
+}
 
 export const config = {
   anchor: `
@@ -94,11 +100,19 @@ events.click.listener = function (listener, event) {
 events.focus = ['focus', 'touchstart']
 events.focus.listener = events.blur.listener
 
+function html (contents, factory) {
+  if (factory && factory.createPolicy && !policies.has(factory)) {
+    policies.set(factory, factory.createPolicy('anticore', policy))
+  }
+
+  return (policies.get(factory) || policy).createHTML(contents)
+}
+
 function fromString (data, url) {
   const body = window.document.createElement('body')
   body.classList.add('anticore')
   body.id = url
-  body.innerHTML = data
+  body.innerHTML = html(data, window.trustedTypes)
 
   return body
 }

@@ -43,6 +43,13 @@ import anticore, { defaults, on, trigger } from 'https://unpkg.com/anticore@late
 ```
 
 
+### Security
+
+This library can require the following header/meta:
+
+`Content-Security-Policy: require-trusted-types-for 'script'; trusted-types anticore`
+
+
 ## <a name="contract-anatomy">Contract anatomy</a>
 
 By default, once triggered, anticore triggers the contracts on any element matching a provided selector, event if that
