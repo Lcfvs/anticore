@@ -119,7 +119,7 @@ on('.anticore > main, .anticore title', (element, url) => {
   const current = document.querySelector(selector)
 
   // replacing the embedded element by the new one
-  current.parentNode.replaceChild(element, current)
+  current.replaceWith(element)
 
   if (selector === 'title') {
     // updating the history
