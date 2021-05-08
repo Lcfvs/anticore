@@ -4,6 +4,9 @@
   "description": "A library to handle your AJAX/SSE DOM contents, using some contracts.",
   "main": "index.js",
   "type": "module",
+  "scripts": {
+    "lint": "eslint --report-unused-disable-directives ."
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lcfvs/anticore.git"
@@ -20,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/Lcfvs/anticore/issues"
   },
-  "homepage": "https://anticore.io"
+  "homepage": "https://anticore.io",
+  "devDependencies": {
+    "eslint": "^7.25.0"
+  }
 }
