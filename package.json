@@ -19,6 +19,9 @@
     "contracts"
   ],
   "author": "Lcf.vs",
+  "contributors": [
+    "Brett Zamir"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Lcfvs/anticore/issues"
