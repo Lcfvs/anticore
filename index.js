@@ -37,7 +37,7 @@ export const {
   sse,
   trigger
 } = anticore({
-  window: typeof self !== 'undefined' && self
+  window: typeof globalThis !== 'undefined' && globalThis
 })
 
 const fetcher = {
@@ -109,10 +109,10 @@ function html (contents, factory) {
 }
 
 function fromString (data, url) {
-  const body = window.document.createElement('body')
+  const body = globalThis.document.createElement('body')
   body.classList.add('anticore')
   body.id = url
-  body.innerHTML = html(data, window.trustedTypes)
+  body.innerHTML = html(data, globalThis.trustedTypes)
 
   return body
 }
