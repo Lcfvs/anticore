@@ -1,26 +1,26 @@
-# <a name="reference"><img alt="anticore" src="./logo.png" title="BETA anticore" width="200" /></a>
+# <a name="reference"><img alt="anticore" src="./logo.png" title="anticore" width="200" /></a>
 
 [![npm](https://img.shields.io/npm/v/anticore.svg?style=plastic)]()
 [![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 * **Content based**, anticore is a utility used to easily interact with any
-  [DOM](https://developer.mozilla.org/en-US/docs/Glossary/DOM) server-side rendered element, even received in AJAX or SSE.
+  [DOM](https://developer.mozilla.org/en-US/docs/Glossary/DOM) server-side rendered (SSR) element, even received in AJAX or SSE.
+  Of course, it also supports the `ServiceWorker` rendered elements to **work offline**.
 
 * **Contracts oriented**, just like an event listener, you can write some contracts to define some process on any element
   matching a selector when anticore receives it, regardless of how many (various) views needs them.
 
 * **Automated on demand**, by a single function call, during the script initialization, **it avoids the need to write any
-  AJAX request**, they are automatically deduced by the anchor/form attributes, on the user related event.
+  AJAX request**, they are automatically deduced by the anchor/form attributes, on the user interaction related event (`click`/`submit`).
 
-* **Very low front**, weighing only **4Ko minified** without dependency, it provides a strategy to incite you to keep
-  your front code lightest as possible, letting your rendering strategy and the control to the server side.
- 
+* **Very low front-end**, weighing only **4Ko minified** without dependency, it provides a strategy to incite you to keep
+  your front code lightest as possible, letting your rendering strategy, and the control to the server side.
+
   The front code is only used as an [unobstrusive](https://en.wikipedia.org/wiki/Unobtrusive_JavaScript) overlay to
   improve the user experience and let the client resources available for any other operations.
 
 * **Reusable**, through projects, you have a lot of as **generic contracts** to cover most of your needs **at once**...
-  but you can also write any project-specific contracts if needed, just based on the selector precision.
+  you can also write any project-specific contracts if needed, just based on the selector precision.
 
 * **Server-side/framework agnostic**, no specific server configuration needed, just to receive some DOM contents
   (HTML, SVG, ...). It can be used in conjunction to your favorite libraries & frameworks.
@@ -28,6 +28,9 @@
 * **Easy to maintain**, it doesn't chain all the process, each contract, ideally following the
   [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), is simply
   replaceable/removable without the need to check the entire project.
+
+* **TrustedTypes** support for your own [trusted contents](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API).
+
 
 [Live demo](https://anticore.io)
 
@@ -43,14 +46,9 @@ import anticore, { defaults, on, trigger } from 'https://unpkg.com/anticore@late
 ```
 
 
-### Security
-
-This library can require the following header/meta:
-
-`Content-Security-Policy: require-trusted-types-for 'script'; trusted-types anticore`
-
-
 ## <a name="contract-anatomy">Contract anatomy</a>
+
+A contract is just a query selector associated function, a few like a routing route, where the selector is tested **each time anticore receives a new content**.
 
 By default, once triggered, anticore triggers the contracts on any element matching a provided selector, event if that
 element is already in the document or received after.
@@ -58,6 +56,7 @@ element is already in the document or received after.
 ```js
 import { on } from 'anticore'
 
+// a contract example
 on('a.query.selector', (matchingElement, serverResponseURL) => {
   // processes to apply on the element
 })
@@ -66,17 +65,27 @@ on('a.query.selector', (matchingElement, serverResponseURL) => {
 
 ## <a name="loaded">Target the AJAX/SSE loaded elements only</a>
 
-anticore loads the contents in a `<body class="anticore">`, then you can use that class in your selector to target that
+anticore loads the contents in a `<body class="anticore">` (created internally), then you can use that class in your selector to target that
 elements, specifically.
 
-For example, we don't want to replace an already embedded element by itself. 
+For example, we don't want to replace an already embedded element by itself.
 
 ```js
 import { on } from 'anticore'
 
-// Replaces the current main by any new one
+// selects an element which is only received after the page load
 on('.anticore a.query.selector', (matchingElement, serverResponseURL) => {
   // processes to apply on the element
+})
+```
+
+A useful selector prefix can also be `body:not(.anticore)` to only target the elements initially loaded (non AJAX/SSE).
+
+```js
+import { on } from 'anticore'
+
+on('body:not(.anticore) a.query.selector', (matchingElement, serverResponseURL) => {
+  // processes to apply on a loaded element
 })
 ```
 
@@ -84,7 +93,8 @@ on('.anticore a.query.selector', (matchingElement, serverResponseURL) => {
 
 ```js
 import { defaults, trigger } from 'anticore'
-// import all your contracts here
+// an import to load all on your contracts
+import './contracts.js'
 
 defaults() // register the default contracts, to handle your anchors/forms without target attribute
 trigger() // applies the contracts on the current document elements
@@ -98,7 +108,7 @@ contents.
 To do that, commonly...
 
 * you need to create a lot of functions to build some AJAX (`XMLHttpRequest`/`fetch`) requests
-* you need to check if the response is the expected response (eg. 403, 404, 500, ...)
+* you need to check if the response is the expected response (e.g. 403, 404, 500, ...)
 * you need to write some functions to treat the received contents
 * you need to update the user's history
 
@@ -132,12 +142,14 @@ on('.anticore > main, .anticore title', (element, url) => {
 
 _Voilà_, import it in your `main.js` and your AJAX navigation is resolved **for all your pages, at once!**.
 
-**Caution**: to improve the user experience and the performances, it's recommanded to import the "switchers" as very last
+**Caution**: to improve the user experience and the performances, it's recommended to import the "switchers" as very last
 contracts, in your `main.js`.
 
 ```js
 import { defaults, trigger } from 'anticore'
 // non-switching contracts here
+import './contracts.js'
+// then the view-switcher
 import './view-switcher.js'
 
 defaults()
@@ -158,7 +170,7 @@ Example:
     <body>
         <main>
             <h1>Initial title</h1>
-            <a href="/response">Load the response</a> 
+            <a href="/response">Load the response</a>
         </main>
     </body>
 </html>
@@ -203,13 +215,39 @@ import { on } from 'anticore'
 
 // An listener can be async
 on('body', async (element, url) => {
-  element.appendChild(document.createTextNode(`Hello world from ${url}`))
+  element.append(`Hello world from ${url}`)
 })
 ```
 
+### <a name="defaults">defaults()</a>
+
+A function that wraps 2 contracts
+
+#### <a name="a-click-handler">A click handler</a>
+
+A contract that tells to anticore to fetch the `href` of any clicked anchor
+
+It uses the following selector
+```css
+a[href^="http"]:not([download]):not([target]),
+a[href^="."]:not([download]):not([target]),
+a[href^="/"]:not([download]):not([target])
+```
+
+#### <a name="a-submit-handler">A submit handler</a>
+
+A contract that tells to anticore to fetch the `action` of any submitted form
+
+It uses the following selector
+```css
+form:not([target])
+```
+
+Additionally, before the fetching, it removes the form descendants that have a `error` class, useful to remove the error messages from a previous submission.
+
 ### <a name="trigger">trigger([node])</a>
 Useful to apply the declared contracts on the provided `node`, where:
-* **optional** `node`: the targeted node (element or current document))
+* **optional** `node`: the targeted node (element or current document)
 
 ```js
 import { trigger } from 'anticore'
@@ -217,26 +255,49 @@ import { trigger } from 'anticore'
 trigger(document)
 ```
 
-### <a name="fetch">fetch(request, event = null, target = null)</a>
+### <a name="fetch">fetch(request, event = null, target = event?.target)</a>
 
 Useful to create your own DOM content fetchers, where:
 * `request`: the [Request](https://developer.mozilla.org/fr/docs/Web/API/Request) instance
 * `event`: the event invoking the `fetch`
 * `target`: the element invoking the `fetch` (gets a `.fetching`, until resolved)
 
-** If no `event` is provided, anticore just fetches without DOM parsing, not contracts triggering **
+** If no `event` is provided, anticore just fetches without DOM parsing, no contracts triggering**
 
 ```js
 import { fetch } from 'anticore'
 
-fetch(request, event, target) // uses triggers the contracts
+fetch(request, event, target) // fetches the contents & triggers the contracts on them
 fetch(request) // just fetches
-
 ```
+
+#### <a name="fetch--why-another-fetch">Why another `fetch()`?</a>
+
+##### <a name="fetch--connection-loss-management">Connection loss management</a>
+
+Once called, anticore attempts to fetch the response until its resolution.
+
+If the user isn't connected, anticore retries after a delay (1 second by default)
+
+##### <a name="fetch--event-handling">Event handling</a>
+
+If provided, anticore manages the `event` like this:
+1. It checks if the event behavior is prevented by `Event.preventDefault()` (e.g. from a form validation contract) or if the bubbling is canceled `event.cancelBubble`.
+  In that case, anticore just avoids doing anything
+2. It prevents the event behavior
+3. It adds a `fetching` class on the element that triggers the event
+4. It really fetches the contents
+5. It triggers the contracts on them
+6. It removes the `fetching` class on the element that triggers the event
+
 
 ## <a name="sse">sse(url, [options, [reviver]])</a>
 
-Useful to listen Server-Sent Events
+Useful to listen Server-Sent Events, where
+* `url`: the URL to listen
+* `options`: the `EventSource` options
+* `reviver`: a function to parse the DOM nodes from each message
+
 ```js
 import { sse } from 'anticore'
 
@@ -246,8 +307,13 @@ const eventSource = sse(url, options, reviver)
 ## <a name="listen">listen(event, target, listener[, options])</a>
 
 Useful to listen events, on any support (touch and/or not)
+* `event`: the event type
+* `target`: an `EventTarget`
+* `listener`: a function called each time the event triggers
+* `options`: the `addEventListener` options
 
-It provides a function to remove the listener, without any arguments needed
+It returns a function to remove the listener, without any arguments needed
+
 ```js
 import { listen } from 'anticore'
 
@@ -257,11 +323,24 @@ const forget = listen(event, target, listener, options)
 ## <a name="notable-changes">Notable changes from V3</a>
 
 The **V4** is now promise-based, the V3 `next()` is removed, if you need to await some async operations, just use an `async` listener.
- 
+
+
+### <a name="security">Security</a>
+
+If your project is defining a strict Content-Security-Policy (CSP) you can need to add the following header/meta, to trust your DOM contents:
+
+`Content-Security-Policy: require-trusted-types-for 'script'; trusted-types anticore`
+
 
 ## <a name="license">License</a>
 
 [MIT](https://github.com/Lcfvs/anticore/blob/master/licence.md)
+
+
+
+## <a name="contributors">Contributors</a>
+
+* [Brettz Zamir](https://github.com/brettz9)
 
 ## <a name="sponsors">Sponsors</a>
 
