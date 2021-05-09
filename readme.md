@@ -286,9 +286,10 @@ If provided, anticore manages the `event` like this:
   In that case, anticore just avoids doing anything
 2. It prevents the event behavior
 3. It adds a `fetching` class on the element that triggers the event
-4. It really fetches the contents
-5. It triggers the contracts on them
-6. It removes the `fetching` class on the element that triggers the event
+4. It enqueues that request
+5. It really fetches the contents
+6. It triggers the contracts on them
+7. It removes the `fetching` class on the element that triggers the event
 
 
 ## <a name="sse">sse(url, [options, [reviver]])</a>
