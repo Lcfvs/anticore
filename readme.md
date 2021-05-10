@@ -34,7 +34,7 @@
 
 [Live demo](https://anticore.io)
 
-[anticore-starter](https://glitch.com/edit/#!/anticore-starter?path=README.md%3A1%3A0)
+[anticore-starter](https://glitch.com/edit/#!/anticore-starter?path=README.md%3A1%3A0) (also available into [./demo](./demo))
 
 
 ## <a name="install">Install</a>
