@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs'
-import { fileURLToPath } from 'url'
+// import { fileURLToPath } from 'url'
 import { template, serialize } from '@lcf.vs/dom-engine/lib/backend.js'
 import resolve from './resolve.js'
 

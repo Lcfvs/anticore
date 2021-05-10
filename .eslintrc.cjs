@@ -17,6 +17,13 @@ module.exports = {
       env: {
         node: true
       }
+    },
+    {
+      files: 'demo/public/**',
+      env: {
+        node: false,
+        browser: true
+      }
     }
   ]
 };

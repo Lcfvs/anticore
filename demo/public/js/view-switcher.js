@@ -8,7 +8,7 @@ function replace (element) {
   const selector = tag !== 'meta'
     ? tag
     : `${tag}[name="${element.name}"]`
-  
+
   one(selector).replaceWith(element)
 }
 
