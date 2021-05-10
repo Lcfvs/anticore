@@ -1,5 +1,6 @@
 {
-  "name": "hello-express",
+  "private": true,
+  "name": "hello-anticore-express",
   "version": "0.0.1",
   "description": "A simple Node app built on Express, instantly up and running.",
   "type": "module",
