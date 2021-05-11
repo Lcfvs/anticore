@@ -5,6 +5,7 @@
   "description": "A simple Node app built on Express, instantly up and running.",
   "type": "module",
   "scripts": {
+    "open": "node app/server.js --open",
     "start": "node app/server.js"
   },
   "dependencies": {
@@ -23,5 +24,8 @@
     "node",
     "glitch",
     "express"
-  ]
+  ],
+  "devDependencies": {
+    "open": "^7.4.2"
+  }
 }
