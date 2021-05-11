@@ -11,8 +11,8 @@ app.post('/form', (request, response) => {
     const partials = {
       result: error.fill('result')
     }
-    
-    
+
+
     return response.send(render(layout, form, response.xhr, partials))
   }
 
