@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "start": "node app/server.js --po",
-    "test": "cypress run",
+    "test": "cypress run --record --key bd646905-6912-4a9a-a502-34244a23248b",
     "ci": "start-test 8080 test"
   },
   "dependencies": {

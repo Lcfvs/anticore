@@ -4,7 +4,7 @@
 [![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/Lcfvs/anticore.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Lcfvs/anticore/context:javascript)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/Lcfvs/anticore.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Lcfvs/anticore/alerts/)
-
+[![anticore](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/a8gm9m&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/a8gm9m/runs)
 
 * **Content based**, anticore is a utility used to easily interact with any
   [DOM](https://developer.mozilla.org/en-US/docs/Glossary/DOM) server-side rendered (SSR) element, even received in AJAX or SSE.
