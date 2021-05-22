@@ -1,13 +1,17 @@
 import { readFileSync } from 'fs'
-import { template, serialize } from '@lcf.vs/dom-engine/lib/backend.js'
+import * as dom from '@lcf.vs/dom-engine/lib/backend.js'
 import resolve from './resolve.js'
 
-const fragment = template('{partials}', {
+const fragment = dom.template('{partials}', {
   partials: ''
 })
 
 export function load ({ url }, ...segments) {
-  return template(readFileSync(resolve(url, ...segments)).toString())
+  return dom.template(readFileSync(resolve(url, ...segments)).toString())
+}
+
+export function serialize (node) {
+  return dom.serialize(node)
 }
 
 export function render (layout, view, xhr, partials = null) {

@@ -2,11 +2,17 @@ import * as dom from './dom.js'
 
 const load = dom.load.bind(null, import.meta)
 
+export const ping = {
+  ...load('./html/ping/event.html'),
+  counter: 0
+}
+
 export const layout = {
   ...load('./html/layout.html'),
   description: null,
   main: null,
-  title: null
+  title: null,
+  ping
 }
 
 export const error = {

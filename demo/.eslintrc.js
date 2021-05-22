@@ -1,11 +1,8 @@
-'use strict';
-
-module.exports = {
+export default {
   extends: ['eslint:recommended'],
   env: {
     node: true,
-    es2020: true,
-    es6: true
+    es2021: true
   },
   parserOptions: {
     ecmaVersion: 2021,
@@ -19,11 +16,15 @@ module.exports = {
       }
     },
     {
-      files: 'demo/public/**',
+      files: 'cypress/**',
+      extends: ['plugin:cypress/recommended']
+    },
+    {
+      files: 'public/**',
       env: {
         node: false,
         browser: true
       }
     }
   ]
-};
+}
