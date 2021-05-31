@@ -1,6 +1,6 @@
 {
   "name": "anticore",
-  "version": "4.3.4",
+  "version": "4.3.5",
   "description": "A library to handle your AJAX/SSE DOM contents, using some contracts.",
   "main": "index.js",
   "type": "module",
@@ -28,6 +28,6 @@
   },
   "homepage": "https://anticore.io",
   "devDependencies": {
-    "eslint": "^7.25.0"
+    "eslint": "^7.27.0"
   }
 }
