@@ -1,10 +1,55 @@
 # <a name="reference"><img alt="anticore" src="./logo.png" title="anticore" width="200" /></a>
 
+A library to handle your AJAX/SSE DOM contents and to automate your requests, using some contracts.
+
 [![npm](https://img.shields.io/npm/v/anticore.svg?style=plastic)]()
 [![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/Lcfvs/anticore.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Lcfvs/anticore/context:javascript)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/Lcfvs/anticore.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Lcfvs/anticore/alerts/)
 [![anticore](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/a8gm9m&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/a8gm9m/runs)
+
+## <a name="demos">Demos</a>
+
+Since it really often helps to understand the concept, you can try it yourself in a few seconds:
+  * Go to the [Live demo](https://anticore.io), using another tab/window
+  * Replace the content of the **Your contracts** by
+```js
+on('main.a', element => {
+  element.querySelector('h1').append('should be a: ', element.className)
+})
+
+on('main.b', element => {
+  element.querySelector('h1').append('should be b: ', element.className)
+})
+
+on('main.c', element => {
+  element.querySelector('h1').append('should be c: ', element.className)
+})
+
+on('main', element => {
+  element.querySelector('h1').append(' AND can be one of a || b || c || my-own: ', element.className)
+})
+
+// a very basic view switcher
+on('.anticore > main', element => {
+  const main = document.querySelector('main')
+
+  main.replaceWith(element)
+})
+```
+  * Press the **"play"** button on its right
+  * Go to the **Server responses**
+  * Click on the **"plus"** button, type `a` into the prompt & press **Enter**
+  * Click on the **"plus"** button, type `b` into the prompt & press **Enter**
+  * Click on the **"plus"** button, type `c` into the prompt & press **Enter**
+  * Finally, send them by clicking the **"play"** button on its right, in any order and check how it changes the **Preview**, and the **Current tree**.
+
+Alternatively, you can also try this other demo, which includes an SSE example:
+
+[anticore-starter](https://glitch.com/edit/#!/anticore-starter?path=README.md%3A1%3A0) (also installable from [./demo](./demo))
+
+
+## <a name="key-features">Key features</a>
 
 * **Content based**, anticore is a utility used to easily interact with any
   [DOM](https://developer.mozilla.org/en-US/docs/Glossary/DOM) server-side rendered (SSR) element, even received in AJAX or SSE.
@@ -33,11 +78,6 @@
   replaceable/removable without the need to check the entire project.
 
 * **TrustedTypes** support for your own [trusted contents](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API).
-
-
-[Live demo](https://anticore.io)
-
-[anticore-starter](https://glitch.com/edit/#!/anticore-starter?path=README.md%3A1%3A0) (also available into [./demo](./demo))
 
 
 ## <a name="install">Install</a>
@@ -144,6 +184,8 @@ on('.anticore > main, .anticore title', (element, url) => {
   }
 })
 ```
+
+[A full implementation](./demo/public/js/view-switcher.js)
 
 _Voilà_, import it in your `main.js` and your AJAX navigation is resolved **for all your pages, at once!**.
 
