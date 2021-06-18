@@ -1,7 +1,7 @@
 {
   "name": "demo",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "type": "module",
   "scripts": {
@@ -30,5 +30,5 @@
     "start-server-and-test": "^1.12.5"
   },
   "author": "",
-  "license": "ISC"
+  "license": "MIT"
 }
