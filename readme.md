@@ -46,7 +46,7 @@ on('.anticore > main', element => {
 
 Alternatively, you can also try this other demo, which includes an SSE example:
 
-[anticore-starter](https://glitch.com/edit/#!/anticore-starter?path=README.md%3A1%3A0) (also installable from [./demo](./demo))
+[anticore-demo](https://glitch.com/edit/#!/anticore-demo?path=README.md%3A1%3A0) (also installable from [./demo](./demo))
 
 
 ## <a name="key-features">Key features</a>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{view.description}" />
+    <title>{view.title} - anticore-demo</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/js/main.js" type="module"></script>
+  </head>
+  <body>
+    <header>
+      <h1>anticore-demo</h1>
+      <p data-sse="./ping">Ping: {ping}</p>
+    </header>
+    {view}
+    <footer>
+      <ol>
+        <li><a href="https://github.com/Lcfvs/anticore" rel="noopener noreferrer" target="_blank">Check the documentation</a></li>
+        <li><a href="https://glitch.com/edit/#!/anticore-demo?path=%2Fsrc%2Fassets%2Fjs%2Fmain.js" rel="noopener noreferrer" target="_blank">Check the sources</a></li>
+      </ol>
+    </footer>
+  </body>
+</html>

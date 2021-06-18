@@ -1,33 +1,33 @@
 {
-  "name": "cypress-store",
+  "name": "demo",
   "private": true,
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node app/server.js --po",
+    "start": "node src/server.js --po",
     "test": "cypress run --record --key bd646905-6912-4a9a-a502-34244a23248b",
     "ci": "start-test 8080 test"
   },
   "dependencies": {
-    "@lcf.vs/dom-engine": "^2.3.4",
+    "@lcf.vs/dom-engine": "^3.1.1",
     "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "multer": "^1.4.2"
+    "fastify": "^3.18.0",
+    "fastify-multipart": "^4.0.6",
+    "fastify-static": "^4.2.2"
   },
   "engines": {
     "node": ">=14.x"
   },
   "devDependencies": {
-    "@cypress/code-coverage": "^3.9.5",
-    "cypress": "^7.3.0",
-    "eslint": "^7.26.0",
+    "@cypress/code-coverage": "^3.9.6",
+    "cypress": "^7.5.0",
+    "eslint": "^7.28.0",
     "eslint-plugin-cypress": "^2.11.3",
     "nyc": "^15.1.0",
-    "open": "^8.1.0",
+    "open": "^8.2.0",
     "rxjs-compat": "^6.6.7",
-    "start-server-and-test": "^1.12.2"
+    "start-server-and-test": "^1.12.5"
   },
   "author": "",
   "license": "ISC"
