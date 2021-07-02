@@ -10,25 +10,29 @@
     "ci": "start-test 8080 test"
   },
   "dependencies": {
-    "@lcf.vs/dom-engine": "^3.1.1",
+    "@lcf.vs/dom-engine": "^4.0.2",
     "dotenv": "^10.0.0",
-    "fastify": "^3.18.0",
-    "fastify-multipart": "^4.0.6",
+    "fastify": "^3.18.1",
+    "fastify-multipart": "^4.0.7",
     "fastify-static": "^4.2.2"
   },
   "engines": {
     "node": ">=14.x"
   },
   "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
     "@cypress/code-coverage": "^3.9.6",
-    "cypress": "^7.5.0",
+    "cypress": "^7.6.0",
     "eslint": "^7.28.0",
     "eslint-plugin-cypress": "^2.11.3",
     "nyc": "^15.1.0",
     "open": "^8.2.0",
+    "pm2": "^5.1.0",
     "rxjs-compat": "^6.6.7",
     "start-server-and-test": "^1.12.5"
   },
-  "author": "",
+  "author": "Lcf.vs",
   "license": "MIT"
 }

@@ -20,7 +20,7 @@ export default {
       extends: ['plugin:cypress/recommended']
     },
     {
-      files: 'public/**',
+      files: 'src/assets/**',
       env: {
         node: false,
         browser: true
