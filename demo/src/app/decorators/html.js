@@ -46,7 +46,7 @@ const renderXHR = (view, data, errors) => {
     }
 }
 
-fastify.decorateReply('view', function (view, {
+fastify.decorateReply('view', async function (view, {
   data,
   errors = null,
   code = errors ? 422 : 200
@@ -58,7 +58,7 @@ fastify.decorateReply('view', function (view, {
   return this
     .status(code)
     .type('text/html; charset=utf-8')
-    .send(serialize(template))
+    .send(await serialize(template))
 })
 
 fastify.decorateReply('sse', function () {
@@ -70,9 +70,9 @@ fastify.decorateReply('sse', function () {
     'Connection': 'keep-alive'
   })
 
-  return (type, id, template, { ...data } = {}) => {
+  return async (type, id, template, { ...data } = {}) => {
     raw.write(`id: ${id}\n`)
     raw.write(`type: ${type}\n`)
-    raw.write(`data: ${serialize({ ...template, data })}\n\n`)
+    raw.write(`data: ${await serialize({ ...template, data })}\n\n`)
   }
 })

@@ -8,13 +8,13 @@ app.get('/form', async (request, reply) => {
 
 app.post('/form', async ({ body }, reply) => {
   if (body.result !== '2') {
-    reply.view(form.template, {
+    await reply.view(form.template, {
       data: body,
       errors: {
         result: new Error('Wrong answer')
       }
     })
   } else {
-    reply.view(congrats.template)
+    await reply.view(congrats.template)
   }
 })

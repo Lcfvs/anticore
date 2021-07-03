@@ -11,7 +11,7 @@ app.get('/ping', async (request, reply) => {
 
   while (!reply.raw.writableEnded) {
     counter += 1
-    sse('ping', counter, ping.template, { counter })
+    await sse('ping', counter, ping.template, { counter })
     await new Promise(wait)
   }
 })
