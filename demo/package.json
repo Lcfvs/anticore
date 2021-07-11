@@ -1,18 +1,16 @@
 {
-  "name": "demo",
+  "name": "anticore-demo",
   "private": true,
   "version": "1.0.2",
   "description": "",
   "type": "module",
   "scripts": {
-    "start": "node src/server.js --po",
-    "test": "cypress run --record --key bd646905-6912-4a9a-a502-34244a23248b",
-    "ci": "start-test 8080 test"
+    "start": "node src/server.js --po"
   },
   "dependencies": {
-    "@lcf.vs/dom-engine": "^4.0.2",
+    "@lcf.vs/dom-engine": "^5.0.1",
     "dotenv": "^10.0.0",
-    "fastify": "^3.18.1",
+    "fastify": "^3.19.0",
     "fastify-multipart": "^4.0.7",
     "fastify-static": "^4.2.2"
   },
@@ -20,18 +18,8 @@
     "node": ">=14.x"
   },
   "devDependencies": {
-    "@babel/cli": "^7.14.5",
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "@cypress/code-coverage": "^3.9.6",
-    "cypress": "^7.6.0",
     "eslint": "^7.28.0",
-    "eslint-plugin-cypress": "^2.11.3",
-    "nyc": "^15.1.0",
-    "open": "^8.2.0",
-    "pm2": "^5.1.0",
-    "rxjs-compat": "^6.6.7",
-    "start-server-and-test": "^1.12.5"
+    "open": "^8.2.0"
   },
   "author": "Lcf.vs",
   "license": "MIT"

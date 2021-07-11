@@ -1,3 +1,4 @@
+import './config.js'
 import open from 'open'
 import app from './app/app.js'
 import './routes/index.js'
