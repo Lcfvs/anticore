@@ -282,11 +282,11 @@ A `on`-like method allowing to lazily import a module method to use as a `on` li
 Example:
 
 ```js
-when('.anticcore main', import.meta, 'view-switcher.js')
+when('.anticore main', import.meta, 'view-switcher.js')
 ```
 Is equivalent to
 ```js
-on('.anticcore main', async (element, url) => {
+on('.anticore main', async (element, url) => {
   const exports = await import(new URL('view-switcher.js', import.meta.url).toString())
 
   return exports.default(element, url)
@@ -294,11 +294,11 @@ on('.anticcore main', async (element, url) => {
 ```
 Or
 ```js
-when('.anticcore main', import.meta, 'view-switcher.js', switcher => switcher)
+when('.anticore main', import.meta, 'view-switcher.js', switcher => switcher)
 ```
 Or
 ```js
-when('.anticcore main', import.meta, 'view-switcher.js', (switcher, exports) => exports.default)
+when('.anticore main', import.meta, 'view-switcher.js', (switcher, exports) => exports.default)
 ```
 
 ### <a name="defaults">defaults()</a>
