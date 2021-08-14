@@ -267,7 +267,7 @@ on('body', async (element, url) => {
 })
 ```
 
-### <a name="when">when()</a>
+### <a name="when">when(selector, { url }, path, picker = picked => picked)</a>
 
 A `on`-like method allowing to lazily import a module method to use as a `on` listener, but on-the-fly.
 

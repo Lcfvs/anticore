@@ -1,6 +1,6 @@
 {
   "name": "anticore",
-  "version": "4.4.1",
+  "version": "4.4.2",
   "description": "A library to handle your AJAX/SSE DOM contents and to automate your requests, using some contracts.",
   "main": "index.js",
   "type": "module",
