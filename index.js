@@ -37,7 +37,8 @@ export const {
   listen,
   on,
   sse,
-  trigger
+  trigger,
+  when
 } = anticore({
   window: typeof globalThis !== 'undefined' && globalThis
 })
