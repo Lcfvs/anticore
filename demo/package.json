@@ -1,18 +1,18 @@
 {
   "name": "anticore-demo",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "type": "module",
   "scripts": {
     "start": "node src/server.js --po"
   },
   "dependencies": {
-    "@lcf.vs/dom-engine": "^5.0.1",
+    "@lcf.vs/dom-engine": "^5.2.3",
     "dotenv": "^10.0.0",
-    "fastify": "^3.19.0",
+    "fastify": "^3.20.2",
     "fastify-multipart": "^4.0.7",
-    "fastify-static": "^4.2.2"
+    "fastify-static": "^4.2.3"
   },
   "engines": {
     "node": ">=14.x"

@@ -79,6 +79,7 @@ Alternatively, you can also try this other demo, which includes an SSE example:
 
 * **TrustedTypes** support for your own [trusted contents](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API).
 
+* **Lazy load** support
 
 ## <a name="install">Install</a>
 
@@ -264,6 +265,40 @@ import { on } from 'anticore'
 on('body', async (element, url) => {
   element.append(`Hello world from ${url}`)
 })
+```
+
+### <a name="when">when()</a>
+
+A `on`-like method allowing to lazily import a module method to use as a `on` listener, but on-the-fly.
+
+* `selector`: a query selector
+* `{ url }`: the current `import.meta`
+* `path`: the wanted module path
+* `picker`: an optional function to pick an exported listener from the loaded module
+  It receives 2 arguments
+  * `default`: the default module export (or `undefined`)
+  * `exports`: the named module exports
+
+Example:
+
+```js
+when('.anticcore main', import.meta, 'view-switcher.js')
+```
+Is equivalent to
+```js
+on('.anticcore main', async (element, url) => {
+  const exports = await import(new URL('view-switcher.js', import.meta.url).toString())
+
+  return exports.default(element, url)
+})
+```
+Or
+```js
+when('.anticcore main', import.meta, 'view-switcher.js', switcher => switcher)
+```
+Or
+```js
+when('.anticcore main', import.meta, 'view-switcher.js', (switcher, exports) => exports.default)
 ```
 
 ### <a name="defaults">defaults()</a>

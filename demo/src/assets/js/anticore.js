@@ -29,6 +29,8 @@ button:not([type])`,
   onError: console.error.bind(console)
 }
 
+const defaultPicker = fn => fn
+
 export const {
   defaults,
   fetch,
@@ -271,6 +273,15 @@ export default function anticore ({
     on (selector, listener) {
       session.contracts.push({ listener, selector })
       session.onContract(selector, listener)
+    },
+    when (selector, { url }, path, picker = defaultPicker) {
+      const resolved = `${new URL(path, url)}`
+
+      return handler.on(selector, async (element, url) => {
+        const exports = await import(resolved)
+
+        return picker(exports.default, exports)(element, url)
+      })
     },
     sse (url, config, reviver = fromString) {
       const source = new window.EventSource(url, config)
