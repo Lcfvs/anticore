@@ -1,3 +1,3 @@
 import './sse.js'
 import './validation-error.js'
-import './view-switcher.js'
+import 'anticore-tree-view/on.js'

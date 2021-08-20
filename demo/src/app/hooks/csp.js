@@ -5,6 +5,7 @@ fastify.addHook('preHandler', async (request, reply) => {
     `default-src 'none'`,
     `connect-src 'self'`,
     `script-src 'self'`,
+    `img-src 'self'`,
     `style-src 'self'`,
     `require-trusted-types-for 'script'`,
     `trusted-types anticore dom-engine`

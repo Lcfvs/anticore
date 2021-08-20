@@ -1,5 +1,9 @@
 const policies = new WeakMap()
 
+const once = true
+
+const passive = true
+
 const noop = () => {}
 
 const policy = {
@@ -285,13 +289,22 @@ export default function anticore ({
       })
     },
     sse (url, config, reviver = parse) {
-      const source = new window.EventSource(url, config)
+      const source = new globalThis.EventSource(url, config)
+      let unloaded = false
 
-      source.addEventListener('message', event => {
+      listen('beforeunload', globalThis, () => {
+        unloaded = true
+      }, { once, passive })
+
+      listen('message', source, event => {
         handler.trigger(reviver(event.data, url), url)
-      })
+      }, { passive })
 
-      source.addEventListener('error', onError)
+      listen('error', source, event => {
+        if (!unloaded) {
+          onError(event)
+        }
+      }, { passive })
 
       return source
     },

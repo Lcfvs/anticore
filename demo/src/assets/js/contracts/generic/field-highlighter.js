@@ -1,4 +1,4 @@
-import { listen, on } from '../../anticore.js'
+import { listen, on } from 'anticore'
 
 function highlight ({ target: { classList }, type }) {
   if (type === 'input') {

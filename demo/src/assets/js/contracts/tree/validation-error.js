@@ -1,4 +1,4 @@
-import { on } from '../../anticore.js'
+import { on } from 'anticore'
 import { one } from '../../utils/select.js'
 
 // matching any received .error[data-target]

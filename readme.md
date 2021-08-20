@@ -186,7 +186,7 @@ on('.anticore > main, .anticore title', (element, url) => {
 })
 ```
 
-[A full implementation](./demo/public/js/view-switcher.js)
+[A full implementation](https://github.com/Lcfvs/anticore-tree-view)
 
 _Voilà_, import it in your `main.js` and your AJAX navigation is resolved **for all your pages, at once!**.
 

@@ -1,6 +1,6 @@
 {
   "name": "anticore",
-  "version": "4.5.1",
+  "version": "4.5.2",
   "description": "A library to handle your AJAX/SSE DOM contents and to automate your requests, using some contracts.",
   "main": "index.js",
   "type": "module",
@@ -10,6 +10,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lcfvs/anticore.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lcfvs/anticore/issues"
   },
   "keywords": [
     "library",
@@ -23,9 +26,6 @@
     "Brett Zamir"
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Lcfvs/anticore/issues"
-  },
   "homepage": "https://anticore.io",
   "devDependencies": {
     "eslint": "^7.27.0"
