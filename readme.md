@@ -337,6 +337,17 @@ import { trigger } from 'anticore'
 trigger(document)
 ```
 
+### <a name="parse">parse(source, url)</a>
+Useful to parse an existing HTML/SVG source to real DOM nodes, to be able to trigger on it.
+
+It parses the provides source into a `<body class="anticore" id="{url}">{source}</body>`
+
+```js
+import { trigger } from 'anticore'
+
+trigger(parse(source, url))
+```
+
 ### <a name="fetch">fetch(request, event = null, target = event?.target)</a>
 
 Useful to create your own DOM content fetchers, where:

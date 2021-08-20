@@ -1,32 +1,28 @@
-import { listen, on } from '../../anticore.js'
+import { listen, on, parse, trigger } from '../../anticore.js'
 import { all, one } from '../../utils/select.js'
 
-const history = []
-
-function replace (element) {
-  const tag = element.nodeName.toLowerCase()
+const replace = element => {
+  const { name, nodeName, property } = element
+  const tag = nodeName.toLowerCase()
   const selector = tag !== 'meta'
     ? tag
-    : `${tag}[name="${element.name}"]`
+    : `${tag}[${name ? 'name' : 'property'}="${name || property}"]`
 
   one(selector).replaceWith(element)
 }
 
 on('.anticore main', (main, url) => {
-  const body = main.closest('body')
-  const title = one('title', body)
-  const metas = all('meta[name]', body)
-  const elements = [main, title, ...metas]
-
-  window.scrollTo(0, 0)
+  const root = main.getRootNode()
+  const title = one('title', root)
+  const metas = all('meta[name], meta[property]', root)
+  const elements = [...metas, title, main]
 
   if (!main.classList.contains('error')) {
-    const state = {
-      key: history.push(elements) - 1
-    }
+    globalThis.history.pushState(root.innerHTML, title.innerHTML, url)
+  }
 
-    window.history.pushState(state, title.innerHTML, url)
-    history.push(elements)
+  if (!globalThis.location.hash) {
+    globalThis.scrollTo(0, 0)
   }
 
   if (title.matches('.anticore > title')) {
@@ -34,6 +30,6 @@ on('.anticore main', (main, url) => {
   }
 })
 
-listen('popstate', window, ({ state: { key } }) => {
-  history[key] && history[key].forEach(replace)
-})
+listen('popstate', globalThis, ({ state }) =>
+  trigger(parse(state, document.location.href)))
+

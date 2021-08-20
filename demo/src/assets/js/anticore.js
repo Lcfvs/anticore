@@ -36,6 +36,7 @@ export const {
   fetch,
   listen,
   on,
+  parse,
   sse,
   trigger,
   when
@@ -59,7 +60,7 @@ const fetcher = {
       const { url = request.url } = response
       const data = await response.text()
 
-      body = fromString(data, url)
+      body = parse(data, url)
       await this.trigger(body, url)
     } catch (error) {
       const { interval, retries = session.retries } = this
@@ -109,15 +110,6 @@ function html (contents, factory) {
   }
 
   return (policies.get(factory) || policy).createHTML(contents)
-}
-
-function fromString (data, url) {
-  const body = globalThis.document.createElement('body')
-  body.classList.add('anticore')
-  body.id = url
-  body.innerHTML = html(data, globalThis.trustedTypes)
-
-  return body
 }
 
 function sleep (interval) {
@@ -186,18 +178,18 @@ function length (params) {
 }
 
 export default function anticore ({
-                                    anchor = config.anchor,
-                                    className = config.className,
-                                    credentials = config.credentials,
-                                    focused = config.focused,
-                                    form = config.form,
-                                    interval = config.interval,
-                                    onContract = config.onContract,
-                                    onError = config.onError,
-                                    redirect = config.redirect,
-                                    retries = config.retries,
-                                    window
-                                  }) {
+  anchor = config.anchor,
+  className = config.className,
+  credentials = config.credentials,
+  focused = config.focused,
+  form = config.form,
+  interval = config.interval,
+  onContract = config.onContract,
+  onError = config.onError,
+  redirect = config.redirect,
+  retries = config.retries,
+  window
+}) {
   const session = {
     className,
     credentials,
@@ -275,6 +267,14 @@ export default function anticore ({
       session.contracts.push({ listener, selector })
       session.onContract(selector, listener)
     },
+    parse (data, url) {
+      const body = globalThis.document.createElement('body')
+      body.classList.add('anticore')
+      body.id = url
+      body.innerHTML = html(data, globalThis.trustedTypes)
+
+      return body
+    },
     when (selector, { url }, path, picker = defaultPicker) {
       const resolved = `${new URL(path, url)}`
 
@@ -284,7 +284,7 @@ export default function anticore ({
         return picker(exports.default, exports)(element, url)
       })
     },
-    sse (url, config, reviver = fromString) {
+    sse (url, config, reviver = parse) {
       const source = new window.EventSource(url, config)
 
       source.addEventListener('message', event => {

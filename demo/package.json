@@ -8,7 +8,7 @@
     "start": "node src/server.js --po"
   },
   "dependencies": {
-    "@lcf.vs/dom-engine": "^5.2.3",
+    "@lcf.vs/dom-engine": "^5.2.4",
     "dotenv": "^10.0.0",
     "fastify": "^3.20.2",
     "fastify-multipart": "^4.0.7",
