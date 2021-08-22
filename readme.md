@@ -145,6 +145,12 @@ import './contracts.js'
 defaults() // register the default contracts, to handle your anchors/forms without target attribute
 trigger() // applies the contracts on the current document elements
 ```
+Alternatively, you can also declare it like
+```js
+import './contracts.js'
+import 'anticore/defaults.js'
+import 'anticore/trigger.js'
+```
 
 ## <a name="a-very-first-contract">A very first contract</a> (aka `view-switcher.js`)
 

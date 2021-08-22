@@ -1,9 +1,14 @@
 {
   "name": "anticore",
-  "version": "4.5.3",
+  "version": "4.6.0",
   "description": "A library to handle your AJAX/SSE DOM contents and to automate your requests, using some contracts.",
   "main": "index.js",
   "type": "module",
+  "exports": {
+    "./": "./index.js",
+    "./defaults.js": "./defaults.js",
+    "./trigger.js": "./trigger.js"
+  },
   "scripts": {
     "lint": "eslint --report-unused-disable-directives ."
   },

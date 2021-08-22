@@ -13,9 +13,9 @@
     "bundle:svg": "esbuild --loader:.svg=file --asset-names=[name] --outdir=./dist src/assets/img/favicon.svg"
   },
   "dependencies": {
+    "@anticore-contracts/tree-view": "^1.0.1",
     "@lcf.vs/dom-engine": "^5.2.4",
-    "anticore": "^4.5.3",
-    "anticore-tree-view": "^1.1.0",
+    "anticore": "^4.6.0",
     "dotenv": "^10.0.0",
     "fastify": "^3.20.2",
     "fastify-multipart": "^4.0.7",
