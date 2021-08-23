@@ -46,7 +46,7 @@ on('.anticore > main', element => {
 
 Alternatively, you can also try this other demo, which includes an SSE example:
 
-[anticore-demo](https://glitch.com/edit/#!/anticore-demo?path=README.md%3A1%3A0) (also installable from [./demo](./demo))
+[anticore-demo](https://glitch.com/edit/#!/anticore-demo?path=README.md%3A1%3A0) (also installable from [its repository](https://github.com/Lcfvs/anticore-demo))
 
 
 ## <a name="key-features">Key features</a>
@@ -138,17 +138,15 @@ on('body:not(.anticore) a.query.selector', (matchingElement, serverResponseURL) 
 ## <a name="initialization">Initialization</a> (aka `main.js`)
 
 ```js
-import { defaults, trigger } from 'anticore'
-// an import to load all on your contracts
-import './contracts.js'
-
-defaults() // register the default contracts, to handle your anchors/forms without target attribute
-trigger() // applies the contracts on the current document elements
-```
-Alternatively, you can also declare it like
-```js
-import './contracts.js'
+// your generic contracts
+import './contracts/generic/index.js'
+// your view contracts
+import './contracts/view/index.js'
+// register the default contracts, to handle your anchors/forms without target attribute
 import 'anticore/defaults.js'
+// your tree contracts
+import './contracts/tree/index.js'
+// applies the contracts on the current document elements
 import 'anticore/trigger.js'
 ```
 

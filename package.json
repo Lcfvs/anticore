@@ -1,11 +1,12 @@
 {
   "name": "anticore",
-  "version": "4.6.0",
+  "version": "4.6.2",
   "description": "A library to handle your AJAX/SSE DOM contents and to automate your requests, using some contracts.",
   "main": "index.js",
   "type": "module",
   "exports": {
-    "./": "./index.js",
+    ".": "./index.js",
+    "./index.js": "./index.js",
     "./defaults.js": "./defaults.js",
     "./trigger.js": "./trigger.js"
   },

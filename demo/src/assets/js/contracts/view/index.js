@@ -1,1 +1,0 @@
-import './congrats.js'
