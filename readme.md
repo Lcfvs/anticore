@@ -8,6 +8,18 @@ A library to handle your AJAX/SSE DOM contents and to automate your requests, us
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/Lcfvs/anticore.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Lcfvs/anticore/alerts/)
 [![anticore](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/a8gm9m&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/a8gm9m/runs)
 
+
+## <a name="a-brief-explanation">A brief explanation</a>
+
+`anticore` is a library to make a very simple bridge between your front-end and your back-end, using some **contracts
+associating a selector** (to match some elements) **and a task** (a function to make something on the matching elements).
+
+Each time `anticore` loads a DOM content by an AJAX request or received as a Server-Sent Event, it calls the `trigger(fragment)` on it.
+
+It implies that: except for the elements already into the document, it acts **before its insertion**, to improve the performances & the UX (the browser only renders once per view, in opposition to a mutations-based system).
+
+In fact, `anticore` doesn't insert anything, you need to make some "tree" contracts dedicated to that task, like the generic [`@anticore-contracts/tree-view`](https://github.com/anticore-contracts/tree-view) or [`@anticore-contracts/tree-insert`](https://github.com/anticore-contracts/tree-insert)
+
 ## <a name="demos">Demos</a>
 
 Since it really often helps to understand the concept, you can try it yourself in a few seconds:
