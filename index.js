@@ -1,3 +1,4 @@
+
 const policies = new WeakMap()
 
 const once = true
@@ -82,12 +83,14 @@ const fetcher = {
   async trigger (node, url) {
     const matches = []
 
-    this.session.contracts.forEach(({ selector, listener }) => {
+    for (const { selector, listener } of this.session.contracts) {
       matches.push(...[...node.querySelectorAll(selector)]
         .map(current => url => listener(current, url)))
-    })
+    }
 
-    return Promise.all(matches.map(triggerMatch, { url }))
+    for (const match of matches) {
+      await match(url)
+    }
   }
 }
 
@@ -131,12 +134,6 @@ function apply (method, event, target, listener, options) {
       target[method](name, listener, options)
     }
   }
-}
-
-async function triggerMatch (match) {
-  const { url } = this
-
-  await match(url)
 }
 
 function request (session, target) {
