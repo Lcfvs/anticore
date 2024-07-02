@@ -280,7 +280,7 @@ export default function anticore ({
       const resolved = `${new URL(path, url)}`
 
       return handler.on(selector, async (element, url) => {
-        const exports = await import(resolved)
+        const exports = await import(`${resolved}`)
 
         return picker(exports.default, exports)(element, url)
       })
