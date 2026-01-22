@@ -34,6 +34,6 @@
   "license": "MIT",
   "homepage": "https://anticore.io",
   "devDependencies": {
-    "eslint": "^7.27.0"
+    "eslint": "^9.39.1"
   }
 }
