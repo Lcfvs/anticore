@@ -136,33 +136,75 @@ function apply (method, event, target, listener, options) {
   }
 }
 
-function request (session, target) {
+function request (session, target, event) {
   const { window } = session
   const { Request } = window
-  const { init, url } = build(session, target)
+  const { init, url } = build(session, target, event)
 
   return new Request(url, init)
 }
 
-function build (session, target) {
+function extract (submitter) {
+  const { formAction, formMethod, name, value } = submitter
+
+  return submitter.hasAttribute
+    ? {
+      formAction: submitter.hasAttribute('formaction') && formAction,
+      formMethod: submitter.hasAttribute('formMethod') && formMethod,
+      name,
+      value
+    }
+    : { name, value }
+}
+
+function resolve (target, submitter) {
+  const { action, elements, href, method, ownerDocument } = target
+  const { formAction, formMethod, name, value } = extract(submitter || {})
+
+  return {
+    action: formAction || action || href || location.href,
+    elements,
+    method: (formMethod || method || 'GET').toUpperCase(),
+    name,
+    value
+  }
+}
+
+function build (session, target, event) {
+  const resolved = resolve(target, event.submitter)
   const { credentials, redirect, window } = session
   const { FormData, Headers, URL, URLSearchParams } = window
-  const { action, elements, href } = target
-  const method = (target.method || 'GET').toUpperCase()
+  const { action, elements, method, name, value } = resolved
   const hasBody = !['GET', 'HEAD'].includes(method)
-  const url = new URL(action || href || target.ownerDocument.location.href)
+  const url = new URL(action)
+  let body
 
-  if (elements && !hasBody) {
-    const searches = [url.search, new FormData(target)].filter(length)
+  if (hasBody) {
+    body = new FormData(target)
 
-    url.search = new URLSearchParams(searches.join('&')).toString()
+    if (name) {
+      body.append(name, value)
+    }
+  } else {
+    let { searchParams } = url
+
+    if (elements) {
+      searchParams = new URLSearchParams([
+        ...searchParams,
+        ...new FormData(target)
+      ])
+    }
+
+    if (name) {
+      searchParams.append(name, value)
+    }
+
+    url.search = searchParams
   }
 
   return {
     init: {
-      ...hasBody && {
-        body: new FormData(target)
-      },
+      body,
       credentials,
       headers: new Headers({
         'X-Requested-With': 'XMLHttpRequest'
@@ -170,12 +212,16 @@ function build (session, target) {
       method,
       redirect
     },
-    url: url.toString()
+    url: `${url}`
   }
 }
 
 function length (params) {
   return params.toString().length
+}
+
+function submitter (focused, target, submitter) {
+  return submitter || target.querySelector(focused)
 }
 
 export default function anticore ({
@@ -209,7 +255,7 @@ export default function anticore ({
     defaults () {
       handler.on(anchor, element => {
         handler.listen('click', element, event => {
-          return handler.fetch(request(session, element), event, element)
+          return handler.fetch(event, element)
             .catch(onError)
         })
       })
@@ -218,16 +264,16 @@ export default function anticore ({
         handler.listen('submit', element, event => {
           element.querySelectorAll('.error').forEach(error => error.remove())
 
-          return handler.fetch(request(session, element), event, element)
+          return handler.fetch(event, element)
             .catch(onError)
         })
       })
     },
-    async fetch (request, event, target = event && event.target) {
+    async fetch (event, target = event && event.target) {
       const fetchable = {
         ...fetcher,
         event,
-        request,
+        request: request(session, target, event),
         target,
         session
       }
@@ -241,7 +287,7 @@ export default function anticore ({
       }
 
       const emitter = event.type === 'submit'
-        ? target.querySelector(focused)
+        ? submitter(focused, target, event.submitter)
         : target
 
       event.preventDefault()

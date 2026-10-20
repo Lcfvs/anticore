@@ -56,10 +56,6 @@ on('.anticore > main', element => {
   * Click on the **"plus"** button, type `c` into the prompt & press **Enter**
   * Finally, send them by clicking the **"play"** button on its right, in any order and check how it changes the **Preview**, and the **Current tree**.
 
-Alternatively, you can also try this other demo, which includes an SSE example:
-
-[anticore-demo](https://glitch.com/edit/#!/anticore-demo?path=README.md%3A1%3A0) (also installable from [its repository](https://github.com/Lcfvs/anticore-demo))
-
 
 ## <a name="key-features">Key features</a>
 

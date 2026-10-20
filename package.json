@@ -1,6 +1,6 @@
 {
   "name": "anticore",
-  "version": "4.6.5",
+  "version": "5.0.0",
   "description": "A library to handle your AJAX/SSE DOM contents and to automate your requests, using some contracts.",
   "main": "index.js",
   "type": "module",
@@ -31,9 +31,5 @@
   "contributors": [
     "Brett Zamir"
   ],
-  "license": "MIT",
-  "homepage": "https://anticore.io",
-  "devDependencies": {
-    "eslint": "^7.27.0"
-  }
+  "license": "MIT"
 }
