@@ -150,7 +150,7 @@ function extract (submitter) {
   return submitter.hasAttribute
     ? {
       formAction: submitter.hasAttribute('formaction') && formAction,
-      formMethod: submitter.hasAttribute('formMethod') && formMethod,
+      formMethod: submitter.hasAttribute('formmethod') && formMethod,
       name,
       value
     }
@@ -162,7 +162,7 @@ function resolve (target, submitter) {
   const { formAction, formMethod, name, value } = extract(submitter || {})
 
   return {
-    action: formAction || action || href || location.href,
+    action: formAction || action || href || ownerDocument.location.href,
     elements,
     method: (formMethod || method || 'GET').toUpperCase(),
     name,

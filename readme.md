@@ -4,9 +4,6 @@ A library to handle your AJAX/SSE DOM contents and to automate your requests, us
 
 [![npm](https://img.shields.io/npm/v/anticore.svg?style=plastic)]()
 [![Downloads](https://img.shields.io/npm/dt/anticore.svg?style=plastic)]()
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/Lcfvs/anticore.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Lcfvs/anticore/context:javascript)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/Lcfvs/anticore.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Lcfvs/anticore/alerts/)
-[![anticore](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/a8gm9m&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/a8gm9m/runs)
 
 
 ## <a name="a-brief-explanation">A brief explanation</a>
